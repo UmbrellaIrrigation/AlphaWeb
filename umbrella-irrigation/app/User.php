@@ -31,6 +31,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','permission'
     ];
+    public function isAdmin()
+    {
+        return $this->permission == 3;
+    }
+    public function isEmployee()
+    {
+        return $this->permission == 2;
+    }
 }
