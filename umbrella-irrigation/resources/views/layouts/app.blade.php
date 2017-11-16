@@ -36,6 +36,18 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        @if(Auth::check())
+                            @if(Auth::user()->isAdmin())
+                                <li>Permission Level: <b>Admin</b></li>
+
+                            @elseif(Auth::user()->isEmployee())
+                                Permission Level: <b>Employee</b>
+
+                            @else
+                                Permission Level: <b>Guest</b>
+                            @endif
+                            </li>
+                        @endif
                         &nbsp;
                     </ul>
 
@@ -49,6 +61,8 @@
                             @if(Auth::user()->isAdmin())
                                 <li><a href="{{ route('users') }}">Users</a></li>
                             @endif
+
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
