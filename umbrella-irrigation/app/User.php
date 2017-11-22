@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->permission == 2;
     }
+    public function user_groups() //fetch collection of user's groups by using $user->user_groups
+    {
+        return $this->belongsToMany(UserGroup::class,'user_to_group');
+    }
 }
