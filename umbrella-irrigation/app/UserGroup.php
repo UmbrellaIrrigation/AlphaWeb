@@ -16,4 +16,8 @@ class UserGroup extends Model
     {
         return $this->belongsToMany(User::class,'user_to_group');
     }
+    public function getChildren()
+    {
+        return $this::where('parent_id',$this->id)->get();
+    }
 }
