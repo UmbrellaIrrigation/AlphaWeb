@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webpatser\Uuid\Uuid;
@@ -40,6 +41,10 @@ class User extends Authenticatable
     public function isEmployee()
     {
         return $this->permission == 2;
+    }
+    public static function getUsers()
+    {
+        return User::where('id','!=',Auth::user()->id)->get();
     }
     public function user_groups() //fetch collection of user's groups by using $user->user_groups
     {

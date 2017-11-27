@@ -9,7 +9,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::where('id','!=',Auth::user()->id)->get();
+        $users = User::getUsers();
         return view('users')->with(compact('users'));
     }
 }
