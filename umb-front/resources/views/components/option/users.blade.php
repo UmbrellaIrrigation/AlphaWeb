@@ -1,45 +1,44 @@
-<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+<nav class="col-md-1 d-none d-sm-block bg-light sidebar">
     <ul class="nav nav-pills flex-column">
+        <li class="nav-item nav-link h5 pb-0">User Groups</li>
         <li class="nav-item">
-            <a class="nav-link active" href="#">Overview
-                <span class="sr-only">(current)</span>
+            <a class="nav-link" href="#">Add Group</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Delete Group</a>
+        </li>
+    </ul>
+
+    <hr>
+
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item nav-link h5 pb-0">Users</li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Add User</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Delete User</a>
+        </li>
+    </ul>
+
+    <hr>
+
+    <ul class="nav nav-pills flex-column">
+    <li class="nav-item nav-link h5 pb-0">Filters</li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Admins
+                <span class="badge badge-primary">2</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Reports</a>
+            <a class="nav-link" href="#">Employees
+                <span class="badge badge-primary">4</span>
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Analytics</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Export</a>
-        </li>
-    </ul>
-
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Nav item</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Nav item again</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">One more nav</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Another nav item</a>
-        </li>
-    </ul>
-
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Nav item again</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">One more nav</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Another nav item</a>
+            <a class="nav-link" href="#">Guests
+                <span class="badge badge-primary">6</span>
+            </a>
         </li>
     </ul>
 </nav>

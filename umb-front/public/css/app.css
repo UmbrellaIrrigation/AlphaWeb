@@ -9,8 +9,8 @@ body {
 }
 
 /*
-   * Typography
-   */
+ * Typography
+ */
 
 h1 {
   padding-bottom: 9px;
@@ -19,8 +19,8 @@ h1 {
 }
 
 /*
-   * Sidebar
-   */
+ * Sidebar
+ */
 
 .sidebar {
   position: fixed;
@@ -35,11 +35,7 @@ h1 {
   border-right: 1px solid #eee;
 }
 
-.sidebar .nav {
-  margin-bottom: 20px;
-}
-
-.sidebar .nav-item {
+.sidebar.nav-item {
   width: 100%;
 }
 
@@ -52,8 +48,24 @@ h1 {
 }
 
 /*
-   * Dashboard
-   */
+ * Tree-Nav
+ */
+
+.tree-nav {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 20px 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid #eee;
+}
+
+/*
+ * Dashboard
+ */
 
 /* Placeholders */
 

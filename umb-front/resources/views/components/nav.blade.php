@@ -15,12 +15,13 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
+                        John Doe
                     </a>
-                    <div class="dropdown-menu mr-auto" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Account Settings</a>
+                        <a class="dropdown-item" href="#">Notifications</a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
             </ul>
