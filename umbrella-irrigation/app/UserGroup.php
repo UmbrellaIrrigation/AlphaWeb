@@ -12,15 +12,19 @@ class UserGroup extends Model
         });
     }
     public $incrementing = false;
-    public function getChildUsers() //fetch collection of group's users by calling $group->users
+    public function users() //fetch collection of group's users by calling $group->users
     {
-        return $this->belongsToMany(User::class,'user_to_group')->get();
+        return $this->belongsToMany(User::class,'user_to_group');
+    }
+    public function getChildUsers()
+    {
+        return $this->users;
     }
     public function getChildGroups()
     {
         return $this::where('parent_id',$this->id)->get();
     }
-    public static function getRootGroups()
+    public static function getUngroupedGroups()
     {
         return UserGroup::where('parent_id',null)->get();
     }

@@ -43,13 +43,17 @@ class User extends Authenticatable
     {
         return $this->permission == 2;
     }
-    public static function getUsers() //return all other users (for admins)
+    public static function getAllUsers() //return all other users (can add additional constraints at calltime)
     {
         return User::where('id','!=',Auth::user()->id)->get();
     }
-    public function getGroups() //fetch collection of user's groups by using $user->user_groups
+    public function user_groups() //fetch collection of user's groups by using $user->user_groups
     {
-        return $this->belongsToMany(UserGroup::class,'user_to_group')->get();
+        return $this->belongsToMany(UserGroup::class,'user_to_group');
+    }
+    public function getAssocGroups()
+    {
+        return $this->user_groups;
     }
     public static function getUngroupedUsers()
     {
