@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+|   Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.main');
+    return view('users.index');
 });
