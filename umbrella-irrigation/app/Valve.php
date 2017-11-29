@@ -17,31 +17,6 @@ class Valve extends Model
     
 	public $incrementing = false;
 
-    public function isParent()
-    {
-    	return $this->isParent;
-    }
-
-    public function isPostponed()
-    {
-    	return $this->suppressed;
-    }
-
-    public function isShutdown()
-    {
-    	return $this->shutdown;
-    }
-
-    public function isAlerted()
-    {
-    	return $this->alert;
-    }
-
-    public function isOverriden()
-    {
-    	return $this->overriden;
-    }
-
     public static function getPostponed()
     {
     	return Valve::where('postponed','1')->get();
@@ -76,8 +51,48 @@ class Valve extends Model
         return $valves;
     }
 
-    public function valve_groups()
+    public static function getValveWithValveGroups()
     {
-    	return $this->belongsToMany(ValveGroup::class, 'valve_to_group')->get();
+        return Valve::with('valvegroups');
+    }
+
+    public function valvegroups()
+    {
+    	return $this->belongsToMany(ValveGroup::class, 'valve_to_group');
+    }
+
+    public function getAssocGroups()
+    {
+        return $this->valvegroups;
+    }
+
+    public function getChildValves()
+    {
+        return $this->where('parent_id', $this->id)->get();
+    }
+
+    public function isParent()
+    {
+        return $this->isParent;
+    }
+
+    public function isPostponed()
+    {
+        return $this->suppressed;
+    }
+
+    public function isShutdown()
+    {
+        return $this->shutdown;
+    }
+
+    public function isAlerted()
+    {
+        return $this->alert;
+    }
+
+    public function isOverriden()
+    {
+        return $this->overriden;
     }
 }

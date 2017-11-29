@@ -16,20 +16,30 @@ class ValveGroup extends Model
 
     public $incrementing = false;
 
-    //valve group-> id -> find all valves with the same group id
-    public function getChildValves()
-    {
-    	return $this->belongsToMany(Valve::class, 'valve_to_group')->get();
-    }
-
-    public static function getRootGroups()
+    public static function getUngroupedValveGroups()
     {
         return ValveGroup::where('parent_valve_group', NULL)->get();
     }
 
-    public function getChildGroups()
+    public static function getValveGroupsWithValves()
+    {
+        return ValveGroup::with('valves');
+    }
+
+    public function getChildValveGroups()
     {
         return $this::where('parent_valve_group', $this->id)->get();
+    }
+
+    //valve group-> id -> find all valves with the same group id
+    public function valves()
+    {
+        return $this->belongsToMany(Valve::class, 'valve_to_group');
+    }
+
+    public function getAssocValves()
+    {
+        return $this->valves;
     }
 
 }
