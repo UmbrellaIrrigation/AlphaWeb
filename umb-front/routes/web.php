@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('users.index');
 });
+
+Route::get('/users/create', function() {
+    return view('users.create');
+});
+
+
+Route::get('/valves/create', function() {
+    return view('valves.create');
+});
