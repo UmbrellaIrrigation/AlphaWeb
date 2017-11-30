@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Valve;
 
 class ValvesController extends Controller
 {
@@ -13,7 +14,7 @@ class ValvesController extends Controller
      */
     public function index()
     {
-        $valves = Valve::getValves();
+        $valves = Valve::getValveWithValveGroups()->get();
         return view('valves')->with(compact('valves'));
     }
 

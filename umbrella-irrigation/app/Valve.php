@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,9 +21,19 @@ class Valve extends Model
     	return Valve::where('postponed','1')->get();
     }
 
+    public static function getNumberPostponed()
+    {
+        return count(Valve::getPostponed());
+    }
+
     public static function getShutdown()
     {
     	return Valve::where('shutdown', '1')->get();
+    }
+
+    public static function getNumberShutdown()
+    {
+        return count(Valve::getShutdown());
     }
 
     public static function getAlerted()
@@ -32,9 +41,19 @@ class Valve extends Model
     	return Valve::where('alert', '1')->get();
     }
 
+    public static function getNumberAlerted()
+    {
+        return count(Valve::getAlerted());
+    }
+
     public static function getOverriden()
     {
     	return Valve::where('overriden', '1')->get();
+    }
+
+    public static function getNumberOverriden()
+    {
+        return count(Valve::getOverriden());
     }
 
     public static function getRootValves()
