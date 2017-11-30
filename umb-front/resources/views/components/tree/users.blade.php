@@ -4,7 +4,7 @@
     <div id="tree">
         <ul id="treeData" style="display: none;">
             <li id="1">Node 1</li>
-            <li id="2" class="expanded folder">Folder 2
+            <li id="2" class="folder">Folder 2
                 <ul>
                     <li id="3">Node 2.1</li>
                     <li id="4">Node 2.2</li>

@@ -51,3 +51,10 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+require('jquery.fancytree');
+require('jquery.fancytree/dist/modules/jquery.fancytree.edit');
+require('jquery.fancytree/dist/modules/jquery.fancytree.filter');
+require('jquery.fancytree/dist/modules/jquery.fancytree.glyph');
+require('jquery.fancytree/dist/modules/jquery.fancytree.table');
+require('jquery.fancytree/dist/modules/jquery.fancytree.wide');
