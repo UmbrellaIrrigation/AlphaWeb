@@ -59,13 +59,13 @@
 	</div>
 
 	<div class="form-group">
-		<label for="normally-open">Normally Open:</label>
-		<input type="checkbox" class="form-control" id="normally-open" name="normally-open" required>
+		<input type="checkbox" class="form-control" id="normally-open" name="normally-open">
+		<label for="normally-open">Normally Open</label>
 	</div>
 
 	<div class="form-group">
-		<label for="isParent">isParent:</label>
-		<input type="checkbox" class="form-control" id="isParent" name="isParent" required>
+		<input type="checkbox" class="form-control" id="isParent" name="isParent">
+		<label for="isParent">isParent</label>
 	</div>
 
 	<div class="form-group">
