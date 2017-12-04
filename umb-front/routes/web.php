@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/users', function () {
+    return view('users.main');
+});
+
+Route::get('/users/index', function () {
     return view('users.index');
 });
 
