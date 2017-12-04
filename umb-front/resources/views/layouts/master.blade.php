@@ -6,6 +6,8 @@
 </head>
 
 <body>
+  @yield ('modal')
+
   @yield ('nav')
 
   <div class="container-fluid">

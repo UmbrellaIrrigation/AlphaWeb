@@ -12,6 +12,7 @@
 
 <script type="text/javascript">
     $(function () {
+        $("#createUserModal").modal();
         $("#tree").fancytree({
             checkbox: false,
             debugLevel: 2,
