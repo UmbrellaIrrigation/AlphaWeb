@@ -35,6 +35,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token','permission'
     ];
+    public function user_groups() //fetch collection of user's groups by using $user->user_groups
+    {
+        return $this->belongsToMany(UserGroup::class,'user_to_group');
+    }
     public function isAdmin()
     {
         return $this->permission == 3;
@@ -47,9 +51,17 @@ class User extends Authenticatable
     {
         return User::where('id','!=',Auth::user()->id)->get();
     }
-    public function user_groups() //fetch collection of user's groups by using $user->user_groups
+    public static function getAdmins()
     {
-        return $this->belongsToMany(UserGroup::class,'user_to_group');
+        return User::where('permission','=',3)->where('id','!=',Auth::user()->id)->get();
+    }
+    public static function getEmployees()
+    {
+        return User::where('permission','=',2)->where('id','!=',Auth::user()->id)->get();
+    }
+    public static function getGuests()
+    {
+        return User::where('permission','=',1)->where('id','!=',Auth::user()->id)->get();
     }
     public function getAssocGroups()
     {
