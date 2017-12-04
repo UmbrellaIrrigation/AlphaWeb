@@ -1,6 +1,6 @@
 <div class="h1 text-center">Valve Form</div>
 <br>
-<form method="POST" action="/register">
+<form method="POST" action="/">
 	{{ csrf_field() }}
 
 	<div class="form-group">
@@ -73,6 +73,3 @@
 	</div>
 
 </form>
-
-<!--br>
-<div class="h5 text-left">Already have an <a href="/login">account</a>?</div-->
