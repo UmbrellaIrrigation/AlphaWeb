@@ -23,7 +23,14 @@ Route::get('/users/create', function() {
     return view('users.create');
 });
 
+Route::get('/users/group', function() {
+    return view('users.group');
+});
 
 Route::get('/valves/create', function() {
     return view('valves.create');
+});
+
+Route::get('/valves/group', function() {
+    return view('valves.group');
 });

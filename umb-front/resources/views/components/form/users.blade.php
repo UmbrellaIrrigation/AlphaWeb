@@ -1,12 +1,21 @@
-<!-- NOT DONE YET -->
 <div class="h1 text-center">Users Form</div>
 <br>
-<form method="POST" action="/register">
+<form method="POST" action="/">
 	{{ csrf_field() }}
 
 	<div class="form-group">
-		<label for="parentId">parentId:</label>
-		<input type="text" class="form-control" id="parentId" name="parentId" required>
+		<label for="username">UserName:</label>
+		<input type="text" class="form-control" id="username" name="username" required>
+	</div>
+
+	<div class="form-group">
+		<label for="email">Email:</label>
+		<input type="text" class="form-control" id="email" name="email" required>
+	</div>
+
+	<div class="form-group">
+		<label for="password">Password:</label>
+		<input type="password" class="form-control" id="password" name="password" required>
 	</div>
 
 	<div class="form-group">
@@ -20,13 +29,8 @@
 	</div>
 
 	<div class="form-group">
-		<label for="latitude">Latitude:</label>
-		<input type="text" class="form-control" id="latitude" name="latitude" required>
-	</div>
-
-	<div class="form-group">
-		<label for="password_confirmation">Password Confirmation:</label>
-		<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+		<label for="permission">Permission:</label>
+		<input type="number" class="form-control" id="permission" name="permission" required>
 	</div>
 
 	<div class="form-group">
@@ -34,6 +38,3 @@
 	</div>
 
 </form>
-
-<!--br>
-<div class="h5 text-left">Already have an <a href="/login">account</a>?</div-->

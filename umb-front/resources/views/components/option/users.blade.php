@@ -14,7 +14,7 @@
     <ul class="nav nav-pills flex-column">
         <li class="nav-item nav-link h5 pb-0">Users</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Add User</a>
+            <a class="nav-link" href="#createUserModal" data-toggle="modal" data-target="#createUserModal">Add User</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Delete User</a>

@@ -1,5 +1,11 @@
 @extends ('layouts.master')
 
+@section ('modal')
+
+    @include ('components.modal.create.user.item')
+
+@endsection
+
 @section ('nav')
     @include ('components.nav.users')
 @endsection
