@@ -2,18 +2,18 @@
 
 @section ('modal')
 
-    @include ('components.modal.create.user.item')
+    @include ('components.user.create')
 
 @endsection
 
 @section ('nav')
-    @include ('components.nav.users')
+    @include ('components.user.nav')
 @endsection
 
 @section ('content')
-    @include ('components.option.users')
+    @include ('components.user.options')
 
-    @include ('components.tree.users')
+    @include ('components.user.tree')
 
     <main role="main" class="col-md-9 ml-sm-auto pt-3">
         <iframe src="/users/index" name="contentFrame" width="100%" height="850"
