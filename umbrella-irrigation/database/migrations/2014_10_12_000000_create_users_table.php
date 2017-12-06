@@ -22,6 +22,14 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        Schema::create('employee_to_guest', function (Blueprint $table){
+            $table->string('employee_id');
+            $table->string('guest_id');
+        });
+        Schema::create('guest_to_employee', function (Blueprint $table){
+            $table->string('guest_id');
+            $table->string('employee_id');
+        });
     }
 
     /**

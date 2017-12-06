@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','permission'
     ];
 
     /**
@@ -33,11 +33,37 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','permission'
+        'password', 'remember_token'
     ];
+
+    //many-to-many relationships
+
     public function user_groups() //fetch collection of user's groups by using $user->user_groups
     {
         return $this->belongsToMany(UserGroup::class,'user_to_group');
+    }
+    public function employee_to_guest()
+    {
+        return $this->belongsToMany(User::class,'employee_to_guest','employee_id','guest_id');
+    }
+    public function guest_to_employee()
+    {
+        return $this->belongsToMany(User::class,'guest_to_employee','guest_id','employee_id');
+    }
+
+    //functions
+
+    public function getAssocGroups()
+    {
+        return $this->user_groups;
+    }
+    public function getOverseenGuests()
+    {
+        return $this->employee_to_guest;
+    }
+    public function getOverseeingEmployees()
+    {
+        return $this->guest_to_employee;
     }
     public function isAdmin()
     {
@@ -62,10 +88,6 @@ class User extends Authenticatable
     public static function getGuests()
     {
         return User::where('permission','=',1)->where('id','!=',Auth::user()->id)->get();
-    }
-    public function getAssocGroups()
-    {
-        return $this->user_groups;
     }
     public static function getUngroupedUsers()
     {
