@@ -7,10 +7,8 @@
     <li class="nav-item">
         <a class="nav-link" href="#">Valves</a>
     </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="#">Users
-            <span class="sr-only">(current)</span>
-        </a>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Users</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Forecast</a>

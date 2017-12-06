@@ -1,7 +1,11 @@
 @extends ('layouts.master')
 
 @section ('nav')
-    @include('components.nav')
+    @guest
+        @include('layouts.nav')
+    @else
+        @include('components.dashboard.nav')
+    @endguest
 @endsection
 
 @section ('content')
@@ -10,7 +14,7 @@
             <div class="container">
                 <h2 class="display-2">Welcome to Umbrella Irrigation</h2>
                 <hr>
-                <p class="lead text-muted">
+                <p class="lead">
                     To get started using Umbrella Irrigation, please login or register.
                 </p>
                 <div class="container col-5">
@@ -22,7 +26,7 @@
             <div class="container">
                 <h2 class="display-2">Hello, {{ Auth::user()->name }}.</h2>
                 <hr>
-                <p class="lead text-muted">
+                <p class="lead">
                     Please click on any section on the Navigation Menu to get started.
                 </p>
             </div>
