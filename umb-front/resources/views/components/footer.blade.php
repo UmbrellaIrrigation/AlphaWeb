@@ -10,11 +10,3 @@
 
 <script src="{{URL::asset('js/app.js')}}"></script>
 
-<script type="text/javascript">
-    $(function () {
-        $("#tree").fancytree({
-            checkbox: false,
-            debugLevel: 2
-        });
-    });
-</script>

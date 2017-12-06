@@ -11,22 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/users', function () {
+    return view('users.main');
+});
+
+Route::get('/users/index', function () {
     return view('users.index');
 });
 
-Route::get('/users/create', function() {
-    return view('users.create');
-});
-
-Route::get('/users/group', function() {
-    return view('users.group');
-});
-
-Route::get('/valves/create', function() {
-    return view('valves.create');
-});
-
-Route::get('/valves/group', function() {
-    return view('valves.group');
+Route::get('/users/show', function() {
+    return view('users.show');
 });

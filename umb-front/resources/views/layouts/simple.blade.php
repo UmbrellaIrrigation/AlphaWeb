@@ -3,19 +3,18 @@
 
 <head>
   @include ('components.header')
+
+  <style>
+    body {
+      padding-top: .5em;
+      margin: 0;
+    }
+  </style>
 </head>
 
 <body>
-  @yield ('modal')
-
-  @yield ('nav')
-
   <div class="container-fluid">
-    <div class="row">
-
-      @yield ('content')
-
-    </div>
+    @yield ('content')
   </div>
 
   @include ('components.footer')

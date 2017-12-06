@@ -670,7 +670,10 @@ table.fancytree-ext-table.fancytree-treefocus tbody tr.fancytree-selected {
 }
 ul.fancytree-container {
   border: none;
-  outline: none !important;
+}
+
+.hide {
+  display: none;
 }
 
 /*
