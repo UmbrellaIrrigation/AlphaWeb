@@ -3,6 +3,7 @@
 @section ('modal')
 
     @include ('components.user.create')
+    @include ('components.user.group.create')
 
 @endsection
 

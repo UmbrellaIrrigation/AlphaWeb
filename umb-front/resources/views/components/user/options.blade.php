@@ -2,7 +2,7 @@
     <ul class="nav nav-pills flex-column">
         <li class="nav-item nav-link h5 pb-0">User Groups</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Create Group</a>
+            <a class="nav-link" href="#createUserGroupModal" data-toggle="modal" data-target="#createUserGroupModal">Create Group</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Delete Group</a>
