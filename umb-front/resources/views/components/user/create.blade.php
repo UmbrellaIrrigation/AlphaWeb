@@ -48,7 +48,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create User</button>
+                    <button type="submit" class="btn btn-primary">Create User Group</button>
                 </div>
 
             </form>
