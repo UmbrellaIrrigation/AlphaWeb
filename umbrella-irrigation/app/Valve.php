@@ -80,6 +80,11 @@ class Valve extends Model
     	return $this->belongsToMany(ValveGroup::class, 'valve_to_group');
     }
 
+    public function valveevents()
+    {
+        return $this->hasMany('App\ValveEvent');
+    }
+
     public function getAssocGroups()
     {
         return $this->valvegroups;
