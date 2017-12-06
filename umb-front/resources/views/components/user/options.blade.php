@@ -29,18 +29,28 @@
     <ul class="nav nav-pills flex-column">
         <li class="nav-item nav-link h5 pb-0">Filters</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Admins
+            <a class="nav-link" href="#">Suppressed
                 <span class="badge badge-primary">2</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Employees
+            <a class="nav-link" href="#">Postponed
                 <span class="badge badge-primary">4</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Guests
+            <a class="nav-link" href="#">Shutdown
                 <span class="badge badge-primary">6</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Alert
+                <span class="badge badge-primary">1</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Overridden
+                <span class="badge badge-primary">3</span>
             </a>
         </li>
     </ul>
