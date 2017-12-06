@@ -10,13 +10,11 @@
 
   @yield ('nav')
 
-  <div class="container-fluid">
-    <div class="row">
+  <main class="container">
 
       @yield ('content')
 
-    </div>
-  </div>
+  </main>
 
   @include ('components.footer')
 </body>

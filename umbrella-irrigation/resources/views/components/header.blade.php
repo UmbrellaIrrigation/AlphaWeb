@@ -4,7 +4,7 @@
 <meta name="author" content="">
 <link rel="icon" href="">
 
-<title>{{ config('app.name', 'Umbrella Irrigation') }}</title>
+<title>Umbrella Irrigation</title>
 
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
