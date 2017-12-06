@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\ValveGroup;
 use Illuminate\Http\Request;
-use App\Valve;
 
-class ValvesController extends Controller
+class ValveGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ValvesController extends Controller
      */
     public function index()
     {
-        $valves = Valve::getValveWithValveGroups()->get();
-        return view('valves')->with(compact('valves'));
+        $valveGroups = Valve::getValveGroupWithValves()->get();
+        return view('valve_groups')->with(compact('valveGroups'));
     }
 
     /**
@@ -36,7 +36,12 @@ class ValvesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valveGroup = new ValveGroup;
+        $valveGroup->id = $request->id;
+        $valveGroup->name = $request->name;
+        $valve->parent_valve_group = $request->parent_valve_group;
+
+        $valveGroup->save();
     }
 
     /**
