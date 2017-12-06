@@ -3,22 +3,26 @@
     <hr>
     <div id="tree">
         <ul id="treeData" style="display: none;">
-            <li id="231" class="folder">Admins
-                <ul>
-                    <li id="2">Lemuel Dizon</li>
-                    <li id="1">
-                        <a href="//en.wikipedia.org/wiki/Snake" target="contentFrame">
-                            Raffi "Snake" Bilemjian
-                        </a>
-                    </li>
-                </ul>
-            </li>
             <li id="22" class="folder">Employees
                 <ul>
                     <li id="6">Jeff Wiegley</li>
                     <li id="7">Ramses Ordonez</li>
                 </ul>
             </li>
+            <li id="231" class="folder">Admins
+                    <ul>
+                        <li id="2">
+                            <a href="/users/show" target="contentFrame">
+                                Lemuel Dizon
+                            </a>
+                        </li>
+                        <li id="1">
+                            <a href="//en.wikipedia.org/wiki/Snake" target="contentFrame">
+                                Raffi "Snake" Bilemjian
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             <li id="3" class="folder">Guest
                 <ul>
                     <li id="10" class="folder">Oviatt Library

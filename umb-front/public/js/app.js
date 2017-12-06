@@ -16634,6 +16634,60 @@ $(function () {
             node.setExpanded(false);
         });
     });
+
+    /**
+     * Edit User
+     */
+    function onExit($input, save) {
+        $input.keypress(function (e) {
+            if (e.which == 13) {
+                $(this).blur();
+            }
+        });
+        $input.one('blur', save).focus();
+    }
+
+    $('body').on('click', '[data-edit-user-name]', function () {
+        var $el = $(this);
+
+        var $input = $('<input type="text" class="form-control" id="name" name="name" required />').val($el.text());
+        $el.replaceWith($input);
+
+        var save = function save() {
+            var $h3 = $('<h3 data-edit-user-name />').text($input.val());
+            $input.replaceWith($h3);
+        };
+
+        onExit($input, save);
+    });
+
+    $('body').on('click', '[data-edit-user-desc]', function () {
+        var $el = $(this);
+
+        var $input = $('<input type="text" class="form-control" id="description" name="description" required/>').val($el.text());
+        $el.replaceWith($input);
+
+        var save = function save() {
+            var $p = $('<p data-edit-user-desc />').text($input.val());
+            $input.replaceWith($p);
+        };
+
+        onExit($input, save);
+    });
+
+    $('body').on('click', '[data-edit-user-auth]', function () {
+        var $el = $(this);
+
+        var $input = $('<input type="number" class="form-control" id="permission" name="permission" required/>').val($el.text());
+        $el.replaceWith($input);
+
+        var save = function save() {
+            var $p = $('<p data-edit-user-auth />').text($input.val());
+            $input.replaceWith($p);
+        };
+
+        onExit($input, save);
+    });
 });
 
 /***/ }),

@@ -1,6 +1,6 @@
-@extends ('layouts.iframe')
+@extends ('layouts.simple')
 
-@section ('iframe-content')
+@section ('content')
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-3">Please Choose a User</h1>
