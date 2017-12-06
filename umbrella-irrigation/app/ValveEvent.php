@@ -16,8 +16,8 @@ class ValveEvent extends Model
 
     public $incrementing = false;
 
-    public function valves()
+    public function valve()
     {
-    	return $this->hasMany('App\Valve');
+    	return $this->belongsTo('App\Valve');
     }
 }

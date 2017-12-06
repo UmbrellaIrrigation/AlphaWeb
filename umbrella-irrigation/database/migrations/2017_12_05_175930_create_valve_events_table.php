@@ -23,9 +23,7 @@ class CreateValveEventsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('valve_events_to_group', function (Blueprint $table)){
-            $table->string('valve_id')
-        }
+
     }
 
     /**
