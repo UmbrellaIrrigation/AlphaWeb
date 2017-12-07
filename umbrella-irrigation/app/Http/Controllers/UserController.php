@@ -9,7 +9,9 @@ use App\UserGroup;
 class UserController extends Controller
 {
     public function main() {
-        return view('users.main');
+        $rootUsers = User::getRootUsers();
+        $rootGroups = UserGroup::getRootGroups();
+        return view('users.main', compact('rootUsers'), compact('rootGroups'));
     }
 
     /**
@@ -19,9 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $rootUsers = User::getRootUsers();
-        $rootGroups = UserGroup::getRootGroups();
-        return view('users.index', compact('rootUsers'), compact('rootGroups'));
+        return view('users.index');
     }
 
     /**
@@ -45,8 +45,8 @@ class UserController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'email' => ['required','string','email','max:255','unique:users', new ValidateEmail()],
-            'password' => 'required|string|min:6|confirmed',
+            'email' => ['required','string','email','max:255','unique:users'],
+            'password' => 'required|string|min:6',
             'permission' => 'integer|between:1,3'
         ]);
 
