@@ -11,12 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users','UsersController@index')->name('users')->middleware('admin');
-Route::get('/valves', 'ValvesController@index')->name('valves');
+Route::get('/', 'DashboardController@index')->name('dashboard');
+Route::get('/users','UserController@index')->name('users')->middleware('admin');
+Route::get('/valves', 'ValveController@index')->name('valves')->middleware('admin');

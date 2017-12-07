@@ -9,7 +9,7 @@
             <a class="nav-link" href="#">Valves</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#">Users
+            <a class="nav-link" href="{{ route('users') }}">Users
                 <span class="sr-only">(current)</span>
             </a>
         </li>
