@@ -24,7 +24,7 @@
             </div>
         @else
             <div class="container">
-                <h2 class="display-2">Hello, {{ Auth::user()->name }}.</h2>
+                <h2 class="display-3">Hello {{ Auth::user()->name }}, what would you like to do today?</h2>
                 <hr>
                 <p class="lead">
                     Please click on any section on the Navigation Menu to get started.

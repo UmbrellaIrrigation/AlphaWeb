@@ -1,13 +1,17 @@
 @extends('layouts.master')
 
+@section ('nav')
+    @include ('layouts.nav')
+@endsection
+
 @section('content')
-    <div class="row mb-4">
-        <p class="col display-4 text-center">Welcome back, Sign in to get back to business.</p>
+    <div class="row mt-5 mb-4">
+        <p class="col display-4 text-center">Welcome back, Sign in to get back to business</p>
     </div>
 
     <div class="card row">
 
-        <div class="card-header">Sign in</div>
+        <div class="card-header text-center">We know its a pain, but please enter your information so we can verify your credentials</div>
 
         <div class="card-body">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
