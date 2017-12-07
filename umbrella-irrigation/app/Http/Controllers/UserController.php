@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function main() {
+        return view('users.main');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.main');
+        return view('users.index');
     }
 
     /**
@@ -34,7 +38,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'email' => ['required','string','email','max:255','unique:users', new ValidateEmail()],
+            'password' => 'required|string|min:6|confirmed',
+            'permission' => 'integer|between:1,3'
+        ]);
+
+        User::create([
+            'name' => request('name'),
+            'description' => request('description'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+            'permission' => request('permission')
+        ]);
+
+        return redirect('users');
     }
 
     /**

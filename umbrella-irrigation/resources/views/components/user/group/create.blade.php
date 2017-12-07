@@ -20,7 +20,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="parent_user_gid">Parent User Group Id:</label>
+						<label for="parent_user_gid">Parent User Group:</label>
 						<input type="number" class="form-control" id="parent_user_gid" name="parent_user_gid">
 					</div>
 
@@ -28,7 +28,7 @@
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Create User</button>
+					<button type="submit" class="btn btn-primary">Create User Group</button>
 				</div>
 
 			</form>
