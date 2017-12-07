@@ -3,6 +3,23 @@
     <hr>
     <div id="tree">
         <ul id="treeData" style="display: none;">
+            @foreach ($rootGroups as $group)
+                <li class="folder">
+                    {{ $group->name }}
+                    @if (count($group->getChildGroups) || count($group->getChildUsers)) 
+                        @include('components.users.treeloop', ['childGroups' => $group->getChildGroups, 'childUsers' => $group->getChildUsers]) 
+                    @endif
+                </li>
+            @endforeach
+
+            @foreach ($rootUsers as $user)
+                <li>
+                    {{ $user->name }}
+                </li>
+            @endforeach
+
+
+
             <li id="22" class="folder">Employees
                 <ul>
                     <li id="6">Jeff Wiegley</li>

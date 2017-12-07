@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\UserGroup;
 
 class UserController extends Controller
 {
@@ -17,7 +19,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $rootUsers = User::getRootUsers();
+        $rootGroups = UserGroup::getRootGroups();
+        return view('users.index', compact('rootUsers'), compact('rootGroups'));
     }
 
     /**
