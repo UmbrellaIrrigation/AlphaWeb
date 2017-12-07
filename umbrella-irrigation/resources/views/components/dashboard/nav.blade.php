@@ -4,12 +4,14 @@
     <li class="nav-item">
         <a class="nav-link" href="#">Overview</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Valves</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
-    </li>
+    @if (Auth::user()->isAdmin())
+        <li class="nav-item">
+            <a class="nav-link" href="#">Valves</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Users</a>
+        </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="#">Forecast</a>
     </li>
