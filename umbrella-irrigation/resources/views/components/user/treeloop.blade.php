@@ -10,7 +10,9 @@
 
     @foreach ($childUsers as $user)
         <li>
-            {{ $user->name }}
+            <a href="/users/show/user/{{ $user->id }}" target="contentFrame">
+                {{ $user->name }}
+            </a>
         </li>
     @endforeach
 </ul>

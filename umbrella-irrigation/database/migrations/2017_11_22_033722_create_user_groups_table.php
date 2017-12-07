@@ -14,12 +14,13 @@ class CreateUserGroupsTable extends Migration
     public function up()
     {
         Schema::create('user_groups', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id')->primary();
             $table->string('name');
             $table->string('parent_id')->nullable();
             $table->timestamps();
         });
         Schema::create('user_to_group', function (Blueprint $table) {
+            $table->string('id')->primary();
             $table->string('user_id');
             $table->string('user_group_id');
         });

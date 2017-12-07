@@ -11,7 +11,8 @@ class UserController extends Controller
     public function main() {
         $rootUsers = User::getRootUsers();
         $rootGroups = UserGroup::getRootGroups();
-        return view('users.main', compact('rootUsers'), compact('rootGroups'));
+        $allGroups = UserGroup::getAllGroups();
+        return view('users.main', compact('rootUsers'), compact('rootGroups'))->with(compact('allGroups'));;
     }
 
     /**
@@ -67,7 +68,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showUser(User $user)
+    public function show(User $user)
     {
         return view('users.show', compact('user'));
     }

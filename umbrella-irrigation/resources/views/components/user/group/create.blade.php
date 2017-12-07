@@ -2,7 +2,7 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 
-			<form method="POST" action="/">
+			<form method="POST" action="{{ route('usergroup.store') }}">
 				{{ csrf_field() }}
 
 				<div class="modal-header">
@@ -14,14 +14,25 @@
 
 				<div class="modal-body">
 
-					<div class="form-group">
-						<label for="name">Name:</label>
-						<input type="text" class="form-control" id="name" name="name" required>
+					<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+						<label for="name" class="control-label">Name</label>
+
+						<div>
+							<input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus> 
+							@if ($errors->has('name'))
+								<small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
+							@endif
+						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="parent_user_gid">Parent User Group:</label>
-						<input type="number" class="form-control" id="parent_user_gid" name="parent_user_gid">
+						<label for="parent_id">Parent User Group</label>
+						<select class="form-control" id="parent_id" name="parent_id">
+							<option value="null" selected>None</option>
+							@foreach ($allGroups as $group)
+								<option value="{{ $group->id }}">{{ $group->name }}</option>
+							@endforeach
+						</select>
 					</div>
 
 				</div>

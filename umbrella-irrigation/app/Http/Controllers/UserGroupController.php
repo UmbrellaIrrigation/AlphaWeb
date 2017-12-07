@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\UserGroup;
 
 class UserGroupController extends Controller
 {
@@ -38,11 +40,18 @@ class UserGroupController extends Controller
             'name' => 'required|string',
             'parent_id' => 'string',
         ]);
-
-        UserGroup::create([ 
-            'name' => request('name'),
-            'parent_id' => request('parent_id'),
-        ]);
+        
+        if (request('parent_id') == 'null') {
+            UserGroup::create([ 
+                'name' => request('name')
+            ]);
+        }
+        else {
+            UserGroup::create([ 
+                'name' => request('name'),
+                'parent_id' => request('parent_id'),
+            ]);
+        }
 
         return redirect('users');
     }

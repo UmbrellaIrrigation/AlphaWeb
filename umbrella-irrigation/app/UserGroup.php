@@ -4,6 +4,7 @@ use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 class UserGroup extends Model
 {
+
     public static function boot()
     {
       parent::boot();
@@ -12,8 +13,12 @@ class UserGroup extends Model
         });
     }
     public $incrementing = false;
+    
+    protected $fillable = [
+        'name', 'parent_id'
+    ];
 
-    public static function getGroups()
+    public static function getAllGroups()
     {
         return UserGroup::all();
     }
