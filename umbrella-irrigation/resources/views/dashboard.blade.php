@@ -15,10 +15,10 @@
                 <h2 class="display-2">Welcome to Umbrella Irrigation</h2>
                 <hr>
                 <p class="lead">
-                    To get started using Umbrella Irrigation, please login or register.
+                    To get started using Umbrella Irrigation, please Sign in or Register.
                 </p>
                 <div class="container col-5">
-                    <a href="{{ route('login') }}" class="btn btn-primary btn-block btn-lg">Login</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary btn-block btn-lg">Sign in</a>
                     <a href="{{ route('register') }}" class="btn btn-secondary btn-block btn-lg">Register</a>
                 </div>
             </div>
