@@ -67,7 +67,7 @@ class User extends Authenticatable
     {
         return $this->user_groups;
     }
-    public static function getUngroupedUsers()
+    public static function getRootUsers()
     {
         $ids = DB::table('user_to_group')->pluck('user_id');
         $users = User::all()->keyBy('id');

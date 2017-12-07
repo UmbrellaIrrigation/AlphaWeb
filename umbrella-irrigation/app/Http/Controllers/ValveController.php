@@ -57,7 +57,7 @@ class ValveController extends Controller
         $valve->alert = $request->alert;
         $valve->overriden = $request->overriden;
 
-        $valve->save()
+        $valve->save();
     }
 
     /**

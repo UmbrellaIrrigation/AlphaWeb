@@ -34,9 +34,17 @@ class UserGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $group = new UserGroup;
-        $group->name = $request->name;
-        $group->save();
+        $this->validate(request(), [
+            'name' => 'required|string',
+            'parent_id' => 'string',
+        ]);
+
+        UserGroup::create([ 
+            'name' => request('name'),
+            'parent_id' => request('parent_id'),
+        ]);
+
+        return redirect('users');
     }
 
     /**

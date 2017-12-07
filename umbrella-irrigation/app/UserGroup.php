@@ -13,6 +13,11 @@ class UserGroup extends Model
     }
     public $incrementing = false;
 
+    public static function getGroups()
+    {
+        return UserGroup::all();
+    }
+
     public static function getRootGroups()
     {
         return UserGroup::where('parent_id',null)->get();
