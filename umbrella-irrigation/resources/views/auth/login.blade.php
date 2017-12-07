@@ -50,11 +50,11 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary btn-block">
                         Sign in
                     </button>
 
-                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                    <a class="btn btn-link btn-block" href="{{ route('password.request') }}">
                         Forgot Your Password?
                     </a>
                 </div>

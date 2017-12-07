@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row mt-5 mb-4">
-        <p class="col display-4 text-center">Thanks for choosing Umbrella Irrigation</p>
+        <p class="col display-4 text-center">Thanks for choosing Umbrella Irrigation!</p>
     </div>
 
     <div class="card row">
@@ -33,7 +33,7 @@
                     <label for="name" class="control-label">Description</label>
 
                     <div>
-                        <textarea id="description" type="text" class="form-control" name="description" value="{{ old('description') }}"></textarea>
+                        <textarea id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" required></textarea>
                         
                         @if ($errors->has('description'))
                             <small class="form-text alert alert-danger" role="alert">{{ $errors->first('description') }}</small>
