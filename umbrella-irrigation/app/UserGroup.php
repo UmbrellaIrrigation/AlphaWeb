@@ -12,6 +12,7 @@ class UserGroup extends Model
         $model->id = (string) Uuid::generate(4);
         });
     }
+
     public $incrementing = false;
     
     protected $fillable = [
@@ -35,6 +36,7 @@ class UserGroup extends Model
     
     public function getChildGroups()
     {
-        return $this::where('parent_id',$this->id)->get();
+        return $this->hasMany(UserGroup::class, 'parent_id');
     }
+    
 }

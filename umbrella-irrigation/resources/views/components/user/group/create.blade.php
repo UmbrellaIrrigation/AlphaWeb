@@ -29,8 +29,11 @@
 						<label for="parent_id">Parent User Group</label>
 						<select class="form-control" id="parent_id" name="parent_id">
 							<option value="null" selected>None</option>
-							@foreach ($allGroups as $group)
+							@foreach ($rootGroups as $group)
 								<option value="{{ $group->id }}">{{ $group->name }}</option>
+								@if (count($group->getChildGroups)) 
+									@include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;']) 
+								@endif
 							@endforeach
 						</select>
 					</div>

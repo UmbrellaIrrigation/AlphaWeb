@@ -3,7 +3,7 @@
         <li class="folder">
             {{ $group->name }}
             @if (count($group->getChildGroups) || count($group->getChildUsers)) 
-                @include('components.users.treeloop', ['childGroups' => $group->getChildGroups, 'childUsers' => $group->getChildUsers]) 
+                @include('components.user.treeloop', ['childGroups' => $group->getChildGroups, 'childUsers' => $group->getChildUsers]) 
             @endif
         </li>
     @endforeach

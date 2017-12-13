@@ -6,8 +6,8 @@
             @foreach ($rootGroups as $group)
                 <li class="folder">
                     {{ $group->name }}
-                    @if (count($group->getChildGroup) > 1 || count($group->getChildUsers)) 
-                        @include('components.users.treeloop', ['childGroups' => $group->getChildGroups, 'childUsers' => $group->getChildUsers]) 
+                    @if (count($group->getChildGroups) || count($group->getChildUsers)) 
+                        @include('components.user.treeloop', ['childGroups' => $group->getChildGroups, 'childUsers' => $group->getChildUsers]) 
                     @endif
                 </li>
             @endforeach
@@ -19,8 +19,6 @@
                     </a>
                 </li>
             @endforeach
-
-
 
             <li id="22" class="folder">Employees
                 <ul>

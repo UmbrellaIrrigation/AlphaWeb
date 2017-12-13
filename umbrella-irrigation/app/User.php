@@ -16,6 +16,7 @@ class User extends Authenticatable
         $model->id = (string) Uuid::generate(4);
         });
     }
+    
     public $incrementing = false;
     use Notifiable;
 
