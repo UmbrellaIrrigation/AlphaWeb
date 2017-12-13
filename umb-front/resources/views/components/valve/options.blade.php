@@ -1,8 +1,8 @@
 <nav class="col-md-1 d-none d-sm-block bg-light sidebar">
     <ul class="nav nav-pills flex-column">
-        <li class="nav-item nav-link h5 pb-0">User Groups</li>
+        <li class="nav-item nav-link h5 pb-0">Valve Groups</li>
         <li class="nav-item">
-            <a class="nav-link" href="#createUserGroupModal" data-toggle="modal" data-target="#createUserGroupModal">Create Group</a>
+            <a class="nav-link" href="#createValveGroupModal" data-toggle="modal" data-target="#createValveGroupModal">Create Group</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Delete Group</a>
@@ -15,12 +15,12 @@
     <hr>
 
     <ul class="nav nav-pills flex-column">
-        <li class="nav-item nav-link h5 pb-0">Users</li>
+        <li class="nav-item nav-link h5 pb-0">Valves</li>
         <li class="nav-item">
-            <a class="nav-link" href="#createUserModal" data-toggle="modal" data-target="#createUserModal">Create User</a>
+            <a class="nav-link" href="#createValveModal" data-toggle="modal" data-target="#createValveModal">Create Valve</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Delete User</a>
+            <a class="nav-link" href="#">Delete Valve</a>
         </li>
     </ul>
 
@@ -29,18 +29,28 @@
     <ul class="nav nav-pills flex-column">
         <li class="nav-item nav-link h5 pb-0">Filters</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Admin
+            <a class="nav-link" href="#">Suppressed
                 <span class="badge badge-primary">2</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Employee
+            <a class="nav-link" href="#">Postponed
                 <span class="badge badge-primary">4</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Guest
+            <a class="nav-link" href="#">Shutdown
                 <span class="badge badge-primary">6</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Alert
+                <span class="badge badge-primary">1</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Overridden
+                <span class="badge badge-primary">3</span>
             </a>
         </li>
     </ul>
