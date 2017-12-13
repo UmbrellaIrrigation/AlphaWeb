@@ -16,7 +16,7 @@ class User extends Authenticatable
         $model->id = (string) Uuid::generate(4);
         });
     }
-    
+
     public $incrementing = false;
     use Notifiable;
 
@@ -54,11 +54,6 @@ class User extends Authenticatable
     }
 
     //functions
-
-    public function getAssocGroups()
-    {
-        return $this->user_groups;
-    }
     public function getOverseenGuests()
     {
         return $this->employee_to_guest;
