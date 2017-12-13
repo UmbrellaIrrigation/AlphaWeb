@@ -38,5 +38,10 @@ class UserGroup extends Model
     {
         return $this->hasMany(UserGroup::class, 'parent_id');
     }
-    
+
+    public function getParentGroup()
+    {
+        return $this->belongsTo(UserGroup::class, 'parent_id');
+    }
+
 }

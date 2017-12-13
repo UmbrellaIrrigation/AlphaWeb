@@ -64,7 +64,9 @@ class UserGroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $usergroup = UserGroup::findOrFail($id);
+        $rootGroups = UserGroup::getRootGroups();
+        return view('users.group.show', compact('usergroup'), compact('rootGroups'));
     }
 
     /**

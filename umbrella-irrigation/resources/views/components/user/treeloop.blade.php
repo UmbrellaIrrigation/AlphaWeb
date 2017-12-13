@@ -1,7 +1,9 @@
 <ul>
     @foreach ($childGroups as $group)
         <li class="folder">
-            {{ $group->name }}
+            <a href="/users/show/group/{{ $group->id }}" target="contentFrame">
+                {{ $group->name }}
+            </a>
             @if (count($group->getChildGroups) || count($group->getChildUsers)) 
                 @include('components.user.treeloop', ['childGroups' => $group->getChildGroups, 'childUsers' => $group->getChildUsers]) 
             @endif

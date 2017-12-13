@@ -12,7 +12,12 @@ class UserController extends Controller
         $rootUsers = User::getRootUsers();
         $rootGroups = UserGroup::getRootGroups();
         $allGroups = UserGroup::getAllGroups();
-        return view('users.main', compact('rootUsers'), compact('rootGroups'))->with(compact('allGroups'));;
+        $admins = User::getAdmins();
+        $employees = User::getEmployees();
+        $guests = User::getGuests();
+        return view('users.main', compact('rootUsers'), compact('rootGroups'))
+            ->with(compact('allGroups'))->with(compact('admins'))->with(compact('employees'))
+            ->with(compact('guests'));
     }
 
     /**

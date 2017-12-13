@@ -30,17 +30,17 @@
         <li class="nav-item nav-link h5 pb-0">Filters</li>
         <li class="nav-item">
             <a class="nav-link" href="#">Admins
-                <span class="badge badge-primary">2</span>
+                <span class="badge badge-primary">{{ count($admins) }}</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Employees
-                <span class="badge badge-primary">4</span>
+                <span class="badge badge-primary">{{ count($employees) }}</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Guests
-                <span class="badge badge-primary">6</span>
+                <span class="badge badge-primary">{{ count($guests) }}</span>
             </a>
         </li>
     </ul>
