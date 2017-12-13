@@ -3,35 +3,25 @@
     <hr>
     <div id="tree">
         <ul id="treeData" style="display: none;">
-            <li id="22" class="folder">Employees
+            <li id="13" class="folder">Sequoia Hall Main Valve
                 <ul>
-                    <li id="6">Jeff Wiegley</li>
-                    <li id="7">Ramses Ordonez</li>
-                </ul>
-            </li>
-            <li id="231" class="folder">Admins
-                    <ul>
-                        <li id="2">
-                            <a href="/valves/show" target="contentFrame">
-                                Lemuel Dizon
-                            </a>
-                        </li>
-                        <li id="1">
-                            <a href="//en.wikipedia.org/wiki/Snake" target="contentFrame">
-                                Raffi "Snake" Bilemjian
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            <li id="3" class="folder">Guest
-                <ul>
-                    <li id="10" class="folder">Oviatt Library
+                    <li id="10" class="folder">Oviatt Library Valve
                         <ul>
-                            <li id="131">Sina "Belajio" Eradat</li>
+                            <li id="10">Oviatt Library NE</li>
+                            <li id="11" >Oviatt Library NW</li>
                         </ul>
                     </li>
-                    <li id="411">John Doe</li>
-                    <li id="9">Jane Dow</li>
+                    <li id="10" class="folder">Soccer Field Valve
+                        <ul>
+                            <li>Turf A</li>
+                            <li>Turf B</li>
+                            <li>Turf C</li>
+                            <li>Turf D</li>
+                            <li>Turf E</li>
+                        </ul>
+                    </li>
+                    <li>Valve #2</li>
+                    <li>Valve #23</li>
                 </ul>
             </li>
         </ul>
