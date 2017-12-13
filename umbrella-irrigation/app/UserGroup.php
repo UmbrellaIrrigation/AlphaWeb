@@ -4,6 +4,7 @@ use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 class UserGroup extends Model
 {
+
     public static function boot()
     {
       parent::boot();
@@ -11,21 +12,36 @@ class UserGroup extends Model
         $model->id = (string) Uuid::generate(4);
         });
     }
+
     public $incrementing = false;
-    public function users() //fetch collection of group's users by calling $group->users
+    
+    protected $fillable = [
+        'name', 'parent_id'
+    ];
+
+    public static function getAllGroups()
     {
-        return $this->belongsToMany(User::class,'user_to_group');
+        return UserGroup::all();
     }
-    public function getChildUsers()
-    {
-        return $this->users;
-    }
-    public function getChildGroups()
-    {
-        return $this::where('parent_id',$this->id)->get();
-    }
-    public static function getUngroupedGroups()
+
+    public static function getRootGroups()
     {
         return UserGroup::where('parent_id',null)->get();
     }
+
+    public function getChildUsers() //fetch collection of group's users by calling $group->users
+    {
+        return $this->belongsToMany(User::class,'user_to_group');
+    }
+    
+    public function getChildGroups()
+    {
+        return $this->hasMany(UserGroup::class, 'parent_id');
+    }
+
+    public function getParentGroup()
+    {
+        return $this->belongsTo(UserGroup::class, 'parent_id');
+    }
+
 }
