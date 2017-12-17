@@ -5,11 +5,15 @@
         <a class="nav-link" href="#">Overview</a>
     </li>
     @if (Auth::user()->isAdmin())
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('valves') }}">Valves</a>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('valves') }}">Valves
+                <span class="sr-only">(current)</span>
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('users') }}">Users</a>
+            <a class="nav-link" href="{{ route('users') }}">
+                Users
+            </a>
         </li>
     @endif
     <li class="nav-item">

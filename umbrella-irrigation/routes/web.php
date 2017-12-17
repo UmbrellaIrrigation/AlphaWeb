@@ -21,3 +21,4 @@ Route::get('/users/show/group/{group}', 'UserGroupController@show')->middleware(
 Route::post('/users/store', 'UserController@store')->name('users.store')->middleware('admin');
 Route::post('/users/group/store', 'UserGroupController@store')->name('usergroup.store')->middleware('admin');
 Route::get('/valves', 'ValveController@main')->name('valves')->middleware('admin');
+Route::get('/valves/index','ValveController@index')->name('valves.index')->middleware('admin');

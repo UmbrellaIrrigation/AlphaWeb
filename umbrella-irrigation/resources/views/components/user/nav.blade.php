@@ -6,7 +6,7 @@
     </li>
     @if (Auth::user()->isAdmin())
         <li class="nav-item">
-            <a class="nav-link" href="#">Valves</a>
+            <a class="nav-link" href="{{ route('valves') }}">Valves</a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="{{ route('users') }}">Users
