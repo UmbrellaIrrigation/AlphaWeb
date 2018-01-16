@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\UserGroup;
 
 class UserGroupController extends Controller
 {
@@ -34,9 +36,24 @@ class UserGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $group = new UserGroup;
-        $group->name = $request->name;
-        $group->save();
+        $this->validate(request(), [
+            'name' => 'required|string',
+            'parent_id' => 'string',
+        ]);
+        
+        if (request('parent_id') == 'null') {
+            UserGroup::create([ 
+                'name' => request('name')
+            ]);
+        }
+        else {
+            UserGroup::create([ 
+                'name' => request('name'),
+                'parent_id' => request('parent_id'),
+            ]);
+        }
+
+        return redirect('users');
     }
 
     /**
@@ -47,7 +64,9 @@ class UserGroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $usergroup = UserGroup::findOrFail($id);
+        $rootGroups = UserGroup::getRootGroups();
+        return view('users.group.show', compact('usergroup'), compact('rootGroups'));
     }
 
     /**

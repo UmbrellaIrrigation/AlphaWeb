@@ -7,6 +7,12 @@ use App\Valve;
 
 class ValveController extends Controller
 {
+
+    public function main() 
+    {
+        return view('valves.main');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +20,9 @@ class ValveController extends Controller
      */
     public function index()
     {
-        $valves = Valve::getValveWithValveGroups()->get();
-        return view('valves')->with(compact('valves'));
+        //$valves = Valve::getValveWithValveGroups()->get();
+        
+        return view('valves.index');
     }
 
     /**
@@ -57,7 +64,7 @@ class ValveController extends Controller
         $valve->alert = $request->alert;
         $valve->overriden = $request->overriden;
 
-        $valve->save()
+        $valve->save();
     }
 
     /**

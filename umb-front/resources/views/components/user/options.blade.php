@@ -29,17 +29,17 @@
     <ul class="nav nav-pills flex-column">
         <li class="nav-item nav-link h5 pb-0">Filters</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Admins
+            <a class="nav-link" href="#">Admin
                 <span class="badge badge-primary">2</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Employees
+            <a class="nav-link" href="#">Employee
                 <span class="badge badge-primary">4</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Guests
+            <a class="nav-link" href="#">Guest
                 <span class="badge badge-primary">6</span>
             </a>
         </li>

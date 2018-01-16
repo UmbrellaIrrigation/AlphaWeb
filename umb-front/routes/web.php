@@ -22,3 +22,15 @@ Route::get('/users/index', function () {
 Route::get('/users/show', function() {
     return view('users.show');
 });
+
+Route::get('/valves', function () {
+    return view('valves.main');
+});
+
+Route::get('/valves/index', function () {
+    return view('valves.index');
+});
+
+Route::get('/valves/show', function() {
+    return view('valves.show');
+});

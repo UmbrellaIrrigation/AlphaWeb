@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webpatser\Uuid\Uuid;
+
 class User extends Authenticatable
 {
     public static function boot()
@@ -15,6 +16,7 @@ class User extends Authenticatable
         $model->id = (string) Uuid::generate(4);
         });
     }
+    
     public $incrementing = false;
     use Notifiable;
 
@@ -24,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'description', 'email', 'password', 'permission',
     ];
 
     /**
@@ -67,7 +69,7 @@ class User extends Authenticatable
     {
         return $this->user_groups;
     }
-    public static function getUngroupedUsers()
+    public static function getRootUsers()
     {
         $ids = DB::table('user_to_group')->pluck('user_id');
         $users = User::all()->keyBy('id');
