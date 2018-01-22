@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users','UsersController@index')->name('users')->middleware('admin');
+Route::get('/', 'DashboardController@index')->name('dashboard');
+Route::get('/users','UserController@main')->name('users');
+Route::get('/users/index','UserController@index')->name('users.index');
+Route::get('/users/show/user/{user}', 'UserController@show');
+Route::get('/users/show/group/{group}', 'UserGroupController@show');
+Route::post('/users/store', 'UserController@store')->name('users.store');
+Route::post('/users/group/store', 'UserGroupController@store')->name('usergroup.store');
+Route::get('/valves', 'ValveController@main')->name('valves')->middleware('admin');
+Route::get('/valves/index','ValveController@index')->name('valves.index')->middleware('admin');
