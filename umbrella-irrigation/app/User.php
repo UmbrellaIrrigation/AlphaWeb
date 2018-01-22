@@ -51,6 +51,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(UserGroup::class,'user_to_group')->get();
     }
+
+    public function valves()
+    {
+        
+    }
     public static function getUngroupedUsers()
     {
         $ids = DB::table('user_to_group')->pluck('user_id');

@@ -35,6 +35,11 @@ class CreateValvesTable extends Migration
             $table->boolean('overriden');
             $table->timestamps();
         });
+
+        Schema::create('valve_to_user', function (Blueprint $table) {
+            $table->string('user_id');
+            $table->string('valve_id');
+        });
     }
 
     /**
@@ -45,6 +50,7 @@ class CreateValvesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('valves');
+        Schema::dropIfExists('valve_to_user');
     }
 
 }
