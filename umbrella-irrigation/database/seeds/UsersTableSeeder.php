@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
           'name' => 'admin',
           'email' => 'admin@my.csun.edu',
           'password' => bcrypt('secret'),
+          'description' => 'The god admin',
           'remember_token' => str_random(10),
           'permission'=> 3
         ]);
@@ -25,6 +26,7 @@ class UsersTableSeeder extends Seeder
           'name' => 'rbilemjian',
           'email' => 'rbilemjian@my.csun.edu',
           'password' => bcrypt('secret'),
+          'description' => 'Pretty cool guy',
           'remember_token' => str_random(10),
           'permission'=> 2
         ]);
@@ -33,6 +35,7 @@ class UsersTableSeeder extends Seeder
           'name' => 'guest',
           'email' => 'guest@my.csun.edu',
           'password' => bcrypt('secret'),
+          'description' => 'Decent guy',
           'remember_token' => str_random(10)
         ]);
         DB::table('employee_to_guest')->insert([

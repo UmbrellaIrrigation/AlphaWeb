@@ -14,11 +14,11 @@
 Auth::routes();
 
 Route::get('/', 'DashboardController@index')->name('dashboard');
-Route::get('/users','UserController@main')->name('users')->middleware('admin');
-Route::get('/users/index','UserController@index')->name('users.index')->middleware('admin');
-Route::get('/users/show/user/{user}', 'UserController@show')->middleware('admin');
-Route::get('/users/show/group/{group}', 'UserGroupController@show')->middleware('admin');
-Route::post('/users/store', 'UserController@store')->name('users.store')->middleware('admin');
-Route::post('/users/group/store', 'UserGroupController@store')->name('usergroup.store')->middleware('admin');
+Route::get('/users','UserController@main')->name('users');
+Route::get('/users/index','UserController@index')->name('users.index');
+Route::get('/users/show/user/{user}', 'UserController@show');
+Route::get('/users/show/group/{group}', 'UserGroupController@show');
+Route::post('/users/store', 'UserController@store')->name('users.store');
+Route::post('/users/group/store', 'UserGroupController@store')->name('usergroup.store');
 Route::get('/valves', 'ValveController@main')->name('valves')->middleware('admin');
 Route::get('/valves/index','ValveController@index')->name('valves.index')->middleware('admin');
