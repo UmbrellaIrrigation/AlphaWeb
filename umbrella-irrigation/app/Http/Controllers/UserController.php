@@ -8,6 +8,11 @@ use App\UserGroup;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function main() {
         $rootUsers = User::getRootUsers();
         $rootGroups = UserGroup::getRootGroups();
@@ -109,6 +114,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
