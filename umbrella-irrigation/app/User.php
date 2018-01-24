@@ -78,7 +78,11 @@ class User extends Authenticatable
     {
         return User::where('permission','=',3)->where('id','!=',Auth::user()->id)->get();
     }
-    public static function getEmployees()
+    }
+        
+    {
+    public function valves()
+
     {
         return User::where('permission','=',2)->where('id','!=',Auth::user()->id)->get();
     }
