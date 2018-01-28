@@ -116,6 +116,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect('index');
+        return redirect('index'); //redirect not working properly
     }
 }
