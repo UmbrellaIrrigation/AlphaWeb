@@ -8,7 +8,7 @@
 @endsection
 
 @section ('nav')
-    @include ('components.user.nav')
+    @include ('components.nav')
 @endsection
 
 @section ('content')

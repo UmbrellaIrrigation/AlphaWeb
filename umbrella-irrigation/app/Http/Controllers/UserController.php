@@ -21,7 +21,9 @@ class UserController extends Controller
         $employees = User::getEmployees();
         $guests = User::getGuests();
         return view('users.main', compact('rootUsers'), compact('rootGroups'))
-            ->with(compact('allGroups'))->with(compact('admins'))->with(compact('employees'))
+            ->with(compact('allGroups'))
+            ->with(compact('admins'))
+            ->with(compact('employees'))
             ->with(compact('guests'));
     }
 

@@ -6,7 +6,7 @@
 @endsection
 
 @section ('nav')
-    @include ('components.valve.nav')
+    @include ('components.nav')
 @endsection
 
 @section ('content')
