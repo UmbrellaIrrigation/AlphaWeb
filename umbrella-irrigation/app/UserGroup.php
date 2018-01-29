@@ -16,7 +16,7 @@ class UserGroup extends Model
     public $incrementing = false;
     
     protected $fillable = [
-        'name', 'parent_id'
+        'name', 'parent_id', 'auth'
     ];
 
     public static function getAllGroups()
@@ -84,7 +84,8 @@ class UserGroup extends Model
     {
         $pid = $userGroup->parent_id;
         $name = $userGroup->name;
-        $groupData = array("parent_id" => $pid, "name" => $name, "child_groups" => array(), "users" => array());
+        $groupAuth = $userGroup->auth;
+        $groupData = array("parent_id" => $pid, "name" => $name, "auth" => $groupAuth, "child_groups" => array(), "users" => array());
 
         $usersArray = & $groupData["users"];
 

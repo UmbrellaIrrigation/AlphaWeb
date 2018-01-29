@@ -17,6 +17,7 @@ class CreateUserGroupsTable extends Migration
             $table->string('id')->primary();
             $table->string('name');
             $table->string('parent_id')->nullable();
+            //$table->integer('auth')->default(1);
             $table->timestamps();
         });
         Schema::create('user_to_group', function (Blueprint $table) {
