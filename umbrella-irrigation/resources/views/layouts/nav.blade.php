@@ -34,7 +34,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Account Settings</a>
+                            <a class="dropdown-item" href="/accountsettings">Account Settings</a>
                             <a class="dropdown-item" href="#">Notifications</a>
                             <div role="separator" class="dropdown-divider"></div>
 
