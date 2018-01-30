@@ -102,6 +102,6 @@ class UserGroupController extends Controller
     {
         $group = UserGroup::find($id);
         $group->delete();
-        return redirect('users.index'); //redirect not working properly
+        return redirect('/users/index'); 
     }
 }
