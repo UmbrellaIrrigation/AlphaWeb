@@ -88,7 +88,7 @@ class User extends Authenticatable
     }
     public function getAssocGroups()
     {
-        return $this->user_groups;
+        return $this->user_groups()->get();
     }
     public static function getRootUsers()
     {
@@ -99,5 +99,32 @@ class User extends Authenticatable
             $users->pull($id);
         }
         return $users;
+    }
+    public function addToGroup(UserGroup $group) //call using $user->addToGroup($group);
+    {
+        $user = $this;
+        $assocGroups = $user->getAssocGroups();
+        if($assocGroups->contains('id',$group->id))
+            return false;
+        /*$groups = $group->getChildGroups;
+        while(!empty($groups))
+        {
+            $currGroup = $groups->first();
+            if($assocGroups->contains('id',$currGroup->id)
+                return false;
+            $groups = $groups->concat($currGroup->getChildGroups());
+            $groups->forget($currGroup);
+        }*/
+        $user->user_groups()->attach($group);
+        return true;
+    }
+    public function removeFromGroup(UserGroup $group) //call using $user->removeFromGroup($group);
+    {
+        $user = $this;
+        $assocGroups = $user->getAssocGroups();
+        if(!$assocGroups->contains('id',$group->id))
+            return false;
+        $user->user_groups()->detach($group);
+        return true;
     }
 }
