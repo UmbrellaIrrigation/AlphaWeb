@@ -100,5 +100,17 @@ class User extends Authenticatable
         }
         return $users;
     }
+    public function editName($newName)
+    {
+        $this->name = $newName;
+    }
+    public function editDescription($newDescription)
+    {
+        $this->description = $newDescription;
+    }
+    public function editPermission($newPermission)
+    {
+        $this->permission = $newPermission;
+    }
 
 }

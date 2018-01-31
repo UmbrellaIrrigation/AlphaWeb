@@ -17,6 +17,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 Route::get('/users','UserController@main')->name('users');
 Route::get('/users/index','UserController@index')->name('users.index');
 Route::get('/users/show/user/{user}', 'UserController@show');
+Route::get('/users/edit/user/{user}', 'UserController@edit');
 Route::get('/users/show/group/{group}', 'UserGroupController@show');
 Route::post('/users/store', 'UserController@store')->name('users.store');
 Route::post('/users/group/store', 'UserGroupController@store')->name('usergroup.store');
