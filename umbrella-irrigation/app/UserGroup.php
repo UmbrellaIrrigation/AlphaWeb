@@ -2,6 +2,7 @@
 namespace App;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use App\UserGroupTree;
 class UserGroup extends Model
 {
 
@@ -46,69 +47,77 @@ class UserGroup extends Model
 
     public static function getUserGroupTree()
     {
-        $rootGroups = UserGroup::getRootGroups();
-        $jsonUserTree = array();
+        $jsonTree = new UserGroupTree();
+        $jsonTree->createTree(UserGroup::getRootGroups());
 
-        foreach($rootGroups as $userGroup)
-        {
-
-            $groupData = UserGroup::convertGroupToData($userGroup);
-
-            UserGroup::recursiveChildGroups($groupData, $userGroup);
-
-            array_push($jsonUserTree, $groupData);
-        }
-
-        return json_encode($jsonUserTree, JSON_PRETTY_PRINT);
+        return $jsonTree;
     }
 
-    private static function recursiveChildGroups(& $groupData, $userGroup)
-    {
-        $childGroups = $userGroup->getChildGroups()->get();
+    // public static function getUserGroupTree()
+    // {
+    //     $rootGroups = UserGroup::getRootGroups();
+    //     $jsonUserTree = array();
 
-        if($childGroups->count() > 0)
-        {
+    //     foreach($rootGroups as $userGroup)
+    //     {
 
-            foreach($childGroups as $childGroup)
-            {
-                $childGroupData = UserGroup::convertGroupToData($childGroup);
+    //         $groupData = UserGroup::convertGroupToData($userGroup);
 
-                UserGroup::recursiveChildGroups($childGroupData, $childGroup);
-                array_push($groupData["child_groups"], $childGroupData);
-            }
-        }
+    //         UserGroup::recursiveChildGroups($groupData, $userGroup);
 
-        return;
-    }
+    //         array_push($jsonUserTree, $groupData);
+    //     }
 
-    private static function convertGroupToData($userGroup)
-    {
-        $pid = $userGroup->parent_id;
-        $myid = $userGroup->id;
-        $name = $userGroup->name;
-        $groupData = array(
-            "id" => $myid, 
-            "parent_id" => $pid, 
-            "name" => $name, 
-            "child_groups" => array(), 
-            "users" => array()
-        );
+    //     return json_encode($jsonUserTree, JSON_PRETTY_PRINT);
+    // }
 
-        $usersArray = & $groupData["users"];
+    // private static function recursiveChildGroups(& $groupData, $userGroup)
+    // {
+    //     $childGroups = $userGroup->getChildGroups()->get();
 
-        $users = $userGroup->getChildUsers()->get();
+    //     if($childGroups->count() > 0)
+    //     {
 
-        foreach($users as $user)
-        {
-            $usersArray[$user->id] = array
-            (
-                "name"=>$user->name,
-                "description"=>$user->description,
-                "permission"=>$user->permission
-            );
-        }
+    //         foreach($childGroups as $childGroup)
+    //         {
+    //             $childGroupData = UserGroup::convertGroupToData($childGroup);
 
-        return $groupData;
-    }
+    //             UserGroup::recursiveChildGroups($childGroupData, $childGroup);
+    //             array_push($groupData["child_groups"], $childGroupData);
+    //         }
+    //     }
+
+    //     return;
+    // }
+
+    // private static function convertGroupToData($userGroup)
+    // {
+    //     $pid = $userGroup->parent_id;
+    //     $myid = $userGroup->id;
+    //     $name = $userGroup->name;
+    //     $groupData = array(
+    //         "id" => $myid, 
+    //         "parent_id" => $pid, 
+    //         "name" => $name, 
+    //         "child_groups" => array(), 
+    //         "users" => array()
+    //     );
+
+    //     $usersArray = & $groupData["users"];
+
+    //     $users = $userGroup->getChildUsers()->get();
+
+    //     foreach($users as $user)
+    //     {
+    //         $usersArray[$user->id] = array
+    //         (
+    //             "name"=>$user->name,
+    //             "description"=>$user->description,
+    //             "permission"=>$user->permission
+    //         );
+    //     }
+
+    //     return $groupData;
+    // }
 
 }
