@@ -23,11 +23,11 @@
                 </div>
             </div>
         @else
-            <div class="container">
+            <div class="container text-center" style="width: 50%;">
                 <h2 class="display-3 text-center">Account Settings</h2>
                 <hr>
-                <p class="lead">
-                <form class="form-horizontal" style="width: 50%;" method="POST" action="{{ route('register') }}">
+                <div class="lead">
+                <form class="form-horizontal" style="margin-bottom: 100px;" method="POST" action="">
                     {{ csrf_field() }}
     
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -41,7 +41,13 @@
                             @endif
                         </div>
                     </div>
-    
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Save Name
+                        </button>
+                    </div>
+                </form>
+                <form class="form-horizontal" style="margin-bottom: 100px;" method="POST" action="">
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email" class="control-label">E-Mail Address</label>
     
@@ -53,7 +59,13 @@
                             @endif
                         </div>
                     </div>
-    
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Save Email
+                        </button>
+                    </div>
+                </form>
+                <form class="form-horizontal" method="POST" action="">
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="control-label">Old Password</label>
     
@@ -65,7 +77,6 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="control-label">New Password</label>
     
@@ -85,7 +96,7 @@
     
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-primary btn-block">
-                            Save Settings
+                            Save Password
                         </button>
                     </div>
                 </form>
