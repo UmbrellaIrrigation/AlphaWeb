@@ -44,4 +44,22 @@ class UserGroup extends Model
         return $this->belongsTo(UserGroup::class, 'parent_id');
     }
 
+    public function addToGroup(UserGroup $parentGroup) //$child->addToGroup($parent)
+    {
+        $childGroup = $this;
+        if($childGroup->parent_id==$parentGroup->id || $childGroup->id == $parentGroup->id)
+            return false;
+        $parentGroup->getChildGroups()->save($childGroup);
+        return true;
+    }
+
+    public function removeFromGroup(UserGroup $parentGroup) //$child->removeFromGroup($parent)
+    {
+        $childGroup = $this;
+        if($childGroup->parent_id!=$parentGroup->id || $childGroup->id == $parentGroup->id)
+            return false;
+        $childGroup->parent_id = null;
+        $childGroup->save();
+        return true;
+    }
 }
