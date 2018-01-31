@@ -16,7 +16,7 @@ class UserGroup extends Model
     public $incrementing = false;
     
     protected $fillable = [
-        'name', 'parent_id', 'auth'
+        'name', 'parent_id'
     ];
 
     public static function getAllGroups()
@@ -51,29 +51,30 @@ class UserGroup extends Model
 
         foreach($rootGroups as $userGroup)
         {
-            $id = $userGroup->id;
 
             $groupData = UserGroup::convertGroupToData($userGroup);
-            $jsonUserTree[$id] = $groupData;
 
-            UserGroup::recursiveChildGroups($jsonUserTree[$id]["child_groups"], $userGroup);
+            UserGroup::recursiveChildGroups($groupData, $userGroup);
+
+            array_push($jsonUserTree, $groupData);
         }
 
         return json_encode($jsonUserTree, JSON_PRETTY_PRINT);
     }
 
-    private static function recursiveChildGroups(& $childGroupArray, $userGroup)
+    private static function recursiveChildGroups(& $groupData, $userGroup)
     {
         $childGroups = $userGroup->getChildGroups()->get();
+
         if($childGroups->count() > 0)
         {
 
             foreach($childGroups as $childGroup)
             {
-                $id = $childGroup->id;
                 $childGroupData = UserGroup::convertGroupToData($childGroup);
-                $childGroupArray[$id] = $childGroupData;
-                UserGroup::recursiveChildGroups($childGroupArray[$id]["child_groups"], $childGroup);
+
+                UserGroup::recursiveChildGroups($childGroupData, $childGroup);
+                array_push($groupData["child_groups"], $childGroupData);
             }
         }
 
@@ -83,9 +84,15 @@ class UserGroup extends Model
     private static function convertGroupToData($userGroup)
     {
         $pid = $userGroup->parent_id;
+        $myid = $userGroup->id;
         $name = $userGroup->name;
-        $groupAuth = $userGroup->auth;
-        $groupData = array("parent_id" => $pid, "name" => $name, "auth" => $groupAuth, "child_groups" => array(), "users" => array());
+        $groupData = array(
+            "id" => $myid, 
+            "parent_id" => $pid, 
+            "name" => $name, 
+            "child_groups" => array(), 
+            "users" => array()
+        );
 
         $usersArray = & $groupData["users"];
 
