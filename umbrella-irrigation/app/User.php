@@ -106,15 +106,6 @@ class User extends Authenticatable
         $assocGroups = $user->getAssocGroups();
         if($assocGroups->contains('id',$group->id))
             return false;
-        /*$groups = $group->getChildGroups;
-        while(!empty($groups))
-        {
-            $currGroup = $groups->first();
-            if($assocGroups->contains('id',$currGroup->id)
-                return false;
-            $groups = $groups->concat($currGroup->getChildGroups());
-            $groups->forget($currGroup);
-        }*/
         $user->user_groups()->attach($group);
         return true;
     }
