@@ -668,6 +668,10 @@ table.fancytree-ext-table.fancytree-treefocus tbody tr.fancytree-active {
 table.fancytree-ext-table.fancytree-treefocus tbody tr.fancytree-selected {
   background-color: #CBE8F6;
 }
+/* Media Queries */
+
+/* Framework Style Overrides */
+
 ul.fancytree-container {
   border: none;
 }
@@ -700,43 +704,71 @@ h1 {
 }
 
 /*
- * Sidebar
+ * Option Bar
  */
 
-.sidebar {
+.option-nav {
   position: fixed;
   top: 51px;
   bottom: 0;
-  left: 0;
-  z-index: 1000;
+  z-index: 1001;
   padding: 20px 0;
   overflow-x: hidden;
   overflow-y: auto;
-  /* Scrollable contents if viewport is shorter than content. */
   border-right: 1px solid #eee;
+  left: 0;
 }
 
-.sidebar.nav-item {
+@media (min-width: 1801px) {
+  .option-nav {
+    width: 8.3333%;
+  }
+}
+
+@media (min-width: 1501px) and (max-width: 1800px) {
+  .option-nav {
+    width: 10%;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1500px) {
+  .option-nav {
+    width: 12%;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .option-nav {
+    width: 15%;
+  }
+}
+
+@media (max-width: 900px) {
+  .option-nav {
+    width: 20%;
+  }
+}
+
+.option-nav .nav-item {
   width: 100%;
 }
 
-.sidebar .nav-item + .nav-item {
+.option-nav .nav-item + .nav-item {
   margin-left: 0;
 }
 
-.sidebar .nav-link {
+.option-nav .nav-link {
   border-radius: 0;
 }
 
 /*
- * Tree-Nav
+ * Tree Bar
  */
 
 .tree-nav {
   position: fixed;
   top: 51px;
   bottom: 0;
-  left: 0;
   z-index: 1000;
   padding: 20px 0px;
   overflow-x: hidden;
@@ -744,9 +776,88 @@ h1 {
   border-right: 1px solid #eee;
 }
 
+@media (min-width: 1801px) {
+  .tree-nav {
+    left: 8.3333%;
+    width: 16.6667%;
+  }
+}
+
+@media (min-width: 1501px) and (max-width: 1800px) {
+  .tree-nav {
+    left: 10%;
+    width: 20%;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1500px) {
+  .tree-nav {
+    left: 12%;
+    width: 23%;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .tree-nav {
+    left: 15%;
+    width: 25%;
+  }
+}
+
+@media (max-width: 900px) {
+  .tree-nav {
+    left: 20%;
+    width: 30%;
+  }
+}
+
 /*
- * Dashboard
+ * Main View
  */
+
+.main-view {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  padding: 20px 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@media (min-width: 1801px) {
+  .main-view {
+    left: 25%;
+    width: 75%;
+  }
+}
+
+@media (min-width: 1501px) and (max-width: 1800px) {
+  .main-view {
+    left: 30%;
+    width: 70%;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1500px) {
+  .main-view {
+    left: 35%;
+    width: 65%;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .main-view {
+    left: 40%;
+    width: 60%;
+  }
+}
+
+@media (max-width: 900px) {
+  .main-view {
+    left: 50%;
+    width: 50%;
+  }
+}
 
 /* Placeholders */
 

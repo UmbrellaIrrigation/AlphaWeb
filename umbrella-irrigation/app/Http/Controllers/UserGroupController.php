@@ -62,9 +62,8 @@ class UserGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(UserGroup $usergroup)
     {
-        $usergroup = UserGroup::findOrFail($id);
         $rootGroups = UserGroup::getRootGroups();
         return view('users.group.show', compact('usergroup'), compact('rootGroups'));
     }

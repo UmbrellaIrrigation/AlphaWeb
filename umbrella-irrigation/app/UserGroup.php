@@ -1,7 +1,9 @@
 <?php
+
 namespace App;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
+
 class UserGroup extends Model
 {
 
