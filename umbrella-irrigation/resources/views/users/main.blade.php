@@ -18,7 +18,7 @@
     
         @include ('components.user.tree')
     
-        <div role="main" class="col-lg-7 offset-lg-5 col-xl-9 offset-xl-3 pt-3">
+        <div role="main" class="main-view">
             <iframe src="{{ route('users.index') }}" name="contentFrame" width="100%" height="850"
                 scrolling="yes" marginheight="0" marginwidth="0" frameborder="0">
               <p>Your browser does not support iframes</p>

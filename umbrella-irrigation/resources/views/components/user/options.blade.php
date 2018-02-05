@@ -1,4 +1,4 @@
-<nav class="col-lg-2 col-xl-1 d-none d-sm-block bg-light sidebar">
+<nav class="bg-light option-nav">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item nav-link h5 pb-0">Create</li>
         <li class="nav-item">

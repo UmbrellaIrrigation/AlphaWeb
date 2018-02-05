@@ -1,4 +1,4 @@
-<aside class="col-lg-3 offset-lg-2 col-xl-2 offset-xl-1 tree-nav">
+<aside class="tree-nav">
     <h4 class="pl-3">Navigation Menu</h4>
     <hr>
     <div id="tree">
