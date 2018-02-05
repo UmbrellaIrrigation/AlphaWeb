@@ -13,7 +13,7 @@
                 <h2 class="display-3 text-center">Account Settings</h2>
                 <hr>
                 <div class="lead">
-                <form class="form-horizontal" method="POST" action="">
+                <form class="form-horizontal text-center" method="POST" action="">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <p data-editable data-type="text" data-name="name">{{ $user->name }}</p>

@@ -8,9 +8,6 @@ use App\UserGroup;
 
 class AccountSettingsController extends Controller
 {
-    var $edited = false;
-    var $new_edited = true;
-
     public function __construct()
     {
         $this->middleware('admin');
