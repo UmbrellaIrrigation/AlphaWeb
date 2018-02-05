@@ -1,11 +1,7 @@
 @extends ('layouts.master')
 
 @section ('nav')
-    @guest
-        @include('layouts.nav')
-    @else
-        @include('components.dashboard.nav')
-    @endguest
+    @include('components.nav')
 @endsection
 
 @section ('content')        
@@ -13,7 +9,7 @@
                 <h2 class="display-3 text-center">Account Settings</h2>
                 <hr>
                 <div class="lead">
-                <form class="form-horizontal text-center" method="POST" action="">
+                <form class="form-horizontal" method="POST" action="">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <p data-editable data-type="text" data-name="name">{{ $user->name }}</p>
