@@ -3,7 +3,7 @@
 @section ('content')
     <form method="" action="">
         <h3 data-editable data-type="text" data-name="name">{{ $usergroup->name }}</h3>
-        
+
         <hr>
 
         <div class="form-group">
@@ -17,13 +17,16 @@
 
                 @foreach ($rootGroups as $group)
                     <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @if (count($group->getChildGroups)) 
-                        @include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;']) 
+                    @if (count($group->getChildGroups))
+                        @include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;'])
                     @endif
                 @endforeach
             </select>
         </div>
-        
+        <div class="container col-5">
+            <a href="/users/group/delete/{{$usergroup->id}}" class="btn btn-primary btn-block btn-lg">Delete</a>
+        </div>
+
         <hr>
 
     </form>

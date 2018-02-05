@@ -21,7 +21,9 @@ class UserController extends Controller
         $employees = User::getEmployees();
         $guests = User::getGuests();
         return view('users.main', compact('rootUsers'), compact('rootGroups'))
-            ->with(compact('allGroups'))->with(compact('admins'))->with(compact('employees'))
+            ->with(compact('allGroups'))
+            ->with(compact('admins'))
+            ->with(compact('employees'))
             ->with(compact('guests'));
     }
 
@@ -84,26 +86,81 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing User name.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editName(User $user)
     {
-        //
+        return view('users.editName', compact('user'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Show the form for editing User description.
+     *
+     * @param  User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function editDescription(User $user)
+    {
+        return view('users.editDescription', compact('user'));
+    }
+
+    /**
+     * Show the form for editing User permission.
+     *
+     * @param  User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function editPermission(User $user)
+    {
+        return view('users.editPermission', compact('user'));
+    }
+
+    /**
+     * Update the specified resource's name in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateName(Request $request, User $user)
     {
-        //
+        $user->editName($request->name);
+        $user->save();
+
+        return redirect('users');
+    }
+
+    /**
+     * Update the specified resource's description in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDescription(Request $request, User $user)
+    {
+        $user->editDescription($request->description);
+        $user->save();
+
+        return redirect('users');
+    }
+
+    /**
+     * Update the specified resource's permission in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePermission(Request $request, User $user)
+    {
+        $user->editPermission($request->permission);
+        $user->save();
+
+        return redirect('users');
     }
 
     /**
@@ -114,6 +171,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/users/index');
     }
 }

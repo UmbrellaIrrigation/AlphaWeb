@@ -1,5 +1,41 @@
 @import "~jquery.fancytree/dist/skin-win8-n/ui.fancytree.css";
 
+
+/* Media Queries */
+$breakPointXL: 1800px;
+$breakPointLG: 1500px;
+$breakPointMD: 1200px;
+$breakPointSM: 900px;
+$breakPointXS: 600px;
+
+@mixin xl-screen {
+    @media (min-width: #{$breakPointXL + 1px}) {
+        @content;
+    }
+}
+@mixin lg-screen {
+    @media (min-width: #{$breakPointLG + 1px}) and (max-width: #{$breakPointXL}) {
+        @content;
+    }
+}
+@mixin md-screen {
+    @media (min-width: #{$breakPointMD + 1px}) and (max-width: #{$breakPointLG}) {
+        @content;
+    }
+}
+@mixin sm-screen {
+    @media (min-width: #{$breakPointSM + 1px}) and (max-width: #{$breakPointMD}) {
+        @content;
+    }
+}
+@mixin xs-screen {
+    @media (max-width: #{$breakPointSM}) {
+        @content;
+    }
+}
+
+
+/* Framework Style Overrides */
 ul.fancytree-container {
     border: none;
 }
@@ -11,12 +47,9 @@ ul.fancytree-container {
     background-color: #fff;
 }
   
-
-
 /*
  * Base structure
  */
-
 
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 
@@ -37,55 +70,118 @@ h1 {
 
 
 /*
- * Sidebar
+ * Option Bar
  */
 
-.sidebar {
+.option-nav {
     position: fixed;
     top: 51px;
     bottom: 0;
-    left: 0;
-    z-index: 1000;
+    z-index: 1001;
     padding: 20px 0;
     overflow-x: hidden;
     overflow-y: auto;
-    /* Scrollable contents if viewport is shorter than content. */
     border-right: 1px solid #eee;
+
+    left: 0;
+    @include xl-screen {
+        width: 8.3333%;
+    }
+    @include lg-screen {
+        width: 10%;
+    }
+    @include md-screen {
+        width: 12%;
+    }
+    @include sm-screen {
+        width: 15%;
+    }
+    @include xs-screen {
+        width: 20%;
+    }
 }
 
-.sidebar.nav-item {
+.option-nav .nav-item {
     width: 100%;
 }
 
-.sidebar .nav-item+.nav-item {
+.option-nav .nav-item + .nav-item {
     margin-left: 0;
 }
 
-.sidebar .nav-link {
+.option-nav .nav-link {
     border-radius: 0;
 }
 
 
 /*
- * Tree-Nav
+ * Tree Bar
  */
-
 .tree-nav {
     position: fixed;
     top: 51px;
     bottom: 0;
-    left: 0;
     z-index: 1000;
     padding: 20px 0px;
     overflow-x: hidden;
     overflow-y: auto;
     border-right: 1px solid #eee;
+
+    @include xl-screen {
+        left: 8.3333%;
+        width: 16.6667%;        
+    }
+    @include lg-screen {
+        left: 10%;
+        width: 20%;
+    }
+    @include md-screen {
+        left: 12%;
+        width: 23%;
+    }
+    @include sm-screen {
+        left: 15%;
+        width: 25%;
+    }
+    @include xs-screen {
+        left: 20%;
+        width: 30%;
+    }
 }
 
 
 /*
- * Dashboard
+ * Main View
  */
+.main-view {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    padding: 20px 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @include xl-screen {
+        left: 25%;
+        width: 75%;
+    }
+    @include lg-screen {
+        left: 30%;
+        width: 70%;
+    }
+    @include md-screen {
+        left: 35%;
+        width: 65%;
+    }
+    @include sm-screen {
+        left: 40%;
+        width: 60%;
+    }
+    @include xs-screen {
+        left: 50%;
+        width: 50%;
+    }
+}
 
 
 /* Placeholders */

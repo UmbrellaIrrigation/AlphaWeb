@@ -40,14 +40,14 @@ class UserGroupController extends Controller
             'name' => 'required|string',
             'parent_id' => 'string',
         ]);
-        
+
         if (request('parent_id') == 'null') {
-            UserGroup::create([ 
+            UserGroup::create([
                 'name' => request('name')
             ]);
         }
         else {
-            UserGroup::create([ 
+            UserGroup::create([
                 'name' => request('name'),
                 'parent_id' => request('parent_id'),
             ]);
@@ -62,9 +62,8 @@ class UserGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(UserGroup $usergroup)
     {
-        $usergroup = UserGroup::findOrFail($id);
         $rootGroups = UserGroup::getRootGroups();
         return view('users.group.show', compact('usergroup'), compact('rootGroups'));
     }
@@ -100,6 +99,8 @@ class UserGroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $group = UserGroup::find($id);
+        $group->delete();
+        return redirect('/users/index'); 
     }
 }

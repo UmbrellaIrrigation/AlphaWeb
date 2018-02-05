@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section ('nav') 
-    @include ('layouts.nav') 
+    @include ('components.nav') 
 @endsection 
 
 @section('content')
