@@ -8,100 +8,47 @@
     @endguest
 @endsection
 
-@section ('content')
-    <!--section class="jumbotron jumbotron-fluid text-center"-->
-        @guest
-            <div class="container">
-                <h2 class="display-2">Welcome to Umbrella Irrigation</h2>
-                <hr>
-                <p class="lead">
-                    To get started using Umbrella Irrigation, please Sign in or Register.
-                </p>
-                <div class="container col-5">
-                    <a href="{{ route('login') }}" class="btn btn-primary btn-block btn-lg">Sign in</a>
-                    <a href="{{ route('register') }}" class="btn btn-secondary btn-block btn-lg">Register</a>
-                </div>
-            </div>
-        @else
-            <div class="container text-center" style="width: 50%;">
+@section ('content')        
+            <div class="container" style="width: 50%;">
                 <h2 class="display-3 text-center">Account Settings</h2>
                 <hr>
                 <div class="lead">
-                <form class="form-horizontal" style="margin-bottom: 100px;" method="POST" action="">
-                    {{ csrf_field() }}
-    
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label for="name" class="control-label">Name</label>
-    
-                        <div>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-    
-                            @if ($errors->has('name'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Save Name
-                        </button>
-                    </div>
-                </form>
-                <form class="form-horizontal" style="margin-bottom: 100px;" method="POST" action="">
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="control-label">E-Mail Address</label>
-    
-                        <div>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-    
-                            @if ($errors->has('email'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('email') }}</small>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Save Email
-                        </button>
-                    </div>
-                </form>
                 <form class="form-horizontal" method="POST" action="">
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="password" class="control-label">Old Password</label>
-    
-                        <div>
-                            <input id="password" type="password" class="form-control" name="password" required>
-    
-                            @if ($errors->has('password'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('password') }}</small>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="password" class="control-label">New Password</label>
-    
-                        <div>
-                            <input id="password" type="password" class="form-control" name="password" required>
-    
-                            @if ($errors->has('password'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('password') }}</small>
-                            @endif
-                        </div>
-                    </div>
-    
                     <div class="form-group">
-                        <label for="password-confirm" class="control-label">Confirm New Password</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <label for="name">Name</label>
+                        <p data-editable data-type="text" data-name="name">{{ $user->name }}</p>
                     </div>
-    
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Save Password
-                        </button>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <p data-editable data-type="text" data-name="description">{{ $user->description }}</p>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <p data-editable data-type="text" data-name="email">{{ $user->email }}</p>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="oldpassword">Password</label>
+                        <p data-editable data-type="text" data-name="password">{{ $user->password }}</p>
+                    </div>
+                    
+                    <div *ngIf="edited" class="form-group">
+                        <label for="password">New Password</label>
+                        <p data-editable data-type="text" data-name="password">{{ $user->password }}</p>
+                    </div>
+
+                    <div *ngIf="new_edited" class="form-group">
+                        <label for="password-confirm">Confirm New Password</label>
+                        <p data-editable data-type="text" data-name="password_confirmation">{{ $user->password }}</p>
                     </div>
                 </form>
-                </p>
             </div>
-        @endguest
-    <!--/section-->
 @endsection
