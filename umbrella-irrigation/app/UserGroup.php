@@ -16,7 +16,7 @@ class UserGroup extends Model
     }
 
     public $incrementing = false;
-    
+
     protected $fillable = [
         'name', 'parent_id'
     ];
@@ -31,11 +31,11 @@ class UserGroup extends Model
         return UserGroup::where('parent_id',null)->get();
     }
 
-    public function getChildUsers() //fetch collection of group's users by calling $group->users
+    public function getChildUsers() //fetch collection of group's users by calling $group->getChildUsers()->get();
     {
         return $this->belongsToMany(User::class,'user_to_group');
     }
-    
+
     public function getChildGroups()
     {
         return $this->hasMany(UserGroup::class, 'parent_id');
@@ -121,4 +121,22 @@ class UserGroup extends Model
         return $groupData;
     }
 
+    public function addToGroup(UserGroup $parentGroup) //$child->addToGroup($parent)
+    {
+        $childGroup = $this;
+        if($childGroup->parent_id==$parentGroup->id || $childGroup->id == $parentGroup->id)
+            return false;
+        $parentGroup->getChildGroups()->save($childGroup);
+        return true;
+    }
+
+    public function removeFromGroup(UserGroup $parentGroup) //$child->removeFromGroup($parent)
+    {
+        $childGroup = $this;
+        if($childGroup->parent_id!=$parentGroup->id || $childGroup->id == $parentGroup->id)
+            return false;
+        $childGroup->parent_id = null;
+        $childGroup->save();
+        return true;
+    }
 }

@@ -23,7 +23,9 @@ Route::get('/users/editDescription/user/{user}', 'UserController@editDescription
 Route::get('/users/editPermission/user/{user}', 'UserController@editPermission');
 
 Route::get('/users/show/group/{usergroup}', 'UserGroupController@show');
+Route::get('/users/delete/{user}','UserController@destroy');
 Route::post('/users/store', 'UserController@store')->name('users.store');
 Route::post('/users/group/store', 'UserGroupController@store')->name('usergroup.store');
+Route::get('/users/group/delete/{group}', 'UserGroupController@destroy');
 Route::get('/valves', 'ValveController@main')->name('valves')->middleware('admin');
 Route::get('/valves/index','ValveController@index')->name('valves.index')->middleware('admin');
