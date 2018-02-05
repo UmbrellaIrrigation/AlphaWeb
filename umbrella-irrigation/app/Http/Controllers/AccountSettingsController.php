@@ -6,16 +6,21 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserGroup;
 
-class UserGroupController extends Controller
+class AccountSettingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        //
+        return view('account_settings', compact('user') );
     }
 
     /**
@@ -37,23 +42,22 @@ class UserGroupController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'name' => 'required|string',
-            'parent_id' => 'string',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'email' => ['required','string','email','max:255','unique:users'],
+            'password' => 'required|string|min:6',
+            'permission' => 'integer|between:1,3'
         ]);
 
-        if (request('parent_id') == 'null') {
-            UserGroup::create([
-                'name' => request('name')
-            ]);
-        }
-        else {
-            UserGroup::create([
-                'name' => request('name'),
-                'parent_id' => request('parent_id'),
-            ]);
-        }
+        User::create([
+            'name' => request('name'),
+            'description' => request('description'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+            'permission' => request('permission')
+        ]);
 
-        return redirect('users');
+        return redirect('account_settings');
     }
 
     /**
@@ -62,10 +66,9 @@ class UserGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(UserGroup $usergroup)
+    public function show(User $user)
     {
-        $rootGroups = UserGroup::getRootGroups();
-        return view('users.group.show', compact('usergroup'), compact('rootGroups'));
+        return view('account_settings', compact('user'));
     }
 
     /**
@@ -99,8 +102,6 @@ class UserGroupController extends Controller
      */
     public function destroy($id)
     {
-        $group = UserGroup::find($id);
-        $group->delete();
-        return redirect('/users/index'); 
+
     }
 }
