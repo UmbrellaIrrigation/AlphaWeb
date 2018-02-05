@@ -1,26 +1,11 @@
-<nav class="col-md-1 d-none d-sm-block bg-light sidebar">
+<nav class="col-lg-2 col-xl-1 d-none d-sm-block bg-light sidebar">
     <ul class="nav nav-pills flex-column">
-        <li class="nav-item nav-link h5 pb-0">User Groups</li>
+        <li class="nav-item nav-link h5 pb-0">Create</li>
         <li class="nav-item">
-            <a class="nav-link" href="#createUserGroupModal" data-toggle="modal" data-target="#createUserGroupModal">Create Group</a>
+            <a class="nav-link" href="#createUserModal" data-toggle="modal" data-target="#createUserModal">New User</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Delete Group</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Add to Group</a>
-        </li>
-    </ul>
-
-    <hr>
-
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item nav-link h5 pb-0">Users</li>
-        <li class="nav-item">
-            <a class="nav-link" href="#createUserModal" data-toggle="modal" data-target="#createUserModal">Create User</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Delete User</a>
+            <a class="nav-link" href="#createUserGroupModal" data-toggle="modal" data-target="#createUserGroupModal">New User Group</a>
         </li>
     </ul>
 
