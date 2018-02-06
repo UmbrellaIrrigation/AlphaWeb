@@ -52,6 +52,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class,'guest_to_employee','guest_id','employee_id');
     }
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
 
     //functions
     public function getOverseenGuests()

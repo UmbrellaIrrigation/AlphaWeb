@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('permission')->default(1); //1: guest 2: employee 3: admin
             $table->string('password');
             $table->tinyInteger('notification_preference')->default(0); //0:none 1:app 2:email
+            $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
