@@ -1,8 +1,10 @@
 @extends ('layouts.master')
 
 @section ('modal')
-    @include ('components.valve.create')
+
+    @include ('components.create')
     @include ('components.valve.group.create')
+    
 @endsection
 
 @section ('nav')
