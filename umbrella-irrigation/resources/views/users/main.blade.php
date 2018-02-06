@@ -14,7 +14,7 @@
 @section ('content')
 
     <div class="row">
-        @include ('components.user.options')
+        @include ('components.options')
     
         @include ('components.user.tree')
     

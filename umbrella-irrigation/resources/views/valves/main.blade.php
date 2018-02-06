@@ -10,7 +10,7 @@
 @endsection
 
 @section ('content')
-    @include ('components.valve.options')
+    @include ('components.options')
 
     @include ('components.valve.tree')
 
