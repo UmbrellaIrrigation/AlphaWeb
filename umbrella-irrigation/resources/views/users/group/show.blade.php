@@ -23,11 +23,10 @@
                 @endforeach
             </select>
         </div>
-        <div class="container col-5">
-            <a href="/users/group/delete/{{$usergroup->id}}" class="btn btn-primary btn-block btn-lg">Delete</a>
-        </div>
-
+        
         <hr>
+        
+        <a href="/users/group/delete/{{$usergroup->id}}" class="btn btn-danger btn-block btn-lg">Delete Group</a>
 
     </form>
 @endsection
