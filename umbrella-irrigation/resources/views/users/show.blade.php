@@ -17,10 +17,11 @@
             <label for="permission">Permission</label>
             <p data-editable data-type="number" data-name="permission">{{ $user->permission }}</p>
         </div>
-        <div class="container col-5">
-            <a href="/users/delete/{{$user->id}}" class="btn btn-primary btn-block btn-lg">Delete</a>
-        </div>
         <hr>
-
+        @if($user != Auth::user())
+            <div class="container col-5">
+                <a href="/users/delete/{{$user->id}}" class="btn btn-primary btn-block btn-lg">Delete</a>
+            </div>
+        @endif
     </form>
 @endsection
