@@ -7,18 +7,19 @@
         <hr>
 
         <div class="form-group">
-            <label for="parent_id">Parent User Group</label>
+            @if($usergroup->getParentGroup != null)
+                <label for="parent_id">Parent User Group: <b>{{$usergroup->getParentGroup->name}}</b></label>
+            @else
+                <label for="parent_id">Parent User Group: <b>None</b></label>
+            @endif
             <select class="form-control" id="parent_id" name="parent_id">
-                @if (count($usergroup->getParentGroup))
-                    <option value="{{ $usergroup->getParentGroup->id }}" selected>{{ $usergroup->getParentGroup->name }}</option>
-                @else
-                    <option value="None" selected>None</option>
-                @endif
-
+            <option value="None" selected>None</option>
                 @foreach ($rootGroups as $group)
-                    <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @if (count($group->getChildGroups))
-                        @include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;'])
+                    @if($group->id != $usergroup->id && ($usergroup->getParentGroup==null || $usergroup->getParentGroup->id != $group->id))
+                        <option value="{{ $group->id }}">{{ $group->name }}</option>
+                        @if (count($group->getChildGroups))
+                            @include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'usergroup'=>$usergroup, 'currGroup' => $group, 'space' => '&#x02514;&nbsp;'])
+                        @endif
                     @endif
                 @endforeach
             </select>
