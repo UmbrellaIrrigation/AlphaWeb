@@ -36,6 +36,5 @@ Route::prefix('valves')->group(function() {
     Route::get('index','ValveController@index')->name('valves.index')->middleware('admin');
 });
 
-
 Route::get('/account/{user}/settings', 'AccountSettingsController@index');
 // Route::get('/accountsettings', 'AccountSettingsController@show');

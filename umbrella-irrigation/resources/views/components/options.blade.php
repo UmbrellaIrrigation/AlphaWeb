@@ -3,14 +3,14 @@
         <li class="nav-item nav-link h5 pb-0">Create</li>
         @if (Request::is('users*'))
             <li class="nav-item">
-                <a class="nav-link" href="#createUserModal" data-toggle="modal" data-target="#createUserModal">New User</a>
+                <a class="nav-link" href="#createModal" data-toggle="modal" data-target="#createModal">New User</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#createUserGroupModal" data-toggle="modal" data-target="#createUserGroupModal">New User Group</a>
             </li>
         @elseif (Request::is('valves*'))
             <li class="nav-item">
-                <a class="nav-link" href="#createValveModal" data-toggle="modal" data-target="#createValveModal">New Valve</a>
+                <a class="nav-link" href="#createModal" data-toggle="modal" data-target="#createModal">New Valve</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#createValveGroupModal" data-toggle="modal" data-target="#createValveGroupModal">New Valve Group</a>

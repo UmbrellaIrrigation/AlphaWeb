@@ -16590,7 +16590,7 @@ var app = new Vue({
 });
 
 $(function () {
-    $("#createUserModal").modal();
+    $("#createModal").modal();
 
     /**
      * Fancytree Stuff
