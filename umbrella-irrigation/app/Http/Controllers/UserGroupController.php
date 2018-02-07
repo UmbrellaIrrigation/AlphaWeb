@@ -93,6 +93,7 @@ class UserGroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * Additionally, moves all child groups/users up one level in the heirarchy
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -100,7 +101,25 @@ class UserGroupController extends Controller
     public function destroy($id)
     {
         $group = UserGroup::find($id);
+        $parent_id = $group->parent_id;
+        $parentGroup = UserGroup::find($parent_id);
+        $children = $group->getChildGroups()->get();
+        while($children->first()!=null)
+        {
+            $currChild = $children->shift();//gets the first element, removes from collection
+            $currChild->parent_id = $parent_id;
+            $currChild->save();
+        }
+        $children = $group->getChildUsers()->get();
+        while($children->first()!=null)
+        {
+            $currChild = $children->shift();
+            $currChild->user_groups()->detach($group);
+            if($parentGroup!=null)
+                $currChild->user_groups()->attach($parentGroup);
+            $currChild->save();
+        }
         $group->delete();
-        return redirect('/users/index'); 
+        return redirect('/users/index');
     }
 }

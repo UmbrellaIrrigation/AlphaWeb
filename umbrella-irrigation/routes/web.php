@@ -31,3 +31,5 @@ Route::get('/valves', 'ValveController@main')->name('valves')->middleware('admin
 Route::get('/valves/index','ValveController@index')->name('valves.index')->middleware('admin');
 Route::get('/account/{user}/settings', 'AccountSettingsController@index');
 // Route::get('/accountsettings', 'AccountSettingsController@show');
+
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
