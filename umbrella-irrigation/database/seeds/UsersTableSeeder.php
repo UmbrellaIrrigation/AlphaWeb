@@ -19,7 +19,8 @@ class UsersTableSeeder extends Seeder
           'password' => bcrypt('secret'),
           'description' => 'The god admin',
           'remember_token' => str_random(10),
-          'permission'=> 3
+          'permission'=> 3,
+          'verified'=>1
         ]);
         DB::table('users')->insert([
           'id'=> '90f8b5d6-c284-4da3-a251-17e4d9be0061',
@@ -121,6 +122,12 @@ class UsersTableSeeder extends Seeder
         DB::table('guest_to_employee')->insert([
             'employee_id'=> '90f8b5d6-c284-4da3-a251-17e4d9be0061',
             'guest_id'=> '3c825a1b-7e42-4aad-a614-07fab8fe99ff'
+        ]);
+
+        DB::table('verify_users')->insert([
+            'user_id'=>'dca898f6-20e6-45d6-bd54-560dc77e4243',
+            'token'=>'58395766327c473ec096f68d32e2051f863ae6d5'
+
         ]);
     }
 }

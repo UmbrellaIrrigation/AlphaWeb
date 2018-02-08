@@ -79,7 +79,7 @@ class RegisterController extends Controller
 
         $verifyUser = VerifyUser::create([
             'user_id' => $user->id,
-            'token' => str_random(40)
+            'token' => sha1(time())
         ]);
 
         Mail::to($user->email)->send(new VerifyMail($user));
