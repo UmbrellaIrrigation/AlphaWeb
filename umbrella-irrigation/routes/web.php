@@ -29,5 +29,7 @@ Route::post('/users/group/store', 'UserGroupController@store')->name('usergroup.
 Route::get('/users/group/delete/{group}', 'UserGroupController@destroy');
 Route::get('/valves', 'ValveController@main')->name('valves')->middleware('admin');
 Route::get('/valves/index','ValveController@index')->name('valves.index')->middleware('admin');
+
 Route::get('/account/{user}/settings', 'AccountSettingsController@index');
+
 // Route::get('/accountsettings', 'AccountSettingsController@show');
