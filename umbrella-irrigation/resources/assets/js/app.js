@@ -23,7 +23,8 @@ const app = new Vue({
 
 
 $(function () {
-    $("#createModal").modal();
+    $('#createModal').modal();
+    $('#deleteModal').modal();
 
     /**
      * Fancytree Stuff

@@ -1,5 +1,9 @@
 @extends ('layouts.simple')
 
+@section ('modal')
+    @include ('components.delete')
+@endsection
+
 @section ('content')
     <form method="" action="">
         <h3 data-editable data-type="text" data-name="name">{{ $user->name }}</h3>
@@ -20,7 +24,7 @@
 
         <hr>
         
-        <a href="/users/user/delete/{{$user->id}}" class="btn btn-danger btn-block btn-lg">Delete User</a>
+        <a href="#deleteModal" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-block btn-lg">Delete User</a>
 
     </form>
 @endsection
