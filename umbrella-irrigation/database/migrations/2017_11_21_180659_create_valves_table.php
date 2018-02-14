@@ -20,12 +20,16 @@ class CreateValvesTable extends Migration
             $table->text('description');
             $table->double('latitude');
             $table->double('longitude');
-            $table->double('min_flow');
-            $table->double('max_flow');
-            $table->double('current_flow');
+            $table->double('min_flow_limit');
+            $table->double('max_flow_limit');
+            $table->double('nominal_flow_limit');
+            // $table->double('max_curr_limit');
+            // $table->double('min_curr_limit');
+            $table->double('curr_flow');
+            $table->double('max_gpm');
             $table->double('min_voltage');
             $table->double('max_voltage');
-            $table->double('current_voltage');
+            $table->double('curr_voltage');
             $table->boolean('normally_open');
             $table->boolean('is_parent');
             $table->boolean('supressed');
@@ -33,6 +37,7 @@ class CreateValvesTable extends Migration
             $table->boolean('shutdown');
             $table->boolean('alert');
             $table->boolean('overriden');
+            $table->time('last_run_time');
             $table->timestamps();
         });
 
