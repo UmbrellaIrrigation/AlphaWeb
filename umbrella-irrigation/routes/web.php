@@ -43,3 +43,5 @@ Route::get('/account/{user}/settings', 'AccountSettingsController@index');
 // Route::post('/account/{user}/settings/editPassword', 'AccountSettingsController@editPassword')->name('settings.password');
 
 // Route::get('/accountsettings', 'AccountSettingsController@show');
+
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
