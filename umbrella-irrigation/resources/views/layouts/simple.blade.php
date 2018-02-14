@@ -13,6 +13,8 @@
 </head>
 
 <body>
+  @yield ('modal')
+
   <div class="container-fluid">
     @yield ('content')
   </div>

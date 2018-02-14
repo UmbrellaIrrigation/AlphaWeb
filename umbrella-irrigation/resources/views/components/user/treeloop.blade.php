@@ -1,7 +1,7 @@
 <ul>
     @foreach ($childGroups as $group)
         <li class="folder">
-            <a href="/users/show/group/{{ $group->id }}" target="contentFrame">
+            <a href="/users/group/show/{{ $group->id }}" target="contentFrame">
                 {{ $group->name }}
             </a>
             @if (count($group->getChildGroups) || count($group->getChildUsers)) 
@@ -12,7 +12,7 @@
 
     @foreach ($childUsers as $user)
         <li>
-            <a href="/users/show/user/{{ $user->id }}" target="contentFrame">
+            <a href="/users/user/show/{{ $user->id }}" target="contentFrame">
                 {{ $user->name }}
             </a>
         </li>

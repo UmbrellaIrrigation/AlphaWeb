@@ -46,79 +46,12 @@ class UserGroup extends Model
         return $this->belongsTo(UserGroup::class, 'parent_id');
     }
 
-    // public static function getUserGroupTree()
-    // {
-    //     $groupTree = new UserGroupTree();
-    //     $jsonTree = $groupTree->createTree(UserGroup::getRootGroups());
-
-    //     return $jsonTree;
-    // }
-
     public static function getUserGroupTree()
     {
-        $rootGroups = UserGroup::getRootGroups();
-        $jsonUserTree = array();
+        $groupTree = new UserGroupTree();
+        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups());
 
-        foreach($rootGroups as $userGroup)
-        {
-
-            $groupData = UserGroup::convertGroupToData($userGroup);
-
-            UserGroup::recursiveChildGroups($groupData, $userGroup);
-
-            array_push($jsonUserTree, $groupData);
-        }
-
-        return json_encode($jsonUserTree, JSON_PRETTY_PRINT);
-    }
-
-    private static function recursiveChildGroups(& $groupData, $userGroup)
-    {
-        $childGroups = $userGroup->getChildGroups()->get();
-
-        if($childGroups->count() > 0)
-        {
-
-            foreach($childGroups as $childGroup)
-            {
-                $childGroupData = UserGroup::convertGroupToData($childGroup);
-
-                UserGroup::recursiveChildGroups($childGroupData, $childGroup);
-                array_push($groupData["child_groups"], $childGroupData);
-            }
-        }
-
-        return;
-    }
-
-    private static function convertGroupToData($userGroup)
-    {
-        $pid = $userGroup->parent_id;
-        $myid = $userGroup->id;
-        $name = $userGroup->name;
-        $groupData = array(
-            "id" => $myid, 
-            "parent_id" => $pid, 
-            "name" => $name, 
-            "child_groups" => array(), 
-            "users" => array()
-        );
-
-        $usersArray = & $groupData["users"];
-
-        $users = $userGroup->getChildUsers()->get();
-
-        foreach($users as $user)
-        {
-            $usersArray[$user->id] = array
-            (
-                "name"=>$user->name,
-                "description"=>$user->description,
-                "permission"=>$user->permission
-            );
-        }
-
-        return $groupData;
+        return $jsonTree;
     }
 
     public function addToGroup(UserGroup $parentGroup) //$child->addToGroup($parent)

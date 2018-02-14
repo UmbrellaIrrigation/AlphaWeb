@@ -2,7 +2,7 @@
 
 @section ('modal')
 
-    @include ('components.user.create')
+    @include ('components.create')
     @include ('components.user.group.create')
 
 @endsection
@@ -14,7 +14,7 @@
 @section ('content')
 
     <div class="row">
-        @include ('components.user.options')
+        @include ('components.options')
     
         @include ('components.user.tree')
     
