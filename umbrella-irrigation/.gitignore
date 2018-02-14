@@ -1,3 +1,5 @@
+/vendor/[^l]*
+/vendor/league
 /node_modules
 /public/hot
 /public/storage
