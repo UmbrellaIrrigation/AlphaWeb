@@ -28,7 +28,8 @@
                             @endif
                         </div>
                     </div>
-    
+ 
+                    <!--
                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="name" class="control-label">Description</label>
     
@@ -40,6 +41,7 @@
                             @endif
                         </div>
                     </div>
+                    -->
     
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email" class="control-label">E-Mail Address</label>
