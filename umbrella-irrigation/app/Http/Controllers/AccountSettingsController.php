@@ -20,7 +20,7 @@ class AccountSettingsController extends Controller
      */
     public function index(User $user)
     {
-        return view('account_settings', compact('user') );
+        return view('account_settings/account_settings', compact('user') );
     }
 
     /**
@@ -77,9 +77,19 @@ class AccountSettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editName(User $user)
     {
-        //
+        return view('account_settings.edit_name', compact('user'));
+    }
+
+    public function editDescription(User $user)
+    {
+        return view('account_settings.edit_description', compact('user'));
+    }
+
+    public function editEmail(User $user)
+    {
+        return view('account_settings.edit_email', compact('user'));
     }
 
     /**
