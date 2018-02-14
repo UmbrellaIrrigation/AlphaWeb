@@ -11,9 +11,17 @@ class User extends Authenticatable
 {
     public static function boot()
     {
-      parent::boot();
-      self::creating(function ($model) {
-        $model->id = (string) Uuid::generate(4);
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->description = "this is a default description.";
+        });
+        self::creating(function ($model) {
+            $model->id = (string) Uuid::generate(4);
+            });
+        self::saving(function ($model) {
+            if(trim($model->description) == '')
+                $model->description = "this is a default description";
         });
     }
 
