@@ -97,10 +97,9 @@ class UserGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserGroup $usergroup)
     {
-        $group = UserGroup::find($id);
-        $group->delete();
+        $usergroup->delete();
         return redirect('/users/index'); 
     }
 }
