@@ -77,9 +77,11 @@ class AccountSettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editName(User $user)
+    public function editName(Request $request, User $user)
     {
-        return view('account_settings.edit_name', compact('user'));
+        $user->editName($request->name);
+        $user->save();
+        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
     public function editDescription(User $user)
