@@ -1,11 +1,7 @@
 @extends ('layouts.master')
 
 @section ('nav')
-    @guest
-        @include('layouts.nav')
-    @else
-        @include('components.dashboard.nav')
-    @endguest
+    @include('components.nav')
 @endsection
 
 @section ('content')

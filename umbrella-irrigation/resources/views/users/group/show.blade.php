@@ -1,9 +1,13 @@
 @extends ('layouts.simple')
 
+@section ('modal')
+    @include ('components.delete')
+@endsection
+
 @section ('content')
     <form method="" action="">
         <h3 data-editable data-type="text" data-name="name">{{ $usergroup->name }}</h3>
-        
+
         <hr>
 
         <div class="form-group">
@@ -17,14 +21,16 @@
 
                 @foreach ($rootGroups as $group)
                     <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @if (count($group->getChildGroups)) 
-                        @include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;']) 
+                    @if (count($group->getChildGroups))
+                        @include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;'])
                     @endif
                 @endforeach
             </select>
         </div>
         
         <hr>
+        
+        <a href="#deleteModal" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-block btn-lg">Delete Group</a>
 
     </form>
 @endsection
