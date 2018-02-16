@@ -40,6 +40,6 @@
         <p><a href="{{url('user/verify',$user->verifyUser->token)}}">Verify Email Address</a></p>
         
         <p>Thank you for choosing Umbrella Irrigation!</p>
-        <p id="copyright">&#9400; 2018 UmbrellaIrrigation Inc. All rights reserved.</p>
+        <p id="copyright">&#9400; 2018 UmbrellaIrrigation. All rights reserved.</p>
     </body>
 </html>
