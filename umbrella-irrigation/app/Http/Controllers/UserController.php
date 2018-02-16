@@ -95,6 +95,19 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for editing User name.
+     *
+     * @param  User $user
+     * @return \Illuminate\Http\Response
+     */
+    /*
+    public function editEmail(User $user)
+    {
+        return view('users.editEmail', compact('user'));
+    }
+    */
+    
+    /**
      * Show the form for editing User description.
      *
      * @param  User $user

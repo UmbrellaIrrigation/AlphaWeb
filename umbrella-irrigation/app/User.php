@@ -116,6 +116,10 @@ class User extends Authenticatable
     {
         $this->name = $newName;
     }
+    public function editEmail($newEmail){
+        
+        $this->email = $newEmail;
+    }
     public function editDescription($newDescription)
     {
         $this->description = $newDescription;

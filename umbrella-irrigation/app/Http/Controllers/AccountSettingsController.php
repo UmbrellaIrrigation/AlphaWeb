@@ -84,14 +84,23 @@ class AccountSettingsController extends Controller
         return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editDescription(User $user)
+    public function editDescription(Request $request, User $user)
     {
-        return view('account_settings.edit_description', compact('user'));
+        $user->editDescription($request->description);
+        $user->save();
+        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editEmail(User $user)
+    public function editEmail(Request $request, User $user)
     {
-        return view('account_settings.edit_email', compact('user'));
+        
+        $this->validate(request(), [
+            'email' => ['required','string','email','max:255','unique:users'],
+        ]);
+        
+        $user->editEmail($request->email);
+        $user->save();
+        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
     /**
