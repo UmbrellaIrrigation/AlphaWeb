@@ -79,27 +79,32 @@ class AccountSettingsController extends Controller
      */
     public function editName(Request $request, User $user)
     {
-        $user->editName($request->name);
-        $user->save();
+        if( $request->name != $user->name){
+            $user->editName($request->name);
+            $user->save();
+        }
         return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
     public function editDescription(Request $request, User $user)
     {
-        $user->editDescription($request->description);
-        $user->save();
+        if( $request->description != $user->description){
+            $user->editDescription($request->description);
+            $user->save();
+        }
         return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
     public function editEmail(Request $request, User $user)
     {
-        
         $this->validate(request(), [
             'email' => ['required','string','email','max:255','unique:users'],
         ]);
-        
-        $user->editEmail($request->email);
-        $user->save();
+
+        if( $request->email != $user->email ){
+            $user->editEmail($request->email);
+            $user->save();
+        }
         return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
