@@ -125,6 +125,16 @@ class User extends Authenticatable
         $this->permission = $newPermission;
     }
 
+    public function getPermission()
+    {
+        $permission = $this->permission;
+        if($permission == 1)
+            return "Guest";
+        if($permission == 2)
+            return "Employee";
+        return "Administrator";
+    }
+
     public function addToGroup(UserGroup $group) //call using $user->addToGroup($group);
     {
         $user = $this;
