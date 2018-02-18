@@ -58,7 +58,7 @@ class UserController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|max:255',
             'email' => ['required','string','email','max:255','unique:users'],
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
             'permission' => 'integer|between:1,3'
         ]);
 
@@ -68,7 +68,7 @@ class UserController extends Controller
             'password' => bcrypt(request('password')),
             'permission' => request('permission')
         ]);
-
+            
         return redirect('users');
     }
 
