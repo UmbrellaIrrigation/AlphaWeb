@@ -11,9 +11,17 @@ class User extends Authenticatable
 {
     public static function boot()
     {
-      parent::boot();
-      self::creating(function ($model) {
-        $model->id = (string) Uuid::generate(4);
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->description = "this is a default description.";
+        });
+        self::creating(function ($model) {
+            $model->id = (string) Uuid::generate(4);
+            });
+        self::saving(function ($model) {
+            if(trim($model->description) == '')
+                $model->description = "this is a default description";
         });
     }
 
@@ -26,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'email', 'password', 'permission',
+        'name', 'description', 'email', 'password', 'permission', 'notification_preference'
     ];
 
     /**
@@ -51,6 +59,10 @@ class User extends Authenticatable
     public function guest_to_employee()
     {
         return $this->belongsToMany(User::class,'guest_to_employee','guest_id','employee_id');
+    }
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
     }
 
     //functions
@@ -111,6 +123,16 @@ class User extends Authenticatable
     public function editPermission($newPermission)
     {
         $this->permission = $newPermission;
+    }
+
+    public function getPermission()
+    {
+        $permission = $this->permission;
+        if($permission == 1)
+            return "Guest";
+        if($permission == 2)
+            return "Employee";
+        return "Administrator";
     }
 
     public function addToGroup(UserGroup $group) //call using $user->addToGroup($group);

@@ -57,7 +57,6 @@ class UserController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
             'email' => ['required','string','email','max:255','unique:users'],
             'password' => 'required|string|min:6',
             'permission' => 'integer|between:1,3'
@@ -65,7 +64,6 @@ class UserController extends Controller
 
         User::create([
             'name' => request('name'),
-            'description' => request('description'),
             'email' => request('email'),
             'password' => bcrypt(request('password')),
             'permission' => request('permission')
