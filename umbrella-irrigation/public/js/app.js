@@ -16590,8 +16590,6 @@ var app = new Vue({
 });
 
 $(function () {
-    $('#createModal').modal();
-    $('#deleteModal').modal();
 
     /**
      * Fancytree Stuff
@@ -16635,10 +16633,6 @@ $(function () {
             node.setExpanded(false);
         });
     });
-
-    /**
-     * Edit User
-     */
 
     function onExit($input, save) {
         $input.keypress(function (e) {
