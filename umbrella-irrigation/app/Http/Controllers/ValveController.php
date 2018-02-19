@@ -44,30 +44,32 @@ class ValveController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'parent_id' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'latitude' => 'required|double',
-            'longitude' => 'required|double',
-            'min_flow_limit' => 'required|double',
-            'max_flow_limit' => 'required|double',
-            'nominal_flow_limit' => 'required|double',
-            'curr_flow' => 'required|double',
-            'max_gpm' => 'required|double',
-            'min_voltage' => 'required|double',
-            'max_voltage' => 'required|double',
-            'curr_voltage' => 'required|double',
-            'normally_open' => 'required|boolean',
-            'is_parent' => 'required|boolean',
-            'surpressed' => 'required|boolean',
-            'postponed' => 'required|boolean',
-            'shutdown' => 'required|boolean',
-            'alert' => 'required|boolean',
-            'overriden' => 'required|boolean'
+            'parent_id' => 'nullable|string|max:255',
+            'name' => 'unique:valves,name|required|string|max:255',
+            'description' => 'required|string',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'min_flow_limit' => 'required|numeric',
+            'max_flow_limit' => 'required|numeric',
+            'nominal_flow_limit' => 'required|numeric',
+            'curr_flow' => 'required|numeric',
+            'max_gpm' => 'required|numeric',
+            'min_voltage' => 'required|numeric',
+            'max_voltage' => 'required|numeric',
+            'curr_voltage' => 'required|numeric',
+            'normally_open' => 'boolean',
+            'is_parent' => 'boolean',
+            'suppressed' => 'boolean',
+            'postponed' => 'boolean',
+            'shutdown' => 'boolean',
+            'alert' => 'boolean',
+            'overriden' => 'boolean'
         ]);
 
         Valve::create([
             'parent_id' => request('parent_id'),
             'name' => request('name'),
+            'description' => request('description'),
             'latitude' => request('latitude'),
             'longitude' => request('longitude'),
             'min_flow_limit' => request('min_flow_limit'),
@@ -80,7 +82,7 @@ class ValveController extends Controller
             'curr_voltage' => request('curr_voltage'),
             'normally_open' => request('normally_open'),
             'is_parent' => request('is_parent'),
-            'surpressed' => request('surpressed'),
+            'suppressed' => request('suppressed'),
             'postponed' => request('postponed'),
             'shutdown' => request('shutdown'),
             'alert' => request('alert'),
@@ -132,6 +134,8 @@ class ValveController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $valve = Valve::find($id);
+        $valve->delete();
+        return redirect('/valves/index');
     }
 }

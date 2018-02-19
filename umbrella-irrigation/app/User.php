@@ -15,10 +15,8 @@ class User extends Authenticatable
 
         self::creating(function ($model) {
             $model->description = "this is a default description.";
-        });
-        self::creating(function ($model) {
             $model->id = (string) Uuid::generate(4);
-            });
+        });
         self::saving(function ($model) {
             if(trim($model->description) == '')
                 $model->description = "this is a default description";

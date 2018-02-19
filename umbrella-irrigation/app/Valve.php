@@ -2,6 +2,7 @@
 namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use Webpatser\Uuid\Uuid;
 use DB;
 
 class Valve extends Model
@@ -14,13 +15,16 @@ class Valve extends Model
         $model->description = 'sick pipe ma dude';
         $model->id = (string) Uuid::generate(4);
         });
-      self::creating(function ($model){
+      self::saving(function ($model){
         if(trim($model->description) == '')
             $model->description = 'sick pipe ma dude';
       });
     }
     
 	public $incrementing = false;
+    protected $fillable = [
+        'parent_id', 'name', 'description', 'latitude', 'longitude', 'min_flow_limit', 'max_flow_limit', 'nominal_flow_limit', 'curr_flow', 'max_gpm', 'min_voltage', 'max_voltage', 'curr_voltage', 'normally_open', 'is_parent', 'suppressed', 'postponed', 'shutdown', 'alert', 'overriden'
+    ];
 
     public static function getPostponed()
     {
