@@ -2,23 +2,17 @@
 
 @section ('content')
     <form method="" action="">
-        <h3 data-editable data-type="text" data-name="name">Name</h3>
+        <h3 data-editable data-type="text" data-name="name">{{ $valve->name }} </h3>
         
         <hr>
 
         <div class="form-group">
             <label for="description">Description:</label>
-            <p data-editable data-type="text" data-name="description">This is the best description ever.</p>
+            <p data-editable data-type="text" data-name="description">{{ $valve->description }}</p>
         </div>
         
         <hr>
 
-        <div class="form-group">
-            <label for="permission">Permission:</label>
-            <p data-editable data-type="number" data-name="permission">3</p>
-        </div>
-        
-        <hr>
-
+        <a href="#deleteModal" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-block btn-lg">Delete Valve</a>
     </form>
 @endsection
