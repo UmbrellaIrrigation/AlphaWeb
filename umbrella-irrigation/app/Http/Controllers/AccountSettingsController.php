@@ -77,19 +77,35 @@ class AccountSettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editName(User $user)
+    public function editName(Request $request, User $user)
     {
-        return view('account_settings.edit_name', compact('user'));
+        if( $request->name != $user->name){
+            $user->editName($request->name);
+            $user->save();
+        }
+        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editDescription(User $user)
+    public function editDescription(Request $request, User $user)
     {
-        return view('account_settings.edit_description', compact('user'));
+        if( $request->description != $user->description){
+            $user->editDescription($request->description);
+            $user->save();
+        }
+        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editEmail(User $user)
+    public function editEmail(Request $request, User $user)
     {
-        return view('account_settings.edit_email', compact('user'));
+        $this->validate(request(), [
+            'email' => ['required','string','email','max:255','unique:users'],
+        ]);
+
+        if( $request->email != $user->email ){
+            $user->editEmail($request->email);
+            $user->save();
+        }
+        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
     /**

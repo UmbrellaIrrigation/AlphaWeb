@@ -56,6 +56,9 @@
                             <button class="btn btn-primary text-white" href="#editEmailModal" data-toggle="modal" data-target="#editEmailModal">Change email</button>
                         </div>
                     </div>
+                    @if ($errors->has('email'))
+                            <small class="form-text alert alert-danger" role="alert">{{ $errors->first('email') }}</small>
+                    @endif
                     <hr>
 
                     <!-- change password -->

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('settings.description', ['user' => $user->id]) }}">
                 {{ csrf_field() }}
 
                 <div class="modal-header">
@@ -19,8 +19,8 @@
 
                         <div>
                             <input id="description" type="text" class="form-control" name="description" value="{{ $user->description }}" required autofocus> 
-                            <!--@if ($errors->has('name'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
+                            <!--@if ($errors->has('description'))
+                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('description') }}</small>
                             @endif-->
                         </div>
                     </div>
