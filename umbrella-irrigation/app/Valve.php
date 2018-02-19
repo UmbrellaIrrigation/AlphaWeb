@@ -9,16 +9,17 @@ class Valve extends Model
 {
 	public static function boot()
     {
-      parent::boot();
+        parent::boot();
 
-      self::creating(function ($model){
-        $model->description = 'sick pipe ma dude';
-        $model->id = (string) Uuid::generate(4);
+        self::creating(function ($model){
+           $model->description = 'sick pipe ma dude';
+            $model->id = (string) Uuid::generate(4);
         });
-      self::saving(function ($model){
+
+        self::saving(function ($model){
         if(trim($model->description) == '')
             $model->description = 'sick pipe ma dude';
-      });
+        });
     }
     
 	public $incrementing = false;
