@@ -52,7 +52,7 @@ class ValveGroupController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('valvegroups.show', compact('valvegroup'));
     }
 
     /**
@@ -86,6 +86,8 @@ class ValveGroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $valveGroup = ValveGroup::find($id);
+        $valveGroup->delete();
+        return redirect('/valvegroups/index');
     }
 }

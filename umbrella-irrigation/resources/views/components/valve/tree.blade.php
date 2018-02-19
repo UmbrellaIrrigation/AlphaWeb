@@ -3,27 +3,24 @@
     <hr>
     <div id="tree">
         <ul id="treeData" style="display: none;">
-            <li id="13" class="folder">Sequoia Hall Main Valve
-                <ul>
-                    <li id="10" class="folder">Oviatt Library Valve
-                        <ul>
-                            <li id="10">Oviatt Library NE</li>
-                            <li id="11" >Oviatt Library NW</li>
-                        </ul>
-                    </li>
-                    <li id="10" class="folder">Soccer Field Valve
-                        <ul>
-                            <li>Turf A</li>
-                            <li>Turf B</li>
-                            <li>Turf C</li>
-                            <li>Turf D</li>
-                            <li>Turf E</li>
-                        </ul>
-                    </li>
-                    <li>Valve #2</li>
-                    <li>Valve #23</li>
-                </ul>
-            </li>
+            @foreach ($rootGroups as $group)
+                <li class="folder">
+                    <a href="/valves/group/show/{{ $group->id }}" target="contentFrame">
+                        {{ $group->name }}
+                    </a>
+                    @if (count($group->getChildGroups) || count($group->getChildValves)) 
+                        @include('components.valve.treeloop', ['childGroups' => $group->getChildGroups, 'childValves' => $group->getChildValves]) 
+                    @endif
+                </li>
+            @endforeach
+
+            @foreach ($rootValves as $valve)
+                <li>
+                    <a href="/valves/valve/show/{{ $valve->id }}" target="contentFrame">
+                        {{ $valve->name }}
+                    </a>
+                </li>
+            @endforeach
         </ul>
     </div>
 </aside>

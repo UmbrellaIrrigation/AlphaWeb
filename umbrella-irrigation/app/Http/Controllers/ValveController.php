@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Valve;
+use App\ValveGroup;
 
 class ValveController extends Controller
 {
 
     public function main() 
     {
-        return view('valves.main');
+        $rootValves = Valve::getRootValves();
+        $rootGroups = ValveGroup::getRootValveGroups();
+        $allGroups = ValveGroup::getAllGroups();
+
+        return view('valves.main', 
+            compact('rootValves'), compact('rootGroups'))->with(compact('allGroups'));
     }
 
     /**
