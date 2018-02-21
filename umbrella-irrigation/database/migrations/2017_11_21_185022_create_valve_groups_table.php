@@ -16,7 +16,7 @@ class CreateValveGroupsTable extends Migration
         Schema::create('valve_groups', function (Blueprint $table) {
             $table->string('id');
             $table->string('name');
-            $table->string('parent_valve_group')->nullable();
+            $table->string('parent_id')->nullable();
             $table->timestamps();
         });
 

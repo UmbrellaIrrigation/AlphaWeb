@@ -140,7 +140,7 @@ class ValveController extends Controller
      */
     public function destroy($id)
     {
-        $valve = Valve::find($id);
+        $valve = Valve::find($id)
         $valve->delete();
         return redirect('/valves/index');
     }

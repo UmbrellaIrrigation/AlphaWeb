@@ -17,7 +17,7 @@ class CreateValvesTable extends Migration
             $table->string('id');
             $table->string('parent_id')->nullable();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable()->default(null);
             $table->double('latitude')->nullable()->default(null);
             $table->double('longitude')->nullable()->default(null);
             $table->double('min_flow_limit')->nullable()->default(null);
@@ -37,7 +37,7 @@ class CreateValvesTable extends Migration
             $table->boolean('shutdown')->default(false);
             $table->boolean('alert')->default(false);
             $table->boolean('overriden')->default(false);
-            $table->time('last_run_time')->default(null);
+            $table->time('last_run_time')->nullable()->default(null);
             $table->timestamps();
         });
 
