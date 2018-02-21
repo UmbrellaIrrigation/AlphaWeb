@@ -136,13 +136,23 @@ class Valve extends Model
         return $this->overriden;
     }
 
-	public function addToGroup($group)
+	public function addToGroup(ValveGroup $group)
+	{
+		$valve = $this;
+		$assocGroups = $valve->getAssocGroups();
+		if($assocGroups->contains('id',$group->id))
+			return false;
+		$valve->valvegroups()->attach($group);
+		return true;
+	}
+
+	public function removeFromGroup(ValveGroup $group)
 	{
 		$valve = $this;
 		$assocGroups = $valve->getAssocGroups();
 		if(!$assocGroups->contains('id',$group->id))
 			return false;
-		$valve->valvegroups()->attach($group);
+		$valve->valvegroups()->detach($group);
 		return true;
 	}
 }

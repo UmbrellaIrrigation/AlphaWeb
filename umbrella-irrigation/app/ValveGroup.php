@@ -17,7 +17,7 @@ class ValveGroup extends Model
     public $incrementing = false;
 
     /**
-     * returns all entries in ValveGroup DB where the 
+     * returns all entries in ValveGroup DB where the
      * specific entry does not have a parent group
      */
     public static function getUngroupedValveGroups()
@@ -25,8 +25,9 @@ class ValveGroup extends Model
         return ValveGroup::where('parent_valve_group', NULL)->get();
     }
 
+
     /**
-     * returns all the entries in ValveGroup DB along with its 
+     * returns all the entries in ValveGroup DB along with its
      * associated valves
      */
     public static function getValveGroupsWithValves()
@@ -46,9 +47,9 @@ class ValveGroup extends Model
      * returns a collection of ValveGroup where the collection consists
      * of children of the ValveGroup object's self
      */
-    public function getChildValveGroups()
+    public function getChildGroups()
     {
-        return $this::where('parent_valve_group', $this->id)->get();
+        return $this->hasMany(UserGroup::class, 'parent_id');
     }
 
     /**
@@ -66,6 +67,13 @@ class ValveGroup extends Model
     {
         return $this->belongsToMany(Valve::class, 'valve_to_group');
     }
+    /**
+     * creates one-to-many relationship between ValveGroup & itself
+    */
+    public function getParentGroup()
+    {
+        return $this->belongsTo(ValveGroup::class, 'parent_id');
+    }
 
     /**
      * returns collection of associated valves of the ValveGroup object's self
@@ -82,6 +90,25 @@ class ValveGroup extends Model
     public function getNumberOfAssocValves()
     {
         return count($this->getAssocValves());
+    }
+
+    public function addToGroup(ValveGroup $parent)
+    {
+        $child = $this;
+        if($child->parent_id == $parent->id || $child->id == $parent_id)
+            return false;
+        $parent->getChildGroups()->save($child);
+        return true;
+    }
+
+    public function removeFromGroup(ValveGroup $parent)
+    {
+        $child = $this;
+        if($child->parent_id!=$parent->id || $child->id == $parent->id)
+            return false;
+        $child->parent_id = null;
+        $child->save();
+        return true;
     }
 
 }
