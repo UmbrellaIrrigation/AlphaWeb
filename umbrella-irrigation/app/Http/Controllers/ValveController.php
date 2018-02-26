@@ -141,6 +141,7 @@ class ValveController extends Controller
     public function destroy($id)
     {
         $valve = Valve::find($id);
+        $valve->unassignAllUsers();
         $valve->delete();
         return redirect('/valves/index');
     }

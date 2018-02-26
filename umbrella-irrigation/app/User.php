@@ -62,15 +62,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Valve', 'valve_to_user');
     }
-    public function assignValve($valveId)
+    public function assignValve(Valve $valve)
     {
-        if(Valve::find($valveId))
-            $this->valves()->attach($valveId);
+        $this->valves()->attach($valve->id);
         return;
     }
-    public function unassignValve($valveId)
+    public function unassignValve(Valve $valve)
     {
-        $this->valves()->detatch($valveId);
+        $this->valves()->detatch($valve->id);
         return;
     }
     public function unassignAllValves()

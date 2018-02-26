@@ -90,9 +90,29 @@ class ValveGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ValveGroup $group)
     {
-        $valveGroup = ValveGroup::find($id);
+        $parentId = $group->parent_id;
+        $parentGroup = ValveGroup::find($parentId);
+        $childGroups = $group->getChildGroups()->get();
+
+        while($childGroups->first() != null)
+        {
+            $currChild = $childGroups->shift();
+            $currChild->parent_id = $parentId;
+            $currChild->save();
+        }
+
+        $childValves = $group->getChildValves()->get();
+        while($childValves->first() != null)
+        {
+            $currChild = $childValves->shift();
+            $currChild->valvegroups()->detach($group);
+            if($parentGroup != null)
+                $currChild->valve_groups()->attach($parentGroup);
+            $currChild->save();
+        }
+        
         $valveGroup->delete();
         return redirect('/valvegroups/index');
     }

@@ -97,16 +97,15 @@ class Valve extends Model
         return $this->belongsToMany(User::class, 'valve_to_user');
     }
 
-    public function assignUser($userId)
+    public function assignUser(User $user)
     {
-        if(User::find($userId))
-            $this->users()->attach($userId);
+        $this->users()->attach($user->id);
         return;
     }
 
-    public function unassignUser($userId)
+    public function unassignUser(User $user)
     {
-        $this->users()->detach($userId);
+        $this->users()->detach($user->id);
         return;
     }
 
