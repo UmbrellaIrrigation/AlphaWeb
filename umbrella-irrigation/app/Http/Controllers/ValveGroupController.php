@@ -36,12 +36,18 @@ class ValveGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $valveGroup = new ValveGroup;
-        $valveGroup->id = $request->id;
-        $valveGroup->name = $request->name;
-        $valve->parent_valve_group = $request->parent_valve_group;
+        $this->validate(request(), [
+            'name' => 'unique:valvegroups,name|required|string|max:255',
+            'parent_id' => 'nullable|string|max:255'
 
-        $valveGroup->save();
+        ]);
+
+        Valve::create([
+            'name' => request('name'),
+            'parent_id' => request('parent_id')
+        ]);
+
+        return redirect('valvegroups');
     }
 
     /**

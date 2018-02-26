@@ -19,11 +19,8 @@ class Valve extends Model
         self::saving(function ($model){
         if(trim($model->description) == '')
             $model->description = 'sick pipe ma dude';
-        if(isset($model->last_run_time))
-            $model->last_run_time = NULL;
+
         });
-
-
     }
     
 	public $incrementing = false;
@@ -98,6 +95,24 @@ class Valve extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'valve_to_user');
+    }
+
+    public function assignUser($userId)
+    {
+        if(User::find($userId))
+            $this->users()->attach($userId);
+        return;
+    }
+
+    public function unassignUser($userId)
+    {
+        $this->users()->detach($userId);
+        return;
+    }
+
+    public function unassignAllUsers()
+    {
+        $this->users()->detach();
     }
 
     public function valveevents()
