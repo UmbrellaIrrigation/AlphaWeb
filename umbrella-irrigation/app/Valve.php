@@ -183,4 +183,9 @@ class Valve extends Model
 	{
 		$this->users()->detach($user);
 	}
+
+	public function getAssignedUsers()
+	{
+		return $this->users();
+	}
 }
