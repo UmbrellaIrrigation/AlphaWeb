@@ -178,4 +178,9 @@ class Valve extends Model
 	{
 		$this->users()->attach($user);
 	}
+
+	public function unassignToUser(User $user)
+	{
+		$this->users()->detach($user);
+	}
 }
