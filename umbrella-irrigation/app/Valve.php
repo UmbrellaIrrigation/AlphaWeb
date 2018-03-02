@@ -173,9 +173,4 @@ class Valve extends Model
 		$valve->valvegroups()->detach($group);
 		return true;
 	}
-
-	public function assignToUser(User $user)
-	{
-		$this->users()->attach($user);
-	}
 }
