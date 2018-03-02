@@ -183,6 +183,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $user->unassignAllValves();
         $user->delete();
         return redirect('/users/index');
     }

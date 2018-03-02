@@ -58,6 +58,24 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class,'guest_to_employee','guest_id','employee_id');
     }
+    public function valves()
+    {
+        return $this->belongsToMany('App\Valve', 'valve_to_user');
+    }
+    public function assignValve(Valve $valve)
+    {
+        $this->valves()->attach($valve->id);
+        return;
+    }
+    public function unassignValve(Valve $valve)
+    {
+        $this->valves()->detatch($valve->id);
+        return;
+    }
+    public function unassignAllValves()
+    {
+        $this->valves()->detach();
+    }
     public function verifyUser()
     {
         return $this->hasOne('App\VerifyUser');
