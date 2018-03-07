@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserGroup;
-
 class UserGroupController extends Controller
 {
     /**
@@ -98,7 +98,7 @@ class UserGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserGroup $usergroup)
+    public function destroy($id)
     {
         $group = UserGroup::find($id);
         $parent_id = $group->parent_id;
@@ -120,6 +120,59 @@ class UserGroupController extends Controller
             $currChild->save();
         }
         $group->delete();
+        return redirect('/users/index');
+    }
+
+    public function destroyWithChildren($id)
+    {
+        $group = UserGroup::find($id);
+        $parent_id = $group->parent_id;
+        $parentGroup = UserGroup::find($parent_id);
+        $childUsers = $group->getChildUsers()->get();
+        $childGroups = $group->getChildGroups()->get();
+        while($childGroups->first()!=null)
+        {
+            $currChild = $childGroups->shift();
+            $childUsers = $childUsers->merge($currChild->getChildUsers()->get());
+            $currChild->delete();
+        }
+        while($childUsers->first()!=null)
+        {
+            $currChild = $childUsers->shift();//gets the first element, removes from collection
+            if($currChild->id != Auth::user()->id)
+                $currChild->delete();
+        }
+        $group->delete();
+        return redirect('/users/index');
+    }
+
+    public function destroyWithChildrenRec($id) //infinite recursion! Not sure why
+    {
+        $model = null;
+        if(UserGroup::find($id) != null)
+        {
+            $model = UserGroup::find($id);
+            $children = $model->getChildUsers()->get();
+            while($children->first()!=null)
+            {
+                $currChild = $children->pop();
+                if($currChild->id == Auth::User()->id)
+                    continue;
+                $currChild->delete();
+            }
+            $children = $model->getChildGroups()->get();
+            while($children->first()!=null)
+            {
+                $currChild = $children->pop();
+                $this->destroyWithChildrenRec($currChild->id);
+            }
+        }
+        else
+        {
+            $model = User::find($id);
+        }
+        if($model!=null)
+            $model->delete();
         return redirect('/users/index');
     }
 }
