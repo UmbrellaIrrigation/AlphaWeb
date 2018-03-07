@@ -22,7 +22,7 @@ class Valve extends Model
 
         });
     }
-    
+
 	public $incrementing = false;
     protected $fillable = [
         'parent_id', 'name', 'description', 'latitude', 'longitude', 'min_flow_limit', 'max_flow_limit', 'nominal_flow_limit', 'curr_flow', 'max_gpm', 'min_voltage', 'max_voltage', 'curr_voltage', 'normally_open', 'is_parent', 'suppressed', 'postponed', 'shutdown', 'alert', 'overriden'
@@ -159,4 +159,39 @@ class Valve extends Model
     {
         return $this->overriden;
     }
+
+	public function addToGroup(ValveGroup $group)
+	{
+		$valve = $this;
+		$assocGroups = $valve->getAssocGroups();
+		if($assocGroups->contains('id',$group->id))
+			return false;
+		$valve->valvegroups()->attach($group);
+		return true;
+	}
+
+	public function removeFromGroup(ValveGroup $group)
+	{
+		$valve = $this;
+		$assocGroups = $valve->getAssocGroups();
+		if(!$assocGroups->contains('id',$group->id))
+			return false;
+		$valve->valvegroups()->detach($group);
+		return true;
+	}
+
+	public function assignToUser(User $user)
+	{
+		$this->users()->attach($user);
+	}
+
+	public function unassignToUser(User $user)
+	{
+		$this->users()->detach($user);
+	}
+
+	public function getAssignedUsers()
+	{
+		return $this->users();
+	}
 }

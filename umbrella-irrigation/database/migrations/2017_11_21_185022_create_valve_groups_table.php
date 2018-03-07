@@ -25,7 +25,7 @@ class CreateValveGroupsTable extends Migration
             $table->string('valve_id');
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *

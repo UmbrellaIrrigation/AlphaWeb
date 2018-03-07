@@ -17,7 +17,7 @@ class ValveGroup extends Model
     public $incrementing = false;
 
     /**
-     * returns all entries in ValveGroup DB where the 
+     * returns all entries in ValveGroup DB where the
      * specific entry does not have a parent group
      */
     public static function getRootGroups()
@@ -27,6 +27,7 @@ class ValveGroup extends Model
 
 
     /**
+     * returns all the entries in ValveGroup DB along with its
      * returns all entries in ValveGroup DB
      *
      */
@@ -77,6 +78,13 @@ class ValveGroup extends Model
     {
         return $this->belongsToMany(Valve::class, 'valve_to_group');
     }
+    /**
+     * creates one-to-many relationship between ValveGroup & itself
+    */
+    public function getParentGroup()
+    {
+        return $this->belongsTo(ValveGroup::class, 'parent_id');
+    }
 
     /**
      * returns collection of associated valves of the ValveGroup object's self
@@ -98,6 +106,25 @@ class ValveGroup extends Model
     public function getParentGroup()
     {
         return $this->belongsTo(ValveGroup::class, 'parent_valve_group');
+    }
+
+    public function addToGroup(ValveGroup $parent)
+    {
+        $child = $this;
+        if($child->parent_id == $parent->id || $child->id == $parent_id)
+            return false;
+        $parent->getChildGroups()->save($child);
+        return true;
+    }
+
+    public function removeFromGroup(ValveGroup $parent)
+    {
+        $child = $this;
+        if($child->parent_id!=$parent->id || $child->id == $parent->id)
+            return false;
+        $child->parent_id = null;
+        $child->save();
+        return true;
     }
 
 }

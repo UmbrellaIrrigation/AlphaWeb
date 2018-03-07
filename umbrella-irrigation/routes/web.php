@@ -18,16 +18,17 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 Route::prefix('users')->group(function() {
     Route::get('/','UserController@main')->name('users');
     Route::get('index','UserController@index')->name('users.index');
-    
+
     Route::get('user/show/{user}', 'UserController@show');
     Route::get('user/editName/{user}', 'UserController@editName');
     Route::get('user/editDescription/{user}', 'UserController@editDescription');
     Route::get('user/editPermission/{user}', 'UserController@editPermission');
     Route::get('user/delete/{user}','UserController@destroy');
     Route::post('user/store', 'UserController@store')->name('users.store');
-    
+
     Route::get('group/show/{usergroup}', 'UserGroupController@show');
     Route::get('group/delete/{usergroup}', 'UserGroupController@destroy');
+    Route::get('group/deleteWithChildren/{usergroup}','UserGroupController@destroyWithChildren');
     Route::post('group/store', 'UserGroupController@store')->name('usergroup.store');
 });
 
