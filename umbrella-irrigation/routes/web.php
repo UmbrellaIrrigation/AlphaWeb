@@ -34,9 +34,13 @@ Route::prefix('users')->group(function() {
 Route::prefix('valves')->group(function() {
     Route::get('/', 'ValveController@main')->name('valves')->middleware('admin');
     Route::get('index','ValveController@index')->name('valves.index')->middleware('admin');
-    Route::get('valve/show/{valve}');
+    Route::get('valve/show/{valve}', 'ValveController@show');
     Route::get('valve/delete/{valve}', 'ValveController@destroy');
     Route::post('valve/store', 'ValveController@store')->name('valves.store');
+
+    Route::get('group/show/{valvegroup}', 'ValveGroupController@show');
+    Route::get('group/delete/{valvegroup}', 'ValveGroupController@destroy');
+    Route::post('group/store', 'ValveGroupController@store')->name('valvegroup.store');
 });
 
 Route::get('/account/{user}/settings', 'AccountSettingsController@index')->name('settings.home');

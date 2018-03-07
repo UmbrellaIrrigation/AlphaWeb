@@ -36,12 +36,18 @@ class ValveGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $valveGroup = new ValveGroup;
-        $valveGroup->id = $request->id;
-        $valveGroup->name = $request->name;
-        $valve->parent_valve_group = $request->parent_valve_group;
+        $this->validate(request(), [
+            'name' => 'unique:valvegroups,name|required|string|max:255',
+            'parent_valve_group' => 'nullable|string|max:255'
 
-        $valveGroup->save();
+        ]);
+
+        Valve::create([
+            'name' => request('name'),
+            'parent_valve_group' => request('parent_valve_group')
+        ]);
+
+        return redirect('valvegroups');
     }
 
     /**
@@ -50,9 +56,10 @@ class ValveGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(ValveGroup $valvegroup)
+    {    
+        $rootGroups = ValveGroup::getRootGroups();
+        return view('valves.group.show', compact('valvegroup'), compact('rootGroups'));
     }
 
     /**
@@ -86,6 +93,29 @@ class ValveGroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $group = ValveGroup::find($id);
+        $parentId = $group->parent_valve_group;
+        $parentGroup = ValveGroup::find($parentId);
+        $childGroups = $group->getChildGroups()->get();
+        $childValves = $group->getChildValves()->get();
+
+        while($childGroups->first() != null)
+        {
+            $currChild = $childGroups->shift();
+            $currChild->parent_valve_group = $parentId;
+            $currChild->save();
+        }
+
+        while($childValves->first() != null)
+        {
+            $currChild = $childValves->shift();
+            $currChild->valvegroups()->detach($group);
+            if($parentGroup != null)
+                $currChild->valve_groups()->attach($parentGroup);
+            $currChild->save();
+        }
+        
+        $group->delete();
+        return redirect('/valves/index');
     }
 }

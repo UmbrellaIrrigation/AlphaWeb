@@ -20,9 +20,19 @@ class ValveGroup extends Model
      * returns all entries in ValveGroup DB where the 
      * specific entry does not have a parent group
      */
-    public static function getUngroupedValveGroups()
+    public static function getRootGroups()
     {
         return ValveGroup::where('parent_valve_group', NULL)->get();
+    }
+
+
+    /**
+     * returns all entries in ValveGroup DB
+     *
+     */
+    public static function getAllGroups()
+    {
+        return ValveGroup::all();
     }
 
     /**
@@ -46,9 +56,10 @@ class ValveGroup extends Model
      * returns a collection of ValveGroup where the collection consists
      * of children of the ValveGroup object's self
      */
-    public function getChildValveGroups()
+    public function getChildGroups()
     {
-        return $this::where('parent_valve_group', $this->id)->get();
+        // return $this::where('parent_valve_group', $this->id)->get();
+        return $this->hasMany(ValveGroup::class, 'parent_valve_group');
     }
 
     /**
@@ -62,7 +73,7 @@ class ValveGroup extends Model
     /**
      * creats many-to-many association to valve via pivot table
      */
-    public function valves()
+    public function getChildValves()
     {
         return $this->belongsToMany(Valve::class, 'valve_to_group');
     }
@@ -82,6 +93,11 @@ class ValveGroup extends Model
     public function getNumberOfAssocValves()
     {
         return count($this->getAssocValves());
+    }
+
+    public function getParentGroup()
+    {
+        return $this->belongsTo(ValveGroup::class, 'parent_valve_group');
     }
 
 }

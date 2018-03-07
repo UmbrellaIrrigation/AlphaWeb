@@ -12,13 +12,14 @@ class Valve extends Model
         parent::boot();
 
         self::creating(function ($model){
-           $model->description = 'sick pipe ma dude';
+            $model->description = 'sick pipe ma dude';
             $model->id = (string) Uuid::generate(4);
         });
 
         self::saving(function ($model){
         if(trim($model->description) == '')
             $model->description = 'sick pipe ma dude';
+
         });
     }
     
@@ -69,7 +70,13 @@ class Valve extends Model
 
     public static function getRootValves()
     {
-        return Valve::where('parent_id', NULL)->get();
+        $ids = DB::table('valve_to_group')->pluck('valve_id');
+        $valves = Valve::all()->keyBy('id');
+        foreach($ids as $id)
+        {
+            $valves->pull($id);
+        }
+        return $valves;
     }
 
     public static function getUngroupedValves()
@@ -94,6 +101,23 @@ class Valve extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'valve_to_user');
+    }
+
+    public function assignUser(User $user)
+    {
+        $this->users()->attach($user->id);
+        return;
+    }
+
+    public function unassignUser(User $user)
+    {
+        $this->users()->detach($user->id);
+        return;
+    }
+
+    public function unassignAllUsers()
+    {
+        $this->users()->detach();
     }
 
     public function valveevents()
