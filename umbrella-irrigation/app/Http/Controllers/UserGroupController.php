@@ -98,7 +98,7 @@ class UserGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserGroup $usergroup)
+    public function destroy($id)
     {
         $group = UserGroup::find($id);
         $parent_id = $group->parent_id;

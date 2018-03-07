@@ -30,6 +30,21 @@
                     <a href="" class="btn btn-primary" data-dismiss="modal">Keep Children</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Deletion</button>
                 </div>
+            @elseif (Request::is('valves/group*'))
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Valve Group Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you wish to delete all Valves and Groups within this Group (Remove Children) or keep those Valves and Groups in this Group (Keep Children)?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/valves/group/delete/{{$valvegroup->id}}" class="btn btn-danger">Remove Children</a>
+                    <a href="" class="btn btn-primary" data-dismiss="modal">Keep Children</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Deletion</button>
+                </div>
             @elseif (Request::is('valves/valve*'))
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Valve Deletion</h5>

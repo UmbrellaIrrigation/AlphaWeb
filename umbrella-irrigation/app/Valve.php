@@ -70,7 +70,13 @@ class Valve extends Model
 
     public static function getRootValves()
     {
-        return Valve::where('parent_id', NULL)->get();
+        $ids = DB::table('valve_to_group')->pluck('valve_id');
+        $valves = Valve::all()->keyBy('id');
+        foreach($ids as $id)
+        {
+            $valves->pull($id);
+        }
+        return $valves;
     }
 
     public static function getUngroupedValves()

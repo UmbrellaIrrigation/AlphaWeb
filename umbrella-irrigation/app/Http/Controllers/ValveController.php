@@ -12,7 +12,7 @@ class ValveController extends Controller
     public function main() 
     {
         $rootValves = Valve::getRootValves();
-        $rootGroups = ValveGroup::getRootValveGroups();
+        $rootGroups = ValveGroup::getRootGroups();
         $allGroups = ValveGroup::getAllGroups();
 
         return view('valves.main', 

@@ -38,13 +38,13 @@ class ValveGroupController extends Controller
     {
         $this->validate(request(), [
             'name' => 'unique:valvegroups,name|required|string|max:255',
-            'parent_id' => 'nullable|string|max:255'
+            'parent_valve_group' => 'nullable|string|max:255'
 
         ]);
 
         Valve::create([
             'name' => request('name'),
-            'parent_id' => request('parent_id')
+            'parent_valve_group' => request('parent_valve_group')
         ]);
 
         return redirect('valvegroups');
@@ -56,9 +56,10 @@ class ValveGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        return view('valvegroups.show', compact('valvegroup'));
+    public function show(ValveGroup $valvegroup)
+    {    
+        $rootGroups = ValveGroup::getRootGroups();
+        return view('valves.group.show', compact('valvegroup'), compact('rootGroups'));
     }
 
     /**
@@ -90,20 +91,21 @@ class ValveGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ValveGroup $group)
+    public function destroy($id)
     {
-        $parentId = $group->parent_id;
+        $group = ValveGroup::find($id);
+        $parentId = $group->parent_valve_group;
         $parentGroup = ValveGroup::find($parentId);
         $childGroups = $group->getChildGroups()->get();
+        $childValves = $group->getChildValves()->get();
 
         while($childGroups->first() != null)
         {
             $currChild = $childGroups->shift();
-            $currChild->parent_id = $parentId;
+            $currChild->parent_valve_group = $parentId;
             $currChild->save();
         }
 
-        $childValves = $group->getChildValves()->get();
         while($childValves->first() != null)
         {
             $currChild = $childValves->shift();
@@ -113,7 +115,7 @@ class ValveGroupController extends Controller
             $currChild->save();
         }
         
-        $valveGroup->delete();
-        return redirect('/valvegroups/index');
+        $group->delete();
+        return redirect('/valves/index');
     }
 }
