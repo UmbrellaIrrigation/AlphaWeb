@@ -38,13 +38,13 @@ class ValveGroupController extends Controller
     {
         $this->validate(request(), [
             'name' => 'unique:valvegroups,name|required|string|max:255',
-            'parent_valve_group' => 'nullable|string|max:255'
+            'parent_id' => 'nullable|string|max:255'
 
         ]);
 
         Valve::create([
             'name' => request('name'),
-            'parent_valve_group' => request('parent_valve_group')
+            'parent_id' => request('parent_id')
         ]);
 
         return redirect('valvegroups');
@@ -102,7 +102,7 @@ class ValveGroupController extends Controller
         while($childGroups->first() != null)
         {
             $currChild = $childGroups->shift();
-            $currChild->parent_valve_group = $parentId;
+            $currChild->parent_id= $parentId;
             $currChild->save();
         }
 
