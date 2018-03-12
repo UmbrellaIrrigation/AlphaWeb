@@ -53,3 +53,5 @@ Route::post('/account/{user}/settings/editPassword', 'AccountSettingsController@
 // Route::get('/accountsettings', 'AccountSettingsController@show');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+
+Route::get('/sina/data', 'TestController@index');
