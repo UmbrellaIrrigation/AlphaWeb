@@ -54,4 +54,4 @@ Route::post('/account/{user}/settings/editPassword', 'AccountSettingsController@
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 
-Route::get('/sina/data', 'TestController@index');
+Route::get('/sina/rootValves-rootGroups-allGroups', 'TestController@index');
