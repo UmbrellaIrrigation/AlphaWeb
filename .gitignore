@@ -1,1 +1,7 @@
 .DS_Store
+.env
+/database
+/vendor
+/storage
+/node_modules
+/bootstrap
