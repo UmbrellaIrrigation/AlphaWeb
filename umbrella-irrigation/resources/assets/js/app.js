@@ -21,10 +21,7 @@ const app = new Vue({
     el: '#app'
 });
 
-
 $(function () {
-    $('#createModal').modal();
-    $('#deleteModal').modal();
 
     /**
      * Fancytree Stuff
@@ -69,10 +66,8 @@ $(function () {
         });
     });
 
-    /**
-     * Edit User
-     */
 
+    
     function onExit($input, save) {
         $input.keypress(function(e) {
             if(e.which == 13) {
@@ -102,5 +97,4 @@ $(function () {
             onExit($input, save);
         } 
     });
-
 });

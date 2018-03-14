@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('settings.email', ['user' => $user->id]) }}">
                 {{ csrf_field() }}
 
                 <div class="modal-header">
@@ -14,14 +14,11 @@
 
                 <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="name" class="control-label">Email</label>
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label for="email" class="control-label">E-Mail Address</label>
 
                         <div>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ $user->email }}" required autofocus> 
-                            <!--@if ($errors->has('name'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
-                            @endif-->
+                            <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" required autofocus> 
                         </div>
                     </div>
                 </div>

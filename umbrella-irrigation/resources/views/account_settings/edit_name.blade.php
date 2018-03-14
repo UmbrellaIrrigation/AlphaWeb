@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('settings.name', ['user' => $user->id]) }}">
                 {{ csrf_field() }}
 
                 <div class="modal-header">

@@ -19,11 +19,11 @@
 
         <div class="form-group">
             <label for="permission">Permission</label>
-            <p data-editable data-type="number" data-name="permission">{{ $user->permission }}</p>
+            <p data-editable data-type="number" data-name="permission">{{ $user->getPermission() }}</p>
         </div>
 
         <hr>
-        
+
         <a href="#deleteModal" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-block btn-lg">Delete User</a>
 
     </form>

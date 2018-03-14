@@ -63,6 +63,11 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="password-confirm" class="control-label">Confirm Password</label>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                    </div>
+
                     <div class="form-group{{ $errors->has('permission') ? ' has-error' : '' }}">
                         <label for="permission" class="control-label">Permission</label>
 
@@ -224,4 +229,9 @@
         </div>
     </div>
 </div>
-    
+
+@if ( count($errors) )
+    <script>
+        var createError = true;
+    </script>
+@endif
