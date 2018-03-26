@@ -119,7 +119,7 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user)?: redirect('/login');
+        return $this->registered($request, $user)?: redirect('/');
     }
 
     protected function registered(Request $request, $user)
