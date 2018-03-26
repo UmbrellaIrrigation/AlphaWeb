@@ -22,7 +22,7 @@ class ValveGroup extends Model
      */
     public static function getRootGroups()
     {
-        return ValveGroup::where('parent_valve_group', NULL)->get();
+        return ValveGroup::where('parent_id', NULL)->get();
     }
 
 
@@ -60,7 +60,7 @@ class ValveGroup extends Model
     public function getChildGroups()
     {
         // return $this::where('parent_valve_group', $this->id)->get();
-        return $this->hasMany(ValveGroup::class, 'parent_valve_group');
+        return $this->hasMany(ValveGroup::class, 'parent_id');
     }
 
     /**
@@ -101,11 +101,6 @@ class ValveGroup extends Model
     public function getNumberOfAssocValves()
     {
         return count($this->getAssocValves());
-    }
-
-    public function getParentGroup()
-    {
-        return $this->belongsTo(ValveGroup::class, 'parent_valve_group');
     }
 
     public function addToGroup(ValveGroup $parent)
