@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('notification_preference')->default(0); //0:none 1:app 2:email
             $table->boolean('verified')->default(false);
+            $table->string('api_token', 60)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -43,5 +44,8 @@ class CreateUsersTable extends Migration
      public function down()
      {
          Schema::dropIfExists('users');
+         Schema::table('users', function(Blueprint $table) {
+            $table->dropColumn(['api_token']);
+         });
      }
 }

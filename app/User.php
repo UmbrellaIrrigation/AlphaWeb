@@ -44,6 +44,14 @@ class User extends Authenticatable
         'password', 'remember_token'
     ];
 
+    public function generateToken()
+    {
+        $this->api_token = str_random(60);
+        $this->save();
+
+        return $this->api_token;
+    }
+
     //many-to-many relationships
 
     public function user_groups() //fetch collection of user's groups by using $user->user_groups
