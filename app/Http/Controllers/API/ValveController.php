@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Valve;
 use App\ValveGroup;
+use Auth;
 
 class ValveController extends Controller
 {
@@ -16,7 +17,11 @@ class ValveController extends Controller
      */
     public function index()
     {
-        return Valve::all();
+        $user = Auth::guard('api')->user();
+        if($user){
+            return Valve::all();
+        }
+        return null;
     }
 
     /**
