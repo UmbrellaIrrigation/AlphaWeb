@@ -1,4 +1,4 @@
-import Errors from './errors';
+import Errors from './error';
 
 class Form {
     /**
