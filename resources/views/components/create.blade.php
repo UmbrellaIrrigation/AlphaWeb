@@ -212,12 +212,6 @@
     </div>
 </div>
 
-@if ( count($errors) )
-    <script>
-        var createError = true;
-    </script>
-@endif
-
 <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="createGroupModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

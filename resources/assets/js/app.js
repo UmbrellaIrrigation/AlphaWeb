@@ -2,6 +2,9 @@ import Form from './utils/Form';
 
 window.Form = Form;
 
+var createModal = $('#createModal').modal('hide');
+var createGroupModal = $('#createGroupModal').modal('hide');
+
 $(function () {
     
     function onExit($input, save) {

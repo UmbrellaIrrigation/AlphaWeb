@@ -83,6 +83,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 window.Form = __WEBPACK_IMPORTED_MODULE_0__utils_Form__["a" /* default */];
 
+var createModal = $('#createModal').modal('hide');
+var createGroupModal = $('#createGroupModal').modal('hide');
+
 $(function () {
 
     function onExit($input, save) {
