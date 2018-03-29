@@ -8,7 +8,7 @@
                 {{ csrf_field() }}
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create a New User</h5>
+                    <h5 class="modal-title">Create a New User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -26,20 +26,6 @@
                             @endif
                         </div>
                     </div>
-
-                    <!--
-                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                        <label for="name" class="control-label">Description</label>
-
-                        <div>
-                            <textarea id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" required></textarea>
-
-                            @if ($errors->has('description'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('description') }}</small>
-                            @endif
-                        </div>
-                    </div>
-                    -->
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email" class="control-label">E-Mail Address</label>
@@ -94,7 +80,7 @@
                     {{ csrf_field() }}
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create a New Valve</h5>
+                    <h5 class="modal-title">Create a New Valve</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -235,3 +221,91 @@
         var createError = true;
     </script>
 @endif
+
+<div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="createGroupModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            @if (Request::is('users*'))
+
+            <form method="POST" action="{{ route('usergroup.store') }}">
+                {{ csrf_field() }}
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a New User Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <label for="name" class="control-label">Name</label>
+
+                        <div>
+                            <input id="groupname" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus> 
+                            @if ($errors->has('name'))
+                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parent_id">Parent User Group</label>
+                        <select class="form-control" id="parent_id" name="parent_id">
+                            <option value="null" selected>None</option>
+                            @foreach ($rootGroups as $group)
+                                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                @if (count($group->getChildGroups)) 
+                                    @include('components.loop.usergroup', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;']) 
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create User Group</button>
+                </div>
+
+            </form>
+
+            @elseif (Request::is('valves*'))
+                <form method="POST" action="/">
+                    {{ csrf_field() }}
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create a New Valve Group</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="parent_valve_gid">Parent Valve Group Id:</label>
+                            <input type="number" class="form-control" id="parent_valve_gid" name="parent_valve_gid">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create Valve Group</button>
+                        </div>
+                    </div>
+                </form>
+
+            @endif
+
+        </div>
+    </div>
+</div>
