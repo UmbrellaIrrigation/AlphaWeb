@@ -17,6 +17,8 @@
   </main>
 
   @include ('components.footer')
+  
+  @yield ('footer')
 </body>
 
 </html>
