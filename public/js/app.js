@@ -81,6 +81,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_Form__ = __webpack_require__(69);
 
 
+window.Form = __WEBPACK_IMPORTED_MODULE_0__utils_Form__["a" /* default */];
+
 $(function () {
 
     function onExit($input, save) {
@@ -279,7 +281,7 @@ var Form = function () {
     return Form;
 }();
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Form);
+/* harmony default export */ __webpack_exports__["a"] = (Form);
 
 /***/ }),
 

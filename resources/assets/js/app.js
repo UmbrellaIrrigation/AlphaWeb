@@ -1,5 +1,7 @@
 import Form from './utils/Form';
 
+window.Form = Form;
+
 $(function () {
     
     function onExit($input, save) {

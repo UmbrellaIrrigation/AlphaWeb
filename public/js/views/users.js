@@ -122,19 +122,23 @@ module.exports = __webpack_require__(54);
 /***/ }),
 
 /***/ 54:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Example__);
 /**
  * Form and Vue Element
  */
 
-Vue.component('example', __webpack_require__(5));
+
 
 var app = new Vue({
     el: '#app',
 
     components: {
-        Example: Example
+        Example: __WEBPACK_IMPORTED_MODULE_0__components_Example___default.a
     },
 
     data: {

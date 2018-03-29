@@ -2,7 +2,7 @@
  * Form and Vue Element
  */
 
-Vue.component('example', require('../components/Example.vue'));
+import Example from '../components/Example';
 
 const app = new Vue({
     el: '#app',
