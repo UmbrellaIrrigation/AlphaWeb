@@ -1,4 +1,4 @@
-import Form from './utils/form';
+import Form from './utils/Form';
 
 $(function () {
     
