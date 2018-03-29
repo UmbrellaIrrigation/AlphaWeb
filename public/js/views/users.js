@@ -142,15 +142,14 @@ var app = new Vue({
     },
 
     data: {
-        form: new Form({
-            name: '',
-            description: ''
+        createUserForm: new Form({
+            name: ''
         })
     },
 
     methods: {
-        onSubmit: function onSubmit() {
-            this.form.post('/projects').then(function (response) {
+        createUser: function createUser() {
+            this.createUserForm.post('/projects').then(function (response) {
                 return alert('Wahoo!');
             });
         }

@@ -4,8 +4,7 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('users.store') }}">
-                {{ csrf_field() }}
+            <form method="POST" action="{{ route('users.store') }}" @submit.prevent="createUser" @keydown="createUserForm.errors.clear($event.target.name)">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Create a New User</h5>
@@ -18,12 +17,9 @@
 
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="control-label">Name</label>
-
                         <div>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus> 
-                            @if ($errors->has('name'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
-                            @endif
+                            <input id="name" type="text" class="form-control" name="name" v-model="createUserForm.name" required autofocus> 
+                            <small class="form-text alert alert-danger" role="alert" v-if="createUserForm.errors.has('name')" v-text="createUserForm.errors.get('name')"></small>
                         </div>
                     </div>
 
@@ -69,7 +65,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create User</button>
+                    <button type="submit" class="btn btn-primary" :disabled="createUserForm.errors.any()">Create User</button>
                 </div>
 
             </form>
@@ -274,35 +270,36 @@
             </form>
 
             @elseif (Request::is('valves*'))
-                <form method="POST" action="/">
-                    {{ csrf_field() }}
 
-                    <div class="modal-header">
-                        <h5 class="modal-title">Create a New Valve Group</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <form method="POST" action="/">
+                {{ csrf_field() }}
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a New Valve Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
                     </div>
 
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="parent_valve_gid">Parent Valve Group Id:</label>
-                            <input type="number" class="form-control" id="parent_valve_gid" name="parent_valve_gid">
-                        </div>
+                    <div class="form-group">
+                        <label for="parent_valve_gid">Parent Valve Group Id:</label>
+                        <input type="number" class="form-control" id="parent_valve_gid" name="parent_valve_gid">
                     </div>
+                </div>
 
-                    <div class="modal-footer">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Create Valve Group</button>
-                        </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Valve Group</button>
                     </div>
-                </form>
+                </div>
+            </form>
 
             @endif
 
