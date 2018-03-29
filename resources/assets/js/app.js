@@ -1,3 +1,5 @@
+import Form from './utils/form';
+
 /**
  * Vue
  */
@@ -5,7 +7,25 @@
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    components: {
+        Example
+    },
+
+    data: {
+        form: new Form({
+            name: '',
+            description: ''
+        })
+    },
+
+    methods: {
+        onSubmit() {
+            this.form.post('/projects')
+                .then(response => alert('Wahoo!'));
+        }
+    }
 });
 
 $(function () {
