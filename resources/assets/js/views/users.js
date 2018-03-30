@@ -12,14 +12,14 @@ const app = new Vue({
     },
 
     data: {
-        createUserForm: new Form({
+        userForm: new Form({
             name: ''
         })
     },
 
     methods: {
         createUser() {
-            this.createUserForm.post('/projects')
+            this.userForm.post('/projects')
                 .then(response => alert('Wahoo!'));
         }
     }

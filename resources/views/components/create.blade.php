@@ -4,7 +4,7 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('users.store') }}" @submit.prevent="createUser" @keydown="createUserForm.errors.clear($event.target.name)">
+            <form method="POST" action="{{ route('users.store') }}" @submit.prevent="createUser" @keydown="userForm.errors.clear($event.target.name)">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Create a New User</h5>
@@ -15,46 +15,41 @@
 
                 <div class="modal-body">
 
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="name" class="control-label">Name</label>
                         <div>
-                            <input id="name" type="text" class="form-control" name="name" v-model="createUserForm.name" required autofocus> 
-                            <small class="form-text alert alert-danger" role="alert" v-if="createUserForm.errors.has('name')" v-text="createUserForm.errors.get('name')"></small>
+                            <input id="name" type="text" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('name') }" name="name" v-model="userForm.name" required autofocus> 
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('name')" v-text="userForm.errors.get('name')"></small>
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="email" class="control-label">E-Mail Address</label>
-
                         <div>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                            @if ($errors->has('email'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('email') }}</small>
-                            @endif
+                            <input id="email" type="email" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('email') }" name="email" v-model="userForm.email" required>
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('email')" v-text="userForm.errors.get('email')"></small>
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="password" class="control-label">Password</label>
-
                         <div>
-                            <input id="password" type="password" class="form-control" name="password" required> 
-                            @if ($errors->has('password'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('password') }}</small>
-                            @endif
+                            <input id="password" type="password" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password" v-model="userForm.password" required> 
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('password')" v-text="userForm.errors.get('password')"></small>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password-confirm" class="control-label">Confirm Password</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <div>
+                            <input id="password-confirm" type="password" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password_confirmation" v-model="userForm.password_confirmation" required>
+                        </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('permission') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="permission" class="control-label">Permission</label>
-
                         <div>
-                            <input id="permission" type="number" class="form-control" name="permission" required>
+                            <input id="permission" type="number" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('') }" name="permission" required>
                             @if ($errors->has('permission'))
                                 <small class="form-text alert alert-danger" role="alert">{{ $errors->first('permission') }}</small>
                             @endif
@@ -65,7 +60,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" :disabled="createUserForm.errors.any()">Create User</button>
+                    <button type="submit" class="btn btn-primary" :disabled="userForm.errors.any()">Create User</button>
                 </div>
 
             </form>
