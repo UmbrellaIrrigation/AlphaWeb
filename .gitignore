@@ -1,5 +1,4 @@
-/vendor/[^l]*
-/vendor/league
+/vendor
 /node_modules
 /public/hot
 /public/storage
