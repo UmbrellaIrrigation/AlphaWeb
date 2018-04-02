@@ -70,13 +70,7 @@ class Valve extends Model
 
     public static function getRootValves()
     {
-        $ids = DB::table('valve_to_group')->pluck('valve_id');
-        $valves = Valve::all()->keyBy('id');
-        foreach($ids as $id)
-        {
-            $valves->pull($id);
-        }
-        return $valves;
+        return Valve::where('parent_id', NULL)->get();
     }
 
     public static function getUngroupedValves()
@@ -160,6 +154,11 @@ class Valve extends Model
         return $this->overriden;
     }
 
+	public function getAssignedUsers()
+	{
+		return $this->users();
+	}
+
 	public function addToGroup(ValveGroup $group)
 	{
 		$valve = $this;
@@ -190,8 +189,118 @@ class Valve extends Model
 		$this->users()->detach($user);
 	}
 
-	public function getAssignedUsers()
+	public function editDescription($description)
 	{
-		return $this->users();
+		$this->description = $description;
+		$this->save();
 	}
+
+	public function editName($name)
+	{
+		$this->name = $name;
+		$this->save();
+	}
+
+	public function editLatitude($latitude)
+	{
+		$this->latitude = $latitude;
+		$this->save();
+	}
+
+	public function editLongitude($longitude)
+	{
+		$this->longitude = $longitude;
+		$this->save();
+	}
+
+	public function editMinFlowLimit($flowLimit)
+	{
+		$this->min_flow_limit = $flowLimit;
+		$this->save();
+	}
+
+	public function editMaxFlowLimit($flowLimit)
+	{
+		$this->max_flow_limit = $flowLimit;
+		$this->save();
+	}
+
+	public function editNominalFlowLimit($flowLimit)
+	{
+		$this->nominal_flow_limit = $flowLimit;
+		$this->save();
+	}
+
+	public function editCurrFlow($currFlow)
+	{
+		$this->curr_flow = $currFlow;
+		$this->save();
+	}
+
+	public function editMaxGPM($maxGPM)
+	{
+		$this->max_gpm = $maxGPM;
+		$this->save();
+	}
+
+	public function editMinVoltage($minVoltage)
+	{
+		$this->min_voltage = $minVoltage;
+		$this->save();
+	}
+
+	public function editMaxVoltage($maxVoltage)
+	{
+		$this->max_voltage = $maxVoltage;
+		$this->save();
+	}
+
+	public function editCurrVoltage($currVoltage)
+	{
+		$this->curr_voltage = $currVoltage;
+		$this->save();
+	}
+
+	public function setNormallyOpen($boolean)
+	{
+		$this->normally_open = $boolean;
+		$this->save();
+	}
+
+	public function setIsParent($boolean)
+	{
+		$this->is_parent = $boolean;
+		$this->save();
+	}
+
+	public function setSuppressed($boolean)
+	{
+		$this->suppressed = $boolean;
+		$this->save();
+	}
+
+	public function setPostponed($boolean)
+	{
+		$this->postponed = $boolean;
+		$this->save();
+	}
+
+	public function setShutdown($boolean)
+	{
+		$this->shutdown = $boolean;
+		$this->save();
+	}
+
+	public function setAlert($boolean)
+	{
+		$this->alert = $boolean;
+		$this->save();
+	}
+
+	public function editLastRunTime($time)
+	{
+		$this->last_run_time = $time;
+		$this->save();
+	}
+
 }
