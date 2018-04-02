@@ -6,14 +6,14 @@
                 <a class="nav-link" href="#createModal" data-toggle="modal" data-target="#createModal">New User</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#createUserGroupModal" data-toggle="modal" data-target="#createUserGroupModal">New User Group</a>
+                <a class="nav-link" href="#createGroupModal" data-toggle="modal" data-target="#createGroupModal">New User Group</a>
             </li>
         @elseif (Request::is('valves*'))
             <li class="nav-item">
                 <a class="nav-link" href="#createModal" data-toggle="modal" data-target="#createModal">New Valve</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#createValveGroupModal" data-toggle="modal" data-target="#createValveGroupModal">New Valve Group</a>
+                <a class="nav-link" href="#createGroupModal" data-toggle="modal" data-target="#createGroupModal">New Valve Group</a>
             </li>
         @endif
     </ul>

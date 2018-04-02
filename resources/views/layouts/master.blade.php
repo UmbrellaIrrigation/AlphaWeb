@@ -6,17 +6,22 @@
 </head>
 
 <body>
-  @yield ('modal')
 
-  @yield ('nav')
-
-  <main class="container-fluid">
-
-      @yield ('content')
-
-  </main>
+  <div id="app">
+    @yield ('modal')
+  
+    @yield ('nav')
+  
+    <main class="container-fluid">
+  
+        @yield ('content')
+  
+    </main>
+  </div>
 
   @include ('components.footer')
+
+  @yield ('footer')
 </body>
 
 </html>

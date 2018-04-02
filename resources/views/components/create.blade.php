@@ -4,11 +4,10 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('users.store') }}">
-                {{ csrf_field() }}
+            <form method="POST" action="{{ route('users.store') }}" @submit.prevent="createUser" @keydown="userForm.errors.clear($event.target.name)">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create a New User</h5>
+                    <h5 class="modal-title">Create a New User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -16,63 +15,41 @@
 
                 <div class="modal-body">
 
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="name" class="control-label">Name</label>
-
                         <div>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus> 
-                            @if ($errors->has('name'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
-                            @endif
+                            <input id="name" type="text" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('name') }" name="name" v-model="userForm.name" required autofocus> 
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('name')" v-text="userForm.errors.get('name')"></small>
                         </div>
                     </div>
 
-                    <!--
-                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                        <label for="name" class="control-label">Description</label>
-
-                        <div>
-                            <textarea id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" required></textarea>
-
-                            @if ($errors->has('description'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('description') }}</small>
-                            @endif
-                        </div>
-                    </div>
-                    -->
-
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="email" class="control-label">E-Mail Address</label>
-
                         <div>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                            @if ($errors->has('email'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('email') }}</small>
-                            @endif
+                            <input id="email" type="email" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('email') }" name="email" v-model="userForm.email" required>
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('email')" v-text="userForm.errors.get('email')"></small>
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="password" class="control-label">Password</label>
-
                         <div>
-                            <input id="password" type="password" class="form-control" name="password" required> 
-                            @if ($errors->has('password'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('password') }}</small>
-                            @endif
+                            <input id="password" type="password" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password" v-model="userForm.password" required> 
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('password')" v-text="userForm.errors.get('password')"></small>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password-confirm" class="control-label">Confirm Password</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <div>
+                            <input id="password-confirm" type="password" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password_confirmation" v-model="userForm.password_confirmation" required>
+                        </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('permission') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="permission" class="control-label">Permission</label>
-
                         <div>
-                            <input id="permission" type="number" class="form-control" name="permission" required>
+                            <input id="permission" type="number" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('') }" name="permission" required>
                             @if ($errors->has('permission'))
                                 <small class="form-text alert alert-danger" role="alert">{{ $errors->first('permission') }}</small>
                             @endif
@@ -83,7 +60,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create User</button>
+                    <button type="submit" class="btn btn-primary" :disabled="userForm.errors.any()">Create User</button>
                 </div>
 
             </form>
@@ -94,7 +71,7 @@
                     {{ csrf_field() }}
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create a New Valve</h5>
+                    <h5 class="modal-title">Create a New Valve</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -230,8 +207,91 @@
     </div>
 </div>
 
-@if ( count($errors) )
-    <script>
-        var createError = true;
-    </script>
-@endif
+<div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="createGroupModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            @if (Request::is('users*'))
+
+            <form method="POST" action="{{ route('usergroup.store') }}">
+                {{ csrf_field() }}
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a New User Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <label for="name" class="control-label">Name</label>
+
+                        <div>
+                            <input id="groupname" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus> 
+                            @if ($errors->has('name'))
+                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parent_id">Parent User Group</label>
+                        <select class="form-control" id="parent_id" name="parent_id">
+                            <option value="null" selected>None</option>
+                            @foreach ($rootGroups as $group)
+                                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                @if (count($group->getChildGroups)) 
+                                    @include('components.loop.usergroup', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;']) 
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create User Group</button>
+                </div>
+
+            </form>
+
+            @elseif (Request::is('valves*'))
+
+            <form method="POST" action="/">
+                {{ csrf_field() }}
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a New Valve Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parent_valve_gid">Parent Valve Group Id:</label>
+                        <input type="number" class="form-control" id="parent_valve_gid" name="parent_valve_gid">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Valve Group</button>
+                    </div>
+                </div>
+            </form>
+
+            @endif
+
+        </div>
+    </div>
+</div>
