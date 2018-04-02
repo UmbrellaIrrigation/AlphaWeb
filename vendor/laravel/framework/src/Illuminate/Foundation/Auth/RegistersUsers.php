@@ -57,6 +57,7 @@ trait RegistersUsers
      */
     protected function registered(Request $request, $user)
     {
-        //
+        $this->guard()->logout();
+        return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify');
     }
 }

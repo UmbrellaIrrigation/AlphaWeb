@@ -1,10 +1,7 @@
 @extends ('layouts.master')
 
 @section ('modal')
-
     @include ('components.create')
-    @include ('components.user.group.create')
-
 @endsection
 
 @section ('nav')
@@ -26,4 +23,8 @@
         </div>
     </div>
 
+@endsection
+
+@section ('footer')
+    <script src="{{ URL::asset('js/views/users.js') }}"></script>
 @endsection

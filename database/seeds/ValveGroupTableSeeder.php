@@ -21,12 +21,12 @@ class ValveGroupTableSeeder extends Seeder
         DB::table('valve_groups')->insert([
             'id'=>'33cfb362-5be6-4a80-997f-724092a1452f',
             'name'=>'ValveASubGroup',
-            'parent_valve_group'=>'8fe97bcc-fe0b-40d8-aed2-6d632785e533'
+            'parent_id'=>'8fe97bcc-fe0b-40d8-aed2-6d632785e533'
         ]);
         DB::table('valve_groups')->insert([
             'id'=>'c7a3ee9b-3f78-413d-85db-2e29af64a9ac',
             'name'=>'ValveASubSubGroup',
-            'parent_valve_group'=>'33cfb362-5be6-4a80-997f-724092a1452f'
+            'parent_id'=>'33cfb362-5be6-4a80-997f-724092a1452f'
         ]);
 
 
@@ -37,12 +37,12 @@ class ValveGroupTableSeeder extends Seeder
         DB::table('valve_groups')->insert([
             'id'=>'fjaioejr1902831a',
             'name'=>'ValveBSubGroup',
-            'parent_valve_group'=>'fjiajr0u19023840921'
+            'parent_id'=>'fjiajr0u19023840921'
         ]);
         DB::table('valve_groups')->insert([
             'id'=>'mcikzjieuaij18341fa',
             'name'=>'ValveBSubSubGroup',
-            'parent_valve_group'=>'fjaioejr1902831a'
+            'parent_id'=>'fjaioejr1902831a'
         ]);
 
 
@@ -53,12 +53,12 @@ class ValveGroupTableSeeder extends Seeder
         DB::table('valve_groups')->insert([
             'id'=>'90134aoiefjafa9',
             'name'=>'ValveCSubGroup',
-            'parent_valve_group'=>'fjaoie193nfoa'
+            'parent_id'=>'fjaoie193nfoa'
         ]);
         DB::table('valve_groups')->insert([
             'id'=>'fjaioej0190amiz',
             'name'=>'ValveCSubSubGroup',
-            'parent_valve_group'=>'90134aoiefjafa9'
+            'parent_id'=>'90134aoiefjafa9'
         ]);
 
 

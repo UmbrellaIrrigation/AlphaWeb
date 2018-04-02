@@ -25,3 +25,7 @@
     </main>
 
 @endsection
+
+@section ('footer')
+    <script src="{{ URL::asset('js/views/users.js') }}"></script>
+@endsection
