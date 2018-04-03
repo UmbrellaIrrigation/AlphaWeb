@@ -154,7 +154,8 @@ var app = new Vue({
     methods: {
         createUser: function createUser() {
             this.userForm.post('/users/user/store').then(function (response) {
-                return alert('New User Added!');
+                alert('New User Added!');
+                $('#createModal').modal('hide');
             });
         }
     }

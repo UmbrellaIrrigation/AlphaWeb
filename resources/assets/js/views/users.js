@@ -24,7 +24,11 @@ const app = new Vue({
     methods: {
         createUser() {
             this.userForm.post('/users/user/store')
-                .then(response => alert('New User Added!'));
+                .then(response => {
+                    alert('New User Added!');
+                    $('#createModal').modal('hide');
+                } 
+            );
         }
     }
 });
