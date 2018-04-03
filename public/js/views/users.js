@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 53);
+/******/ 	return __webpack_require__(__webpack_require__.s = 54);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -113,15 +113,15 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 53:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
 
-/***/ 54:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -143,14 +143,18 @@ var app = new Vue({
 
     data: {
         userForm: new Form({
-            name: ''
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            permission: ''
         })
     },
 
     methods: {
         createUser: function createUser() {
-            this.userForm.post('/projects').then(function (response) {
-                return alert('Wahoo!');
+            this.userForm.post('/users/user/store').then(function (response) {
+                return alert('New User Added!');
             });
         }
     }

@@ -13,14 +13,18 @@ const app = new Vue({
 
     data: {
         userForm: new Form({
-            name: ''
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            permission: ''
         })
     },
 
     methods: {
         createUser() {
-            this.userForm.post('/projects')
-                .then(response => alert('Wahoo!'));
+            this.userForm.post('/users/user/store')
+                .then(response => alert('New User Added!'));
         }
     }
 });
