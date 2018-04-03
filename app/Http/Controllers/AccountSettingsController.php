@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserGroup;
+use Auth;
 
 class AccountSettingsController extends Controller
 {
@@ -18,9 +19,14 @@ class AccountSettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
-        return view('account_settings/account_settings', compact('user') );
+        return view('account_settings/account_settings');
+    }
+    
+    public function getIndex()
+    {
+        return Auth::user();
     }
 
     /**
