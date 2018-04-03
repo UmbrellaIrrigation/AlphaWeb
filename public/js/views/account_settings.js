@@ -1957,13 +1957,15 @@ module.exports = __webpack_require__(59);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_SettingsFormGroup__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_SettingsFormGroup___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_SettingsFormGroup__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_user__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SettingsFormGroup__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SettingsFormGroup___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_SettingsFormGroup__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 /**
  * Form and Vue Element
  */
+
 
 
 
@@ -1974,22 +1976,21 @@ var app = new Vue({
     template: '\n    <h1 style="padding-top:200px;">Helloooooo</h1>\n    ',
 
     components: {
-        SettingsFormGroup: __WEBPACK_IMPORTED_MODULE_0__components_SettingsFormGroup___default.a
+        SettingsFormGroup: __WEBPACK_IMPORTED_MODULE_1__components_SettingsFormGroup___default.a
     },
 
     data: {
         userForm: new Form({
             name: ''
         }),
-        user: Object
+        user: __WEBPACK_IMPORTED_MODULE_0__models_user__["default"]
     },
 
     mounted: function mounted() {
         var _this = this;
 
-        __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/getsettings').then(function (response) {
-            _this.user = response.data;
-            console.log(response.data);
+        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/getsettings').then(function (response) {
+            _this.user = new __WEBPACK_IMPORTED_MODULE_0__models_user__["default"](response.data);
         }).catch(function (e) {
             console.log(e);
         });
@@ -2077,6 +2078,29 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-fb897bde", module.exports)
   }
 }
+
+/***/ }),
+/* 63 */,
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var User = function User(data) {
+    _classCallCheck(this, User);
+
+    this.id = data.id;
+    this.name = data.name;
+    this.email = data.email;
+    this.description = data.description;
+    this.permission = data.permission;
+    this.notification_preference = data.notification_preference;
+    this.verified = data.verified;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (User);
 
 /***/ })
 /******/ ]);

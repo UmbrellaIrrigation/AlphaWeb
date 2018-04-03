@@ -2,6 +2,7 @@
  * Form and Vue Element
  */
 
+import User from '../models/user';
 import SettingsFormGroup from '../components/SettingsFormGroup';
 import axios from 'axios';
 
@@ -20,13 +21,12 @@ const app = new Vue({
         userForm: new Form({
             name: ''
         }),
-        user: Object,
+        user: User
     },
 
     mounted() {
         axios.get('/getsettings').then(response => {
-            this.user = response.data;
-            console.log(response.data);
+            this.user = new User(response.data);
         }).catch(e => {
             console.log(e);
         });
