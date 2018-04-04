@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for="email" class="control-label">E-Mail Address</label>
                         <div>
-                            <input id="email" type="email" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('email') }" name="email" v-model="userForm.email" required>
+                            <input id="email" type="email" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('email') }" name="email" v-model="userForm.email" required>
                             <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('email')" v-text="userForm.errors.get('email')"></small>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="password" class="control-label">Password</label>
                         <div>
-                            <input id="password" type="password" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password" v-model="userForm.password" required> 
+                            <input id="password" type="password" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password" v-model="userForm.password" required> 
                             <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('password')" v-text="userForm.errors.get('password')"></small>
                         </div>
                     </div>
@@ -42,17 +42,19 @@
                     <div class="form-group">
                         <label for="password-confirm" class="control-label">Confirm Password</label>
                         <div>
-                            <input id="password-confirm" type="password" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password_confirmation" v-model="userForm.password_confirmation" required>
+                            <input id="password-confirm" type="password" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password_confirmation" v-model="userForm.password_confirmation" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="permission" class="control-label">Permission</label>
                         <div>
-                            <input id="permission" type="number" class="{ 'form-control': true, 'is-invalid': userForm.errors.has('') }" name="permission" required>
-                            @if ($errors->has('permission'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('permission') }}</small>
-                            @endif
+                            <select id="permission" :class="{ 'custom-select': true, 'is-invalid': userForm.errors.has('permission') }" name="permission" v-model="userForm.permission" required>
+                                <option value="1" selected>Guest</option>
+                                <option value="2">Employee</option>
+                                <option value="3">Admin</option>
+                            </select>
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('permission')" v-text="userForm.errors.get('permission')"></small>
                         </div>
                     </div>
 
@@ -238,7 +240,7 @@
 
                     <div class="form-group">
                         <label for="parent_id">Parent User Group</label>
-                        <select class="form-control" id="parent_id" name="parent_id">
+                        <select class="custom-select" id="parent_id" name="parent_id">
                             <option value="null" selected>None</option>
                             @foreach ($rootGroups as $group)
                                 <option value="{{ $group->id }}">{{ $group->name }}</option>
