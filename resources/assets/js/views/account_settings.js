@@ -3,19 +3,10 @@
  */
 
 import User from '../models/user';
-import SettingsFormGroup from '../components/SettingsFormGroup';
 import axios from 'axios';
 
 const app = new Vue({
-    el: '#settings',
-
-    template: `
-    <h1 style="padding-top:200px;">Helloooooo</h1>
-    `,
-
-    components: {
-        SettingsFormGroup
-    },
+    el: '#app',
 
     data: {
         userForm: new Form({
