@@ -46,9 +46,9 @@ Route::prefix('valves')->group(function() {
 
 Route::get('/settings', 'AccountSettingsController@index')->name('settings.home');
 Route::get('/getsettings', 'AccountSettingsController@getIndex');
-// Route::post('/account/{user}/settings/editName', 'AccountSettingsController@editName')->name('settings.name');
-// Route::post('/account/{user}/settings/editDescription', 'AccountSettingsController@editDescription')->name('settings.description');
-// Route::post('/account/{user}/settings/editEmail', 'AccountSettingsController@editEmail')->name('settings.email');
-// Route::post('/account/{user}/settings/editPassword', 'AccountSettingsController@editPassword');
+Route::post('settings/name', 'AccountSettingsController@editName')->name('settings.name');
+// Route::post('/settings/description', 'AccountSettingsController@editDescription')->name('settings.description');
+// Route::post('/settings/email', 'AccountSettingsController@editEmail')->name('settings.email');
+// Route::post('/settings/password', 'AccountSettingsController@editPassword');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
