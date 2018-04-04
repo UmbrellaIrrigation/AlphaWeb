@@ -1,6 +1,7 @@
 <?php
 namespace App;
 use App\Tree;
+
 class UserGroupTree
 {
     public static function createTree($rootGroups)
