@@ -1,5 +1,6 @@
 <?php
 namespace App;
+
 use App\Tree;
 
 class UserGroupTree

@@ -21,6 +21,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 Route::prefix('users')->group(function() {
     Route::get('/','UserController@main')->name('users');
     Route::get('index','UserController@index')->name('users.index');
+    
     Route::get('/treeData', function() {
         $groupTree = new UserGroupTree();
         $jsonTree = $groupTree->createTree(UserGroup::getRootGroups());
