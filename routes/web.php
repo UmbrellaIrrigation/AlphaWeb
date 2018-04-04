@@ -13,6 +13,7 @@
 
 use App\UserGroup;
 use App\UserGroupTree;
+use App\User;
 
 Auth::routes();
 
@@ -24,7 +25,8 @@ Route::prefix('users')->group(function() {
     
     Route::get('/treeData', function() {
         $groupTree = new UserGroupTree();
-        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups());
+        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers());
+
 
         return $jsonTree;
     });

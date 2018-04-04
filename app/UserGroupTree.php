@@ -5,7 +5,9 @@ use App\Tree;
 
 class UserGroupTree
 {
-    public static function createTree($rootGroups)
+
+
+    public static function createTree($rootGroups, $rootUsers)
     {
         $jsonTree = array();
 
@@ -17,6 +19,10 @@ class UserGroupTree
             UserGroupTree::recursiveChildGroups($groupData, $group);
 
             array_push($jsonTree, $groupData);
+        }
+
+        foreach($rootUsers as $user){
+            array_push($jsonTree, $user->toArray());
         }
 
         return json_encode($jsonTree, JSON_PRETTY_PRINT);
@@ -34,7 +40,7 @@ class UserGroupTree
                 $childGroupData = UserGroupTree::convertGroupToData($childGroup);
 
                 UserGroupTree::recursiveChildGroups($childGroupData, $childGroup);
-                array_push($groupData["child_groups"], $childGroupData);
+                array_push($groupData["children"], $childGroupData);
             }
         }
 
@@ -44,16 +50,17 @@ class UserGroupTree
     private static function convertGroupToData($userGroup)
     {
         $dataArray = $userGroup->toArray();
-        $dataArray["child_groups"] = array();
-        $dataArray["users"] = array();
+        $dataArray["children"] = array();
+        //$dataArray["users"] = array();
 
-        $objArray = & $dataArray["users"];
+        //$objArray = & $dataArray["users"];
 
         $users = $userGroup->getChildUsers()->get();
 
         foreach($users as $user)
         {
-            $objArray[$user->id] = $user->toArray();
+            //$objArray[$user->id] = $user->toArray();
+            array_push($dataArray["children"], $user->toArray());
         }
        // eval(\Psy\sh());
         return $dataArray;

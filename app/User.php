@@ -41,7 +41,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token', 'description', 'email', 'notification_preference', 'verified', 'pivot', 'created_at', 'updated_at', 'api_token', 'name'
+    ];
+
+    protected $appends = [
+        'title'
     ];
 
     public function generateToken()
@@ -50,6 +54,11 @@ class User extends Authenticatable
         $this->save();
 
         return $this->api_token;
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->attributes['title'] = $this->name;
     }
 
     //many-to-many relationships
