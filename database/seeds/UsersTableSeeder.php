@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
           'description' => 'The god admin',
           'remember_token' => str_random(10),
           'permission'=> 3,
-          'verified'=>1
+          'verified'=> 1
         ]);
         DB::table('users')->insert([
           'id'=> '90f8b5d6-c284-4da3-a251-17e4d9be0061',

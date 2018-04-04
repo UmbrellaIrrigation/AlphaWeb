@@ -22,7 +22,7 @@
                     @if($group->id != $usergroup->id && ($usergroup->getParentGroup==null || $usergroup->getParentGroup->id != $group->id))
                         <option value="{{ $group->id }}">{{ $group->name }}</option>
                         @if (count($group->getChildGroups))
-                            @include('components.user.group.loop', ['childGroups' => $group->getChildGroups, 'usergroup'=>$usergroup, 'currGroup' => $group, 'space' => '&#x02514;&nbsp;'])
+                            @include('components.loop.usergroup', ['childGroups' => $group->getChildGroups, 'usergroup'=>$usergroup, 'currGroup' => $group, 'space' => '&#x02514;&nbsp;'])
                         @endif
                     @endif
                 @endforeach

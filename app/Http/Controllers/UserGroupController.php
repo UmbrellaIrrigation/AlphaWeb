@@ -123,30 +123,7 @@ class UserGroupController extends Controller
         return redirect('/users/index');
     }
 
-    public function destroyWithChildren($id)
-    {
-        $group = UserGroup::find($id);
-        $parent_id = $group->parent_id;
-        $parentGroup = UserGroup::find($parent_id);
-        $childUsers = $group->getChildUsers()->get();
-        $childGroups = $group->getChildGroups()->get();
-        while($childGroups->first()!=null)
-        {
-            $currChild = $childGroups->shift();
-            $childUsers = $childUsers->merge($currChild->getChildUsers()->get());
-            $currChild->delete();
-        }
-        while($childUsers->first()!=null)
-        {
-            $currChild = $childUsers->shift();//gets the first element, removes from collection
-            if($currChild->id != Auth::user()->id)
-                $currChild->delete();
-        }
-        $group->delete();
-        return redirect('/users/index');
-    }
-
-    public function destroyWithChildrenRec($id) //infinite recursion! Not sure why
+    public function destroyWithChildren($id) //infinite recursion! Not sure why
     {
         $model = null;
         if(UserGroup::find($id) != null)

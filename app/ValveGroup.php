@@ -37,7 +37,7 @@ class ValveGroup extends Model
     }
 
     /**
-     * returns all the entries in ValveGroup DB along with its 
+     * returns all the entries in ValveGroup DB along with its
      * associated valves
      */
     public static function getValveGroupsWithValves()
@@ -77,13 +77,6 @@ class ValveGroup extends Model
     public function getChildValves()
     {
         return $this->belongsToMany(Valve::class, 'valve_to_group');
-    }
-    /**
-     * creates one-to-many relationship between ValveGroup & itself
-    */
-    public function getParentGroup()
-    {
-        return $this->belongsTo(ValveGroup::class, 'parent_id');
     }
 
     /**
