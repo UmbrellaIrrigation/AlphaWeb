@@ -26,7 +26,7 @@ class CreateWeeklyScheduleTable extends Migration
             $table->string('sunday_times');
             //each date in the format "DD/MM/YYYY"
             $table->string('start_date');
-            $table->string('end_date')
+            $table->string('end_date');
             $table->timestamps();
         });
     }
