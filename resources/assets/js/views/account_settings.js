@@ -12,7 +12,11 @@ const app = new Vue({
         userForm: new Form({
             name: ''
         }),
-        user: User
+        user: User,
+        editingName: false,
+        editingDescription: false,
+        editingEmail: false,
+        editingPassword: false
     },
 
     mounted() {
@@ -21,6 +25,25 @@ const app = new Vue({
         }).catch(e => {
             console.log(e);
         });
+    },
+    
+    methods: {
+        editName: function( param ) {
+            this.editingName = param;
+        },
+        editDescription: function( param ) {
+            this.editingDescription = param;
+        },
+        editEmail: function( param ) {
+            this.editingEmail = param;
+        },
+        editPassword: function( param ) {
+            this.editingPassword = param;
+        },
+        
+        onSubmit: function() {
+            alert('saving');
+        }
     }
 });
 

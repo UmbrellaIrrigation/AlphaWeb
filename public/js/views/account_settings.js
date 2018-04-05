@@ -1888,7 +1888,11 @@ var app = new Vue({
         userForm: new Form({
             name: ''
         }),
-        user: __WEBPACK_IMPORTED_MODULE_0__models_user__["default"]
+        user: __WEBPACK_IMPORTED_MODULE_0__models_user__["default"],
+        editingName: false,
+        editingDescription: false,
+        editingEmail: false,
+        editingPassword: false
     },
 
     mounted: function mounted() {
@@ -1899,6 +1903,26 @@ var app = new Vue({
         }).catch(function (e) {
             console.log(e);
         });
+    },
+
+
+    methods: {
+        editName: function editName(param) {
+            this.editingName = param;
+        },
+        editDescription: function editDescription(param) {
+            this.editingDescription = param;
+        },
+        editEmail: function editEmail(param) {
+            this.editingEmail = param;
+        },
+        editPassword: function editPassword(param) {
+            this.editingPassword = param;
+        },
+
+        onSubmit: function onSubmit() {
+            alert('saving');
+        }
     }
 });
 
