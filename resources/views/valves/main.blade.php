@@ -3,7 +3,6 @@
 @section ('modal')
 
     @include ('components.create')
-    @include ('components.valve.group.create')
     
 @endsection
 

@@ -352,7 +352,7 @@ var Errors = function () {
     }, {
         key: "record",
         value: function record(errors) {
-            this.errors = errors;
+            this.errors = errors.errors;
         }
 
         /**
