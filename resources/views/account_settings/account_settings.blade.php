@@ -75,7 +75,6 @@
                     <hr>
 
                     <!-- change email -->
-                    <form method="POST" action="/settings/email">
                         <label for="email"><strong>Email</strong></label>
                         <div class="form-group">
                             <div v-if="!editingEmail" class="row col-md-12">
@@ -104,7 +103,6 @@
                         <!-- @if ($errors->has('email'))
                             <small class="form-text alert alert-danger" role="alert">{{ $errors->first('email') }}</small>
                         @endif -->
-                    </form>
                     
                     <hr>
 
