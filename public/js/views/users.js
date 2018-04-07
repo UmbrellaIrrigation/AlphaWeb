@@ -327,14 +327,19 @@ var app = new Vue({
 
     data: {
         userForm: new Form({
-            name: ''
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            permission: ''
         })
     },
 
     methods: {
         createUser: function createUser() {
-            this.userForm.post('/projects').then(function (response) {
-                return alert('Wahoo!');
+            this.userForm.post('/users/user/store').then(function (response) {
+                alert('New User Added!');
+                $('#createModal').modal('hide');
             });
         }
     }

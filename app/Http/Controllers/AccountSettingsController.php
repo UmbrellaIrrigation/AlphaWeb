@@ -83,35 +83,46 @@ class AccountSettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editName(Request $request, User $user)
+    public function editName(Request $request)
     {
+        $this->validate(request(), [
+            'name' => 'required'
+        ]);
+
+        $user=auth::user();
         if( $request->name != $user->name){
             $user->editName($request->name);
             $user->save();
+            return [ 'message' => 'Name successfully updated' ];
         }
-        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editDescription(Request $request, User $user)
+    public function editDescription(Request $request)
     {
+        $this->validate(request(), [
+            'description' => 'required'
+        ]);
+
+        $user=auth::user();
         if( $request->description != $user->description){
             $user->editDescription($request->description);
             $user->save();
+            return [ 'message' => 'Description successfully updated' ];
         }
-        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editEmail(Request $request, User $user)
+    public function editEmail(Request $request)
     {
         $this->validate(request(), [
             'email' => ['required','string','email','max:255','unique:users'],
         ]);
 
+        $user=auth::user();
         if( $request->email != $user->email ){
             $user->editEmail($request->email);
             $user->save();
+            return [ 'message' => 'Email successfully updated' ];
         }
-        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
     /**

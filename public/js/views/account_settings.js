@@ -1874,12 +1874,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_user__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /**
  * Form and Vue Element
  */
 
 
 
+
+var Errors = function () {
+    function Errors() {
+        _classCallCheck(this, Errors);
+
+        this.errors = {};
+    }
+
+    _createClass(Errors, [{
+        key: 'get',
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+    }, {
+        key: 'record',
+        value: function record(error) {
+            this.errors = error;
+        }
+    }]);
+
+    return Errors;
+}();
 
 var app = new Vue({
     el: '#app',
@@ -1892,7 +1920,8 @@ var app = new Vue({
         editingName: false,
         editingDescription: false,
         editingEmail: false,
-        editingPassword: false
+        editingPassword: false,
+        errors: new Errors()
     },
 
     mounted: function mounted() {
@@ -1920,7 +1949,44 @@ var app = new Vue({
             this.editingPassword = param;
         },
 
-        onSubmit: function onSubmit() {
+        onSubmitName: function onSubmitName() {
+            var _this2 = this;
+
+            this.editingName = false;
+            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/settings/name', {
+                name: this.$data.user.name
+            }).then(function (response) {
+                return alert('Successfully changed name');
+            }).catch(function (error) {
+                return _this2.errors.record(error.response.data.errors);
+            });
+        },
+        onSubmitDescription: function onSubmitDescription() {
+            var _this3 = this;
+
+            this.editingDescription = false;
+            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/settings/description', {
+                description: this.$data.user.description
+            }).then(function (response) {
+                return alert('Successfully changed description');
+            }).catch(function (error) {
+                return _this3.errors.record(error.response.data.errors);
+            });
+        },
+        onSubmitEmail: function onSubmitEmail() {
+            var _this4 = this;
+
+            this.editingEmail = false;
+            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/settings/email', {
+                email: this.$data.user.email
+            }).then(function (response) {
+                return alert('Successfully changed email');
+            }).catch(function (error) {
+                return _this4.errors.record(error.response.data.errors);
+            });
+        },
+        onSubmitPassword: function onSubmitPassword() {
+            this.editingPassword = false;
             alert('saving');
         }
     }

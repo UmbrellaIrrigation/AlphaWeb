@@ -18,16 +18,16 @@
                                     <p data-type="text" data-name="name" v-text="user.name"></p>
                                 </div>
                                 <div class="col-md-4 text-center btn-block">
-                                    <button v-on:click="editName(true)" class="btn btn-primary text-white">Edit name</button>
+                                    <button type="button" @click="editName(true)" class="btn btn-primary text-white">Edit name</button>
                                 </div>
                             </div>
                             <div v-if="editingName">
-                                <form method="POST" action="/settings/name" @submit.prevent="onSubmit" class="row col-md-12">
+                                <form method="POST" action="/settings/name" @submit.prevent="onSubmitName" class="row col-md-12">
                                     <div class="col-md-8">
                                         <input type="text" v-model="user.name">
                                     </div>
                                     <div class="col-md-4 text-center btn-block">
-                                        <button type="submit" class="btn btn-primary text-white">Save name</button>
+                                        <button type="submit" @click="editName(true)" class="btn btn-primary text-white">Save name</button>
                                     </div>
                                     <div class="col-md-4 text-center btn-block">
                                         <button type="button" @click="editName(false)" class="btn btn-primary text-white">Cancel</button>
@@ -35,6 +35,7 @@
                                 </form>
                             </div>
                         </div>
+                        <span class="help text-danger" v-text="errors.get('name')"></span>
                         <!-- @if ($errors->has('name'))
                             <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
                         @endif -->
@@ -42,41 +43,64 @@
                     <hr>
 
                     <!-- change description -->
-                    <form>
                         <label for="description"><strong>Description</strong></label>
-                        <div class="form-group row col-md-12">
-                            <div class="col-md-8">
-                                <p v-if="!editingDescription" data-type="text" data-name="description" v-text="user.description"></p>
-                                <input v-if="editingDescription" type="text" v-model="user.description">
+                        <div class="form-group">
+                            <div v-if="!editingDescription" class="row col-md-12">
+                                <div class="col-md-8">
+                                    <p data-type="text" data-name="description" v-text="user.description"></p>
+                                </div>
+                                <div class="col-md-4 text-center btn-block">
+                                    <button type="button" @click="editDescription(true)" class="btn btn-primary text-white">Edit Description</button>
+                                </div>
                             </div>
-                            <div v-if="!editingDescription" class="col-md-4 text-center btn-block">
-                                <button v-on:click="editDescription(true)" class="btn btn-primary text-white">Edit description</button>
-                            </div>
-                            <div v-if="editingDescription" class="col-md-4 text-center btn-block">
-                                <button v-on:click="editDescription(false)" class="btn btn-primary text-white">Save description</button>
+                            <div v-if="editingDescription">
+                                <form method="POST" action="/settings/description" @submit.prevent="onSubmitDescription" class="row col-md-12">
+                                    <div class="col-md-8">
+                                        <input type="text" v-model="user.description">
+                                    </div>
+                                    <div class="col-md-4 text-center btn-block">
+                                        <button type="submit" @click="editDescription(true)" class="btn btn-primary text-white">Save Description</button>
+                                    </div>
+                                    <div class="col-md-4 text-center btn-block">
+                                        <button type="button" @click="editDescription(false)" class="btn btn-primary text-white">Cancel</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                        <span class="help text-danger" v-text="errors.get('description')"></span>
                         <!-- @if ($errors->has('description'))
                             <small class="form-text alert alert-danger" role="alert">{{ $errors->first('description') }}</small>
                         @endif -->
-                    </form>
+
                     <hr>
 
                     <!-- change email -->
                     <form method="POST" action="/settings/email">
                         <label for="email"><strong>Email</strong></label>
-                        <div class="form-group row col-md-12">
-                            <div class="col-md-8">
-                                <p v-if="!editingEmail" data-type="text" data-name="email" v-text="user.email"></p>
-                                <input v-if="editingEmail" type="text" v-model="user.email">
+                        <div class="form-group">
+                            <div v-if="!editingEmail" class="row col-md-12">
+                                <div class="col-md-8">
+                                    <p data-type="text" data-name="email" v-text="user.email"></p>
+                                </div>
+                                <div class="col-md-4 text-center btn-block">
+                                    <button type="button" @click="editEmail(true)" class="btn btn-primary text-white">Edit Email</button>
+                                </div>
                             </div>
-                            <div v-if="!editingEmail" class="col-md-4 text-center btn-block">
-                                <button v-on:click="editEmail(true)" class="btn btn-primary text-white">Edit email</button>
-                            </div>
-                            <div v-if="editingEmail" class="col-md-4 text-center btn-block">
-                                <button v-on:click="editEmail(false)" class="btn btn-primary text-white">Save email</button>
+                            <div v-if="editingEmail">
+                                <form method="POST" action="/settings/email" @submit.prevent="onSubmitEmail" class="row col-md-12">
+                                    <div class="col-md-8">
+                                        <input type="text" v-model="user.email">
+                                    </div>
+                                    <div class="col-md-4 text-center btn-block">
+                                        <button type="submit" @click="editEmail(true)" class="btn btn-primary text-white">Save Email</button>
+                                    </div>
+                                    <div class="col-md-4 text-center btn-block">
+                                        <button type="button" @click="editEmail(false)" class="btn btn-primary text-white">Cancel</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                        <span class="help text-danger" v-text="errors.get('email')"></span>
                         <!-- @if ($errors->has('email'))
                             <small class="form-text alert alert-danger" role="alert">{{ $errors->first('email') }}</small>
                         @endif -->

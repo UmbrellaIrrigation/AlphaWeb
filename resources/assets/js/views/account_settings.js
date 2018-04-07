@@ -5,6 +5,22 @@
 import User from '../models/user';
 import axios from 'axios';
 
+class Errors {
+    constructor() {
+        this.errors = { };
+    }
+
+    get(field) {
+        if( this.errors[field] ) {
+            return this.errors[field][0];
+        }
+    }
+
+    record(error) {
+        this.errors = error;
+    }
+}
+
 const app = new Vue({
     el: '#app',
 
@@ -16,7 +32,8 @@ const app = new Vue({
         editingName: false,
         editingDescription: false,
         editingEmail: false,
-        editingPassword: false
+        editingPassword: false,
+        errors: new Errors()
     },
 
     mounted() {
@@ -41,7 +58,29 @@ const app = new Vue({
             this.editingPassword = param;
         },
         
-        onSubmit: function() {
+        onSubmitName: function() {
+            this.editingName = false;
+            axios.post('/settings/name', {
+                name: this.$data.user.name
+            }).then(response => alert('Successfully changed name'))
+            .catch( error => this.errors.record(error.response.data.errors));
+        },
+        onSubmitDescription: function() {
+            this.editingDescription = false;
+            axios.post('/settings/description', {
+                description: this.$data.user.description
+            }).then(response => alert('Successfully changed description'))
+            .catch( error => this.errors.record(error.response.data.errors));
+        },
+        onSubmitEmail: function() {
+            this.editingEmail = false;
+            axios.post('/settings/email', {
+                email: this.$data.user.email
+            }).then(response => alert('Successfully changed email'))
+            .catch( error => this.errors.record(error.response.data.errors));
+        },
+        onSubmitPassword: function() {
+            this.editingPassword = false;
             alert('saving');
         }
     }
