@@ -15,6 +15,23 @@ class UserTree extends Model
         return $jsonTree;   	
     }
 
+    public static function getSpecificTree($userGroup)
+    {
+    	if(UserGroup::find($userGroup))
+    	{
+    		$groupTree = new UserTree();
+    		$parentGroup = $userGroup->first()->getParentGroup;
+    		$rootUsers = $parentGroup->getChildUsers()->get();
+    		$jsonTree = $groupTree->createTree($userGroup, $rootUsers);
+
+    		return $jsonTree;
+
+    	}
+
+    	return NULL;	
+
+    }
+
     private static function createTree($rootGroups, $rootUsers)
     {
         $jsonTree = array();

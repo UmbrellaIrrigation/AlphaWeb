@@ -3,7 +3,6 @@
 namespace App;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
-use App\UserGroupTree;
 use App\User;
 class UserGroup extends Model
 {
