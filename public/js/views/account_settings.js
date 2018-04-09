@@ -1921,7 +1921,15 @@ var app = new Vue({
         editingDescription: false,
         editingEmail: false,
         editingPassword: false,
-        errors: new Errors()
+        errors: new Errors(),
+
+        edit_old: false,
+        edit_new: false,
+        edit_confirm: false,
+
+        oldpassword: '',
+        newpassword: '',
+        confirmnewpassword: ''
     },
 
     mounted: function mounted() {
@@ -1947,6 +1955,20 @@ var app = new Vue({
         },
         editPassword: function editPassword(param) {
             this.editingPassword = param;
+            if (param == true) {
+                this.edit_old = true;
+            } else {
+                this.edit_old = false;
+                this.edit_new = false;
+                this.edit_confirm = false;
+            }
+        },
+
+        editNewPassword: function editNewPassword(param) {
+            this.edit_new = param;
+        },
+        editConfirmPassword: function editConfirmPassword(param) {
+            this.edit_confirm = param;
         },
 
         onSubmitName: function onSubmitName() {
@@ -1987,6 +2009,17 @@ var app = new Vue({
         },
         onSubmitPassword: function onSubmitPassword() {
             this.editingPassword = false;
+
+            this.edit_old = false;
+            this.edit_new = false;
+            this.edit_confirm = false;
+
+            /* axios.post('/settings/password', {
+                password: this.$data.newpassword
+            }).then(response => alert('Successfully changed email'))
+            .catch( error => this.errors.record(error.response.data.errors));
+            */
+
             alert('saving');
         }
     }

@@ -36,9 +36,6 @@
                             </div>
                         </div>
                         <span class="help text-danger" v-text="errors.get('name')"></span>
-                        <!-- @if ($errors->has('name'))
-                            <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
-                        @endif -->
 
                     <hr>
 
@@ -68,9 +65,6 @@
                             </div>
                         </div>
                         <span class="help text-danger" v-text="errors.get('description')"></span>
-                        <!-- @if ($errors->has('description'))
-                            <small class="form-text alert alert-danger" role="alert">{{ $errors->first('description') }}</small>
-                        @endif -->
 
                     <hr>
 
@@ -100,41 +94,91 @@
                             </div>
                         </div>
                         <span class="help text-danger" v-text="errors.get('email')"></span>
-                        <!-- @if ($errors->has('email'))
-                            <small class="form-text alert alert-danger" role="alert">{{ $errors->first('email') }}</small>
-                        @endif -->
-                    
                     <hr>
 
                     <!-- change password -->
-                    <form method="POST" action="/settings/password">
-                    <div class="row">
-                        <div class="col">
-                            <strong>Password</strong>
-                            <p>...</p>
+                    <div class="form-group" v-if="!editingPassword">
+                        <label for="password"><strong>Password</strong></label>
+                        <div class="row col-md-12">
+                            <div class="col-md-8">...</div>
+                            <div class="col-md-4 text-center btn-block">
+                                <button type="button" @click="editPassword(true)" class="btn btn-primary text-white">Edit Password</button>
+                            </div>
                         </div>
-                        <div>
+                    </div>
+                    <div class="form-group" v-if="editingPassword">
+                        <div v-if="edit_old" class="row col-md-12">
+                            <div class="col-md-4">
+                                <label for="name"><strong>Old Password</strong></label>
+                            </div>
+                            <div class="col-md-3">
+                                <input>
+                            </div>
+                            <div v-if="!edit_new" class="col-md-5 text-right">
+                                <button type="button" @click="editNewPassword(true)" class="btn btn-primary text-white">Next</button>
+                                <button type="button" @click="editPassword(false)" class="btn btn-primary text-white">Cancel</button>
+                            </div>
+                        </div>
+                        <div v-if="edit_new" class="row col-md-12">
+                            <div class="col-md-4">
+                                <label for="name"><strong>New Password</strong></label>
+                            </div>
+                            <div class="col-md-3">
+                                <input>
+                            </div>
+                            <div v-if="!edit_confirm" class="col-md-5 text-right">
+                                <button type="button" @click="editConfirmPassword(true)" class="btn btn-primary text-white">Next</button>
+                                <button type="button" @click="editPassword(false)" class="btn btn-primary text-white">Cancel</button>
+                            </div>
+                        </div>
+                        <div v-if="edit_confirm" class="row col-md-12">
+                            <div class="col-md-4">
+                                <label for="name"><strong>Confirm New Password</strong></label>
+                            </div>
+                            <div class="col-md-3">
+                                <input>
+                            </div>
+                            <div class="col-md-5 text-right">
+                                <button type="button" @click="onSubmitPassword(true)" class="btn btn-primary text-white">Save Password</button>
+                                <button type="button" @click="editPassword(false)" class="btn btn-primary text-white">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                        <div class="row col-md-12">
+                            <div class="col-md-8">
+                                <div>
+                                    <strong>Password</strong>
+                                </div>
+                                <div>...</div>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <button type="button" class="btn btn-primary text-white">Change password</button>
+                            </div>
+                        </div>
+                        <form method="POST" action="/settings/password">
+                        <div class="row">
                             <div class="form-group">
                                 <label for="oldpassword">Password</label>
-                                <p data-editable data-type="text" data-name="password">...</p>
+                                <input type="text" data-name="oldpassword" v-model="oldpassword">
                             </div>
                             
                             <div class="form-group">
                                 <label for="password">New Password</label>
-                                <p data-editable data-type="text" data-name="password">...</p>
+                                <input type="text" data-name="password" v-model="newpassword">
                             </div>
 
                             <div class="form-group">
                                 <label for="password-confirm">Confirm New Password</label>
-                                <p data-editable data-type="text" data-name="password_confirmation">...</p>
+                                <input type="text" data-name="password_confirmation" v-model="confirmnewpassword">
+                            </div>
+
+                            <div class="col text-right">
+                                <button type="submit" class="btn btn-primary text-white">Change password</button>
                             </div>
                         </div>
-
-                        <div class="col text-right">
-                            <button class="btn btn-primary text-white">Change password</button>
-                        </div>
-                    </div>
-                    </form>
+                        </form>
+                        -->
                 </div>
             </div>
 @endsection

@@ -33,7 +33,15 @@ const app = new Vue({
         editingDescription: false,
         editingEmail: false,
         editingPassword: false,
-        errors: new Errors()
+        errors: new Errors(),
+
+        edit_old: false,
+        edit_new: false,
+        edit_confirm: false,
+
+        oldpassword: '',
+        newpassword: '',
+        confirmnewpassword: '',
     },
 
     mounted() {
@@ -56,8 +64,22 @@ const app = new Vue({
         },
         editPassword: function( param ) {
             this.editingPassword = param;
+            if( param == true ) {
+                this.edit_old = true;
+            } else {
+                this.edit_old = false;
+                this.edit_new = false;
+                this.edit_confirm = false;
+            }
         },
         
+        editNewPassword: function( param ) {
+            this.edit_new = param;
+        },
+        editConfirmPassword: function( param ) {
+            this.edit_confirm = param;
+        },
+
         onSubmitName: function() {
             this.editingName = false;
             axios.post('/settings/name', {
@@ -81,6 +103,17 @@ const app = new Vue({
         },
         onSubmitPassword: function() {
             this.editingPassword = false;
+
+            this.edit_old = false;
+            this.edit_new = false;
+            this.edit_confirm = false;
+
+            /* axios.post('/settings/password', {
+                password: this.$data.newpassword
+            }).then(response => alert('Successfully changed email'))
+            .catch( error => this.errors.record(error.response.data.errors));
+            */
+
             alert('saving');
         }
     }
