@@ -16,7 +16,7 @@ class CreateWeeklyScheduleTable extends Migration
         Schema::create('weekly_schedule', function (Blueprint $table) {
             $table->string('id');
             $table->string('valve_id');
-            //each day_time entry is in the format "XX:XX AM/PM - XX:XX: AM/PM"
+            //each day_time entry is in the format "XX:XX AM/PM - XX:XX AM/PM"
             $table->string('monday_times');
             $table->string('tuesday_times');
             $table->string('wednesday_times');
