@@ -13,7 +13,7 @@
     <div class="row">
         @include ('components.options')
     
-        @include ('components.user.tree')
+        @include ('components.tree')
     
         <div role="main" class="main-view">
             <iframe src="{{ route('users.index') }}" name="contentFrame" width="100%" height="850"

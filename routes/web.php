@@ -21,14 +21,6 @@ Route::get('/home', 'DashboardController@index')->name('dashboard');
 Route::prefix('users')->group(function() {
     Route::get('/','UserController@main')->name('users');
     Route::get('index','UserController@index')->name('users.index');
-    
-    Route::get('/treeData', function() {
-        // $groupTree = new UserGroupTree();
-        // $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers());
-
-
-        return UserTree::getTree();
-    });
 
     Route::get('user/show/{user}', 'UserController@show');
     Route::get('user/editName/{user}', 'UserController@editName');

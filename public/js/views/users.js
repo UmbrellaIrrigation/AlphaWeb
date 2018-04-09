@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 55);
+/******/ 	return __webpack_require__(__webpack_require__.s = 54);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 30:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(31)
+var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(32)
+var __vue_script__ = __webpack_require__(7)
 /* template */
-var __vue_template__ = __webpack_require__(33)
+var __vue_template__ = __webpack_require__(8)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -90,7 +90,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Example.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Example.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -99,9 +99,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-650f2efa", Component.options)
+    hotAPI.createRecord("data-v-b6ebd97a", Component.options)
   } else {
-    hotAPI.reload("data-v-650f2efa", Component.options)
+    hotAPI.reload("data-v-b6ebd97a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -113,7 +113,121 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 31:
+/***/ 54:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(55);
+
+
+/***/ }),
+
+/***/ 55:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Example__);
+/**
+ * Form and Vue Element
+ */
+
+
+
+var app = new Vue({
+    el: '#app',
+
+    components: {
+        Example: __WEBPACK_IMPORTED_MODULE_0__components_Example___default.a
+    },
+
+    data: {
+        userForm: new Form({
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            permission: ''
+        }),
+        tree: '',
+        treeData: ''
+    },
+
+    methods: {
+        createUser: function createUser() {
+            this.userForm.post('/users/user/store').then(function (response) {
+                alert('New User Added!');
+                $('#createModal').modal('hide');
+            });
+        },
+        updateTree: function updateTree() {
+            var _this = this;
+
+            axios.get('/api/users/treeData').then(function (response) {
+                _this.treeData = response.data;
+                console.log(_this.treeData);
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            $('#tree').fancytree('option', 'source', this.treeData);
+        }
+    },
+
+    mounted: function mounted() {},
+
+    created: function created() {
+        this.updateTree();
+    },
+
+    ready: function ready() {
+        this.tree = $("#tree").fancytree({
+            checkbox: false,
+            debugLevel: 2,
+            minExpandLevel: 1,
+
+            source: this.treeData,
+            init: function init(event, data, flag) {
+                console.log(this.treeData);
+            },
+            postinit: function postinit(isReloading, isError) {
+                this.reactivate();
+            },
+            focus: function focus(event, data) {
+                // Auto-activate focused node after 2 seconds
+                data.node.scheduleAction("activate", 2000);
+            },
+            activate: function activate(event, data) {
+                var node = data.node;
+                // Use <a> href and target attributes to load the content:
+                if (node.data.id) {
+                    alert(node.data.id);
+                }
+            }
+        });
+
+        $("#treeSort").click(function () {
+            var node = this.tree.fancytree("getRootNode");
+            node.sortChildren(null, true);
+        });
+
+        $("#treeExpand").click(function () {
+            this.tree.fancytree("getTree").visit(function (node) {
+                node.setExpanded();
+            });
+        });
+
+        $("#treeCollapse").click(function () {
+            this.tree.fancytree("getTree").visit(function (node) {
+                node.setExpanded(false);
+            });
+        });
+    }
+});
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -223,7 +337,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 32:
+/***/ 7:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -253,7 +367,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 33:
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -291,104 +405,9 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-650f2efa", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-b6ebd97a", module.exports)
   }
 }
-
-/***/ }),
-
-/***/ 55:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(56);
-
-
-/***/ }),
-
-/***/ 56:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Example__);
-/**
- * Form and Vue Element
- */
-
-
-
-var app = new Vue({
-    el: '#app',
-
-    components: {
-        Example: __WEBPACK_IMPORTED_MODULE_0__components_Example___default.a
-    },
-
-    data: {
-        userForm: new Form({
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-            permission: ''
-        })
-    },
-
-    methods: {
-        createUser: function createUser() {
-            this.userForm.post('/users/user/store').then(function (response) {
-                alert('New User Added!');
-                $('#createModal').modal('hide');
-            });
-        }
-    }
-});
-
-/**
- * Fancytree Stuff
- */
-$(function () {
-    var tree = $("#tree").fancytree({
-        checkbox: false,
-        debugLevel: 2,
-        minExpandLevel: 1,
-        postinit: function postinit(isReloading, isError) {
-            this.reactivate();
-        },
-        focus: function focus(event, data) {
-            // Auto-activate focused node after 2 seconds
-            data.node.scheduleAction("activate", 2000);
-        },
-        activate: function activate(event, data) {
-            var node = data.node;
-            // Use <a> href and target attributes to load the content:
-            if (node.data.href) {
-                // Open target
-                window.open(node.data.href, node.data.target);
-                // or open target in iframe
-                //                $("[name=contentFrame]").attr("src", node.data.href);
-            }
-        }
-    });
-
-    $("#treeSort").click(function () {
-        var node = tree.fancytree("getRootNode");
-        node.sortChildren(null, true);
-    });
-
-    $("#treeExpand").click(function () {
-        tree.fancytree("getTree").visit(function (node) {
-            node.setExpanded();
-        });
-    });
-
-    $("#treeCollapse").click(function () {
-        tree.fancytree("getTree").visit(function (node) {
-            node.setExpanded(false);
-        });
-    });
-});
 
 /***/ })
 
