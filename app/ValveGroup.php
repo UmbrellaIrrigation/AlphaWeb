@@ -96,11 +96,6 @@ class ValveGroup extends Model
         return count($this->getAssocValves());
     }
 
-    public function getParentGroup()
-    {
-        return $this->belongsTo(ValveGroup::class, 'parent_valve_group');
-    }
-
     public function addToGroup(ValveGroup $parent)
     {
         $child = $this;

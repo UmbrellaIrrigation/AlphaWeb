@@ -148,7 +148,9 @@ var app = new Vue({
             password: '',
             password_confirmation: '',
             permission: ''
-        })
+        }),
+        tree: '',
+        treeData: ''
     },
 
     methods: {
@@ -157,53 +159,70 @@ var app = new Vue({
                 alert('New User Added!');
                 $('#createModal').modal('hide');
             });
-        }
-    }
-});
+        },
+        updateTree: function updateTree() {
+            var _this = this;
 
-/**
- * Fancytree Stuff
- */
-$(function () {
-    var tree = $("#tree").fancytree({
-        checkbox: false,
-        debugLevel: 2,
-        minExpandLevel: 1,
-        postinit: function postinit(isReloading, isError) {
-            this.reactivate();
-        },
-        focus: function focus(event, data) {
-            // Auto-activate focused node after 2 seconds
-            data.node.scheduleAction("activate", 2000);
-        },
-        activate: function activate(event, data) {
-            var node = data.node;
-            // Use <a> href and target attributes to load the content:
-            if (node.data.href) {
-                // Open target
-                window.open(node.data.href, node.data.target);
-                // or open target in iframe
-                //                $("[name=contentFrame]").attr("src", node.data.href);
+            axios.get('/api/users/treeData').then(function (response) {
+                _this.treeData = response.data;
+                console.log(_this.treeData);
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            $('#tree').fancytree('option', 'source', this.treeData);
+        }
+    },
+
+    mounted: function mounted() {},
+
+    created: function created() {
+        this.updateTree();
+    },
+
+    ready: function ready() {
+        this.tree = $("#tree").fancytree({
+            checkbox: false,
+            debugLevel: 2,
+            minExpandLevel: 1,
+
+            source: this.treeData,
+            init: function init(event, data, flag) {
+                console.log(this.treeData);
+            },
+            postinit: function postinit(isReloading, isError) {
+                this.reactivate();
+            },
+            focus: function focus(event, data) {
+                // Auto-activate focused node after 2 seconds
+                data.node.scheduleAction("activate", 2000);
+            },
+            activate: function activate(event, data) {
+                var node = data.node;
+                // Use <a> href and target attributes to load the content:
+                if (node.data.id) {
+                    alert(node.data.id);
+                }
             }
-        }
-    });
-
-    $("#treeSort").click(function () {
-        var node = tree.fancytree("getRootNode");
-        node.sortChildren(null, true);
-    });
-
-    $("#treeExpand").click(function () {
-        tree.fancytree("getTree").visit(function (node) {
-            node.setExpanded();
         });
-    });
 
-    $("#treeCollapse").click(function () {
-        tree.fancytree("getTree").visit(function (node) {
-            node.setExpanded(false);
+        $("#treeSort").click(function () {
+            var node = this.tree.fancytree("getRootNode");
+            node.sortChildren(null, true);
         });
-    });
+
+        $("#treeExpand").click(function () {
+            this.tree.fancytree("getTree").visit(function (node) {
+                node.setExpanded();
+            });
+        });
+
+        $("#treeCollapse").click(function () {
+            this.tree.fancytree("getTree").visit(function (node) {
+                node.setExpanded(false);
+            });
+        });
+    }
 });
 
 /***/ }),
