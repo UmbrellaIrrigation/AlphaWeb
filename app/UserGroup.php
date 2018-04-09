@@ -65,22 +65,6 @@ class UserGroup extends Model
         return $this->attributes['title'] = $this->name;
     }
 
-    public static function getUserGroupTree()
-    {
-        $groupTree = new UserGroupTree();
-        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers());
-
-        return $jsonTree;
-    }
-
-    //test
-    public static function testUserGroupTree(UserGroup $group){
-        $groupTree = new UserGroupTree();
-        $jsonTree = $groupTree->createTree($group);
-
-        return $jsonTree;
-    }
-
     public function addToGroup(UserGroup $parentGroup) //$child->addToGroup($parent)
     {
         $childGroup = $this;

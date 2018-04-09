@@ -1,22 +1,30 @@
 <?php
+
 namespace App;
 
-use App\Tree;
-
-class UserGroupTree
+use Illuminate\Database\Eloquent\Model;
+use App\UserGroup;
+use App\User;
+class UserTree extends Model
 {
+    public static function getTree()
+    {
+        $groupTree = new UserTree();
+        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers());
 
+        return $jsonTree;   	
+    }
 
-    public static function createTree($rootGroups, $rootUsers)
+    private static function createTree($rootGroups, $rootUsers)
     {
         $jsonTree = array();
 
         foreach($rootGroups as $group)
         {
 
-            $groupData = UserGroupTree::convertGroupToData($group);
+            $groupData = UserTree::convertGroupToData($group);
 
-            UserGroupTree::recursiveChildGroups($groupData, $group);
+            UserTree::recursiveChildGroups($groupData, $group);
 
             array_push($jsonTree, $groupData);
         }
@@ -37,9 +45,9 @@ class UserGroupTree
 
             foreach($childGroups as $childGroup)
             {
-                $childGroupData = UserGroupTree::convertGroupToData($childGroup);
+                $childGroupData = UserTree::convertGroupToData($childGroup);
 
-                UserGroupTree::recursiveChildGroups($childGroupData, $childGroup);
+                UserTree::recursiveChildGroups($childGroupData, $childGroup);
                 array_push($groupData["children"], $childGroupData);
             }
         }
@@ -65,5 +73,4 @@ class UserGroupTree
        // eval(\Psy\sh());
         return $dataArray;
     }
-
 }

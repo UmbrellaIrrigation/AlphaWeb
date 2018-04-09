@@ -11,8 +11,7 @@
 |
 */
 
-use App\UserGroup;
-use App\UserGroupTree;
+use App\UserTree;
 use App\User;
 
 Auth::routes();
@@ -24,11 +23,11 @@ Route::prefix('users')->group(function() {
     Route::get('index','UserController@index')->name('users.index');
     
     Route::get('/treeData', function() {
-        $groupTree = new UserGroupTree();
-        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers());
+        // $groupTree = new UserGroupTree();
+        // $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers());
 
 
-        return $jsonTree;
+        return UserTree::getTree();
     });
 
     Route::get('user/show/{user}', 'UserController@show');
