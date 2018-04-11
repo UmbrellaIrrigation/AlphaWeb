@@ -10,7 +10,7 @@ class UserTree extends Model
     public static function getTree()
     {
         $groupTree = new UserTree();
-        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers());
+        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups(), User::getRootUsers(), true);
 
         return $jsonTree;   	
     }
@@ -23,7 +23,7 @@ class UserTree extends Model
     		$groupTree = new UserTree();
     		$parentGroup = $userGroup->first()->getParentGroup;
     		$rootUsers = $parentGroup->getChildUsers()->get();
-    		$jsonTree = $groupTree->createTree($userGroup, $rootUsers);
+    		$jsonTree = $groupTree->createTree($userGroup, $rootUsers, true);
 
     		return $jsonTree;
 
@@ -33,16 +33,39 @@ class UserTree extends Model
 
     }
 
-    private static function createTree($rootGroups, $rootUsers)
+    public static function getGroupTree()
+    {
+        $groupTree = new UserTree();
+        $jsonTree = $groupTree->createGroupTree(UserGroup::getRootGroups(), false);
+
+        return $jsonTree;
+    }
+
+    private static function createGroupTree($rootGroups, $withChildren)
+    {
+        $jsonTree = array();
+
+        foreach($rootGroups as $group)
+        {
+            $groupData = UserTree::convertGroupToData($group, $withChildren);
+            UserTree::recursiveChildGroups($groupData, $group, false);
+
+            array_push($jsonTree, $groupData);
+        }
+
+        return json_encode($jsonTree);
+    }
+
+    private static function createTree($rootGroups, $rootUsers, $withChildren)
     {
         $jsonTree = array();
 
         foreach($rootGroups as $group)
         {
 
-            $groupData = UserTree::convertGroupToData($group);
+            $groupData = UserTree::convertGroupToData($group, $withChildren);
 
-            UserTree::recursiveChildGroups($groupData, $group);
+            UserTree::recursiveChildGroups($groupData, $group, $withChildren);
 
             array_push($jsonTree, $groupData);
         }
@@ -54,7 +77,7 @@ class UserTree extends Model
         return json_encode($jsonTree);
     }
 
-    private static function recursiveChildGroups(& $groupData, $group)
+    private static function recursiveChildGroups(& $groupData, $group, $withChildren)
     {
         $childGroups = $group->getChildGroups()->get();
 
@@ -63,9 +86,9 @@ class UserTree extends Model
 
             foreach($childGroups as $childGroup)
             {
-                $childGroupData = UserTree::convertGroupToData($childGroup);
+                $childGroupData = UserTree::convertGroupToData($childGroup, $withChildren);
 
-                UserTree::recursiveChildGroups($childGroupData, $childGroup);
+                UserTree::recursiveChildGroups($childGroupData, $childGroup, $withChildren);
                 array_push($groupData["children"], $childGroupData);
             }
         }
@@ -73,7 +96,7 @@ class UserTree extends Model
         return;
     }
 
-    private static function convertGroupToData($userGroup)
+    private static function convertGroupToData($userGroup, $withChildren)
     {
         $dataArray = $userGroup->toArray();
         $dataArray["children"] = array();
@@ -83,11 +106,15 @@ class UserTree extends Model
 
         $users = $userGroup->getChildUsers()->get();
 
-        foreach($users as $user)
+        if($withChildren)
         {
-            //$objArray[$user->id] = $user->toArray();
-            array_push($dataArray["children"], $user->toArray());
+            foreach($users as $user)
+            {
+                //$objArray[$user->id] = $user->toArray();
+                array_push($dataArray["children"], $user->toArray());
+            }
         }
+
        // eval(\Psy\sh());
         return $dataArray;
     }

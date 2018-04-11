@@ -10,7 +10,7 @@ class ValveTree extends Model
     public static function getTree()
     {
         $groupTree = new ValveTree();
-        $jsonTree = $groupTree->createTree(ValveGroup::getRootGroups(), Valve::getRootValves());
+        $jsonTree = $groupTree->createTree(ValveGroup::getRootGroups(), Valve::getRootValves(), true);
 
         return $jsonTree;   	
     }
@@ -23,7 +23,7 @@ class ValveTree extends Model
     		$groupTree = new ValveGroup();
     		$parentGroup = $valveGroup->first()->getParentGroup;
     		$rootValves = $parentGroup->getChildValves()->get();
-    		$jsonTree = $groupTree->createTree($valveGroup, $rootValves);
+    		$jsonTree = $groupTree->createTree($valveGroup, $rootValves, true);
 
     		return $jsonTree;
 
@@ -33,16 +33,39 @@ class ValveTree extends Model
 
     }
 
-    private static function createTree($rootGroups, $rootValves)
+    public static function getGroupTree()
+    {
+        $groupTree = new ValveTree();
+        $jsonTree = $groupTree->createGroupTree(ValveGroup::getRootGroups(), false);
+
+        return $jsonTree;
+    }
+
+    private static function createGroupTree($rootGroups, $withChildren)
+    {
+        $jsonTree = array();
+
+        foreach($rootGroups as $group)
+        {
+            $groupData = ValveTree::convertGroupToData($group, $withChildren);
+            ValveTree::recursiveChildGroups($groupData, $group, false);
+
+            array_push($jsonTree, $groupData);
+        }
+
+        return json_encode($jsonTree);
+    }
+
+    private static function createTree($rootGroups, $rootValves, $withChildren)
     {
         $jsonTree = array();
 
         foreach($rootGroups as $group)
         {
 
-            $groupData = ValveTree::convertGroupToData($group);
+            $groupData = ValveTree::convertGroupToData($group, $withChildren);
 
-            ValveTree::recursiveChildGroups($groupData, $group);
+            ValveTree::recursiveChildGroups($groupData, $group, $withChildren);
 
             array_push($jsonTree, $groupData);
         }
@@ -54,7 +77,7 @@ class ValveTree extends Model
         return json_encode($jsonTree);
     }
 
-    private static function recursiveChildGroups(& $groupData, $group)
+    private static function recursiveChildGroups(& $groupData, $group, $withChildren)
     {
         $childGroups = $group->getChildGroups()->get();
 
@@ -63,7 +86,7 @@ class ValveTree extends Model
 
             foreach($childGroups as $childGroup)
             {
-                $childGroupData = ValveTree::convertGroupToData($childGroup);
+                $childGroupData = ValveTree::convertGroupToData($childGroup, $withChildren);
 
                 ValveTree::recursiveChildGroups($childGroupData, $childGroup);
                 array_push($groupData["children"], $childGroupData);
@@ -73,18 +96,22 @@ class ValveTree extends Model
         return;
     }
 
-    private static function convertGroupToData($valveGroup)
+    private static function convertGroupToData($valveGroup, $withChildren)
     {
         $dataArray = $valveGroup->toArray();
         $dataArray["children"] = array();
 
         $valves = $valveGroup->getChildValves()->get();
 
-        foreach($valves as $valve)
+        if($withChildren)
         {
-            //$objArray[$user->id] = $user->toArray();
-            array_push($dataArray["children"], $valve->toArray());
+            foreach($valves as $valve)
+            {
+                //$objArray[$user->id] = $user->toArray();
+                array_push($dataArray["children"], $valve->toArray());
+            }            
         }
+
        // eval(\Psy\sh());
         return $dataArray;
     }
