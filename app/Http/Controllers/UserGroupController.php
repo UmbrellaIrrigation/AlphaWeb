@@ -141,7 +141,7 @@ class UserGroupController extends Controller
             while($children->first()!=null)
             {
                 $currChild = $children->pop();
-                $this->destroyWithChildrenRec($currChild->id);
+                $this->destroyWithChildren($currChild->id);
             }
         }
         else

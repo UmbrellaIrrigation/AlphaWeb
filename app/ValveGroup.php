@@ -59,7 +59,7 @@ class ValveGroup extends Model
      */
     public function getChildGroups()
     {
-        // return $this::where('parent_valve_group', $this->id)->get();
+        // return $this::where('parent_id', $this->id)->get();
         return $this->hasMany(ValveGroup::class, 'parent_id');
     }
 
@@ -98,7 +98,7 @@ class ValveGroup extends Model
 
     public function getParentGroup()
     {
-        return $this->belongsTo(ValveGroup::class, 'parent_valve_group');
+        return $this->belongsTo(ValveGroup::class, 'parent_id');
     }
 
     public function addToGroup(ValveGroup $parent)
