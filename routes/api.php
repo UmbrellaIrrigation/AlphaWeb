@@ -21,12 +21,12 @@ Route::post('logout', 'Auth\LoginController@apiLogout');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::prefix('users')->group(function() {
 	Route::get('/treeData', function() {
 		$tree = UserTree::getTree();
 		return response($tree, 200);
-	});
-	
+	})->name('api.users.tree');
 });
 
 

@@ -20,8 +20,7 @@ const app = new Vue({
             password: '',
             password_confirmation: '',
             permission: ''
-        }),
-        route: '/api/users/treeData'
+        })
     },
 
     methods: {

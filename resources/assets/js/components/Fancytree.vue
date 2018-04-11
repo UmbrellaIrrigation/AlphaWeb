@@ -7,28 +7,15 @@ export default {
     props: {
         route: String
     },
-    data: function() {
-        return {
-            data: Object
-        }
-    },
     methods: {
         updateTree: function() {
-            // '/api/users/treeData'
-            axios.get(this.route)
-                .then( response => {
-                    this.data = response.data;
-                    console.log(this.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-                
-            $(this.$el).fancytree('option', 'source', this.data);
+            $(this.$el).fancytree('option', 'source', {
+                url: this.route
+            });
         }
     },
     created: function() {
-        this.updateTree();
+        //this.updateTree();
     },
     mounted: function() {
         $(this.$el).fancytree({
@@ -36,7 +23,9 @@ export default {
             debugLevel: 2,
             minExpandLevel: 1,
             
-            source: this.data,
+            source: {
+                url: this.route
+            },
 
             init: function(event, data, flag) {
 				console.log(this.treeData);
