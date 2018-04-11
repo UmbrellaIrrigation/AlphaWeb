@@ -46,19 +46,19 @@ export default {
             },
         });
     
-        $( "#treeSort" ).click(function() {
-            var node = this.$el.fancytree("getRootNode");
+        $("#treeSort").click(function() {
+            var node = $("#tree").fancytree("getRootNode");
             node.sortChildren(null, true);
         });
     
-        $( "#treeExpand" ).click(function() {
-            this.$el.fancytree("getTree").visit(function(node){
+        $("#treeExpand").click(function() {
+            $("#tree").fancytree("getTree").visit(function(node){
                 node.setExpanded();
             });
         });
     
-        $( "#treeCollapse" ).click(function() {
-            this.$el.fancytree("getTree").visit(function(node){
+        $("#treeCollapse").click(function() {
+            $("#tree").fancytree("getTree").visit(function(node){
                 node.setExpanded(false);
             });
         });

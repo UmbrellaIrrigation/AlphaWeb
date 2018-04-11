@@ -335,18 +335,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
 
         $("#treeSort").click(function () {
-            var node = this.$el.fancytree("getRootNode");
+            var node = $("#tree").fancytree("getRootNode");
             node.sortChildren(null, true);
         });
 
         $("#treeExpand").click(function () {
-            this.$el.fancytree("getTree").visit(function (node) {
+            $("#tree").fancytree("getTree").visit(function (node) {
                 node.setExpanded();
             });
         });
 
         $("#treeCollapse").click(function () {
-            this.$el.fancytree("getTree").visit(function (node) {
+            $("#tree").fancytree("getTree").visit(function (node) {
                 node.setExpanded(false);
             });
         });
