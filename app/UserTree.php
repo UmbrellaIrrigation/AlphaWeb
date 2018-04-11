@@ -51,7 +51,7 @@ class UserTree extends Model
             array_push($jsonTree, $user->toArray());
         }
 
-        return json_encode($jsonTree, JSON_PRETTY_PRINT);
+        return json_encode($jsonTree);
     }
 
     private static function recursiveChildGroups(& $groupData, $group)

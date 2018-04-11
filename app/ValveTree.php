@@ -51,7 +51,7 @@ class ValveTree extends Model
             array_push($jsonTree, $valve->toArray());
         }
 
-        return json_encode($jsonTree, JSON_PRETTY_PRINT);
+        return json_encode($jsonTree);
     }
 
     private static function recursiveChildGroups(& $groupData, $group)
