@@ -14,6 +14,14 @@ class ValveGroup extends Model
             });
     }
 
+    protected $hidden = [
+        'created_at', 'updated_at', 'parent_id', 'name'
+    ];
+
+    protected $appends = [
+        'folder', 'title'
+    ];
+
     public $incrementing = false;
 
     /**
@@ -51,6 +59,16 @@ class ValveGroup extends Model
     public static function getNumberOfGroups()
     {
         return ValveGroup::count();
+    }
+
+    public function getFolderAttribute()
+    {
+        return $this->attributes['folder'] = true;
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->attributes['title'] = $this->name;
     }
 
     /**
