@@ -59,6 +59,6 @@ Route::get('/getsettings', 'AccountSettingsController@getIndex');
 Route::post('/settings/name', 'AccountSettingsController@editName')->name('settings.name');
 Route::post('/settings/description', 'AccountSettingsController@editDescription')->name('settings.description');
 Route::post('/settings/email', 'AccountSettingsController@editEmail')->name('settings.email');
-// Route::post('/settings/password', 'AccountSettingsController@editPassword');
+Route::post('/settings/password', 'AccountSettingsController@editPassword');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');

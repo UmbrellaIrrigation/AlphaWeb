@@ -94,6 +94,8 @@ class AccountSettingsController extends Controller
             $user->editName($request->name);
             $user->save();
             return [ 'message' => 'Name successfully updated' ];
+        } else {
+            return [ 'errors' => 'You entered the same name' ];
         }
     }
 
@@ -108,6 +110,8 @@ class AccountSettingsController extends Controller
             $user->editDescription($request->description);
             $user->save();
             return [ 'message' => 'Description successfully updated' ];
+        } else {
+            return [ 'errors' => 'You entered the same description' ];
         }
     }
 
@@ -122,6 +126,25 @@ class AccountSettingsController extends Controller
             $user->editEmail($request->email);
             $user->save();
             return [ 'message' => 'Email successfully updated' ];
+        } else {
+            return [ 'errors' => 'You entered the same email' ];
+        }
+    }
+    public function editPassword(Request $request)
+    {
+        $this->validate(request(), [
+            'oldpassword' => ['required'],
+            'newpassword' => ['required', 'min:6', 'max:255'],
+        ]);
+
+        $user=Auth::user();
+        $credentials = [ 'email' => $user->email, 'password' => $request->oldpassword ];
+        if( Auth::attempt($credentials) ){
+            $user->editPassword($request->newpassword);
+            $user->save();
+            return [ 'message' => 'Password successfully updated', 'oldpassword' => bcrypt($request->oldpassword), 'dbpassword' => $user->password ];
+        } else {
+            return [ 'errors' => 'Password was incorrect', 'oldpassword' => bcrypt($request->oldpassword), 'dbpassword' => $user->password ];
         }
     }
 

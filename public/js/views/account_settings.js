@@ -2008,19 +2008,32 @@ var app = new Vue({
             });
         },
         onSubmitPassword: function onSubmitPassword() {
+            var _this5 = this;
+
             this.editingPassword = false;
 
             this.edit_old = false;
             this.edit_new = false;
             this.edit_confirm = false;
 
-            /* axios.post('/settings/password', {
-                password: this.$data.newpassword
-            }).then(response => alert('Successfully changed email'))
-            .catch( error => this.errors.record(error.response.data.errors));
-            */
-
-            alert('saving');
+            if (this.newpassword == this.confirmnewpassword) {
+                __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/settings/password', {
+                    oldpassword: this.$data.oldpassword,
+                    newpassword: this.$data.newpassword
+                }).then(function (response) {
+                    return console.log(response.data);
+                }).catch(function (error) {
+                    return _this5.errors.record(error.response.data.errors);
+                });
+                this.oldpassword = '';
+                this.newpassword = '';
+                this.confirmnewpassword = '';
+            } else {
+                this.errors.record(['password', "Passwords do not match"]);
+                this.oldpassword = '';
+                this.newpassword = '';
+                this.confirmnewpassword = '';
+            }
         }
     }
 });

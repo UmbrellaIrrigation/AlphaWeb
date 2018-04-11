@@ -108,13 +108,22 @@ const app = new Vue({
             this.edit_new = false;
             this.edit_confirm = false;
 
-            /* axios.post('/settings/password', {
-                password: this.$data.newpassword
-            }).then(response => alert('Successfully changed email'))
-            .catch( error => this.errors.record(error.response.data.errors));
-            */
+            if( this.newpassword == this.confirmnewpassword ) {
+                axios.post('/settings/password', {
+                    oldpassword: this.$data.oldpassword,
+                    newpassword: this.$data.newpassword,
+                }).then(response => console.log(response.data))
+                .catch( error => this.errors.record(error.response.data.errors));
+                this.oldpassword = '';
+                this.newpassword = '';
+                this.confirmnewpassword = '';
+            } else {
+                this.errors.record(['password', "Passwords do not match"]);
+                this.oldpassword = '';
+                this.newpassword = '';
+                this.confirmnewpassword = '';
+            }
 
-            alert('saving');
         }
     }
 });

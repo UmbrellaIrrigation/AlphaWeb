@@ -144,7 +144,11 @@ class User extends Authenticatable
     {
         $this->permission = $newPermission;
     }
-
+    public function editPassword($newPassword)
+    {
+        $this->password = bcrypt($newPassword);
+    }
+    
     public function getPermission()
     {
         $permission = $this->permission;
