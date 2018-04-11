@@ -65,150 +65,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 5:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(6)
-/* script */
-var __vue_script__ = __webpack_require__(7)
-/* template */
-var __vue_template__ = __webpack_require__(8)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Example.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b6ebd97a", Component.options)
-  } else {
-    hotAPI.reload("data-v-b6ebd97a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 54:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(55);
-
-
-/***/ }),
-
-/***/ 55:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Example__);
-/**
- * Form and Vue Element
- */
-
-
-
-var app = new Vue({
-    el: '#app',
-
-    components: {
-        Example: __WEBPACK_IMPORTED_MODULE_0__components_Example___default.a
-    },
-
-    data: {
-        userForm: new Form({
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-            permission: ''
-        })
-    },
-
-    methods: {
-        createUser: function createUser() {
-            this.userForm.post('/users/user/store').then(function (response) {
-                alert('New User Added!');
-                $('#createModal').modal('hide');
-            });
-        }
-    }
-});
-
-/**
- * Fancytree Stuff
- */
-$(function () {
-    var tree = $("#tree").fancytree({
-        checkbox: false,
-        debugLevel: 2,
-        minExpandLevel: 1,
-        postinit: function postinit(isReloading, isError) {
-            this.reactivate();
-        },
-        focus: function focus(event, data) {
-            // Auto-activate focused node after 2 seconds
-            data.node.scheduleAction("activate", 2000);
-        },
-        activate: function activate(event, data) {
-            var node = data.node;
-            // Use <a> href and target attributes to load the content:
-            if (node.data.href) {
-                // Open target
-                window.open(node.data.href, node.data.target);
-                // or open target in iframe
-                //                $("[name=contentFrame]").attr("src", node.data.href);
-            }
-        }
-    });
-
-    $("#treeSort").click(function () {
-        var node = tree.fancytree("getRootNode");
-        node.sortChildren(null, true);
-    });
-
-    $("#treeExpand").click(function () {
-        tree.fancytree("getTree").visit(function (node) {
-            node.setExpanded();
-        });
-    });
-
-    $("#treeCollapse").click(function () {
-        tree.fancytree("getTree").visit(function (node) {
-            node.setExpanded(false);
-        });
-    });
-});
-
-/***/ }),
-
-/***/ 6:
+/***/ 4:
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -314,6 +171,149 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ 54:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(55);
+
+
+/***/ }),
+
+/***/ 55:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Example__);
+/**
+ * Form and Vue Element
+ */
+
+
+
+var app = new Vue({
+    el: '#app',
+
+    components: {
+        Example: __WEBPACK_IMPORTED_MODULE_0__components_Example___default.a
+    },
+
+    data: {
+        userForm: new Form({
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            permission: ''
+        })
+    },
+
+    methods: {
+        createUser: function createUser() {
+            this.userForm.post('/users/user/store').then(function (response) {
+                alert('New User Added!');
+                $('#createModal').modal('hide');
+            });
+        }
+    }
+});
+
+/**
+ * Fancytree Stuff
+ */
+$(function () {
+    var tree = $("#tree").fancytree({
+        checkbox: false,
+        debugLevel: 2,
+        minExpandLevel: 1,
+        postinit: function postinit(isReloading, isError) {
+            this.reactivate();
+        },
+        focus: function focus(event, data) {
+            // Auto-activate focused node after 2 seconds
+            data.node.scheduleAction("activate", 2000);
+        },
+        activate: function activate(event, data) {
+            var node = data.node;
+            // Use <a> href and target attributes to load the content:
+            if (node.data.href) {
+                // Open target
+                window.open(node.data.href, node.data.target);
+                // or open target in iframe
+                //                $("[name=contentFrame]").attr("src", node.data.href);
+            }
+        }
+    });
+
+    $("#treeSort").click(function () {
+        var node = tree.fancytree("getRootNode");
+        node.sortChildren(null, true);
+    });
+
+    $("#treeExpand").click(function () {
+        tree.fancytree("getTree").visit(function (node) {
+            node.setExpanded();
+        });
+    });
+
+    $("#treeCollapse").click(function () {
+        tree.fancytree("getTree").visit(function (node) {
+            node.setExpanded(false);
+        });
+    });
+});
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(7)
+/* template */
+var __vue_template__ = __webpack_require__(8)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Example.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b6ebd97a", Component.options)
+  } else {
+    hotAPI.reload("data-v-b6ebd97a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
 
 
 /***/ }),
