@@ -17,7 +17,8 @@ class UserTree extends Model
 
     public static function getSpecificTree($userGroup)
     {
-    	if(UserGroup::find($userGroup))
+    	$userGroup = UserGroup::find($userGroup);
+    	if($userGroup)
     	{
     		$groupTree = new UserTree();
     		$parentGroup = $userGroup->first()->getParentGroup;
