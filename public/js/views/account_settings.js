@@ -1814,25 +1814,10 @@ module.exports = function spread(callback) {
 /* 32 */,
 /* 33 */,
 /* 34 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, __webpack_exports__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var User = function User(data) {
-    _classCallCheck(this, User);
-
-    this.id = data.id;
-    this.name = data.name;
-    this.email = data.email;
-    this.description = data.description;
-    this.permission = data.permission;
-    this.notification_preference = data.notification_preference;
-    this.verified = data.verified;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (User);
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/arminekhachatryan/Desktop/AlphaWeb/resources/assets/js/models/user.js'");
 
 /***/ }),
 /* 35 */,
@@ -1872,6 +1857,7 @@ module.exports = __webpack_require__(60);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_user__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_user___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__models_user__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
