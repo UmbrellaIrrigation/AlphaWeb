@@ -14,6 +14,14 @@ class ValveGroup extends Model
             });
     }
 
+    protected $hidden = [
+        'created_at', 'updated_at', 'parent_id', 'name'
+    ];
+
+    protected $appends = [
+        'folder', 'title'
+    ];
+
     public $incrementing = false;
 
     /**
@@ -53,13 +61,23 @@ class ValveGroup extends Model
         return ValveGroup::count();
     }
 
+    public function getFolderAttribute()
+    {
+        return $this->attributes['folder'] = true;
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->attributes['title'] = $this->name;
+    }
+
     /**
      * returns a collection of ValveGroup where the collection consists
      * of children of the ValveGroup object's self
      */
     public function getChildGroups()
     {
-        // return $this::where('parent_valve_group', $this->id)->get();
+        // return $this::where('parent_id', $this->id)->get();
         return $this->hasMany(ValveGroup::class, 'parent_id');
     }
 
@@ -98,7 +116,7 @@ class ValveGroup extends Model
 
     public function getParentGroup()
     {
-        return $this->belongsTo(ValveGroup::class, 'parent_valve_group');
+        return $this->belongsTo(ValveGroup::class, 'parent_id');
     }
 
     public function addToGroup(ValveGroup $parent)

@@ -35,7 +35,19 @@ class dayTime extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'valve_id' => 'required|string|max:255',
+            'date' => 'required|string|min:10|max:10',
+            'start_time' => 'required|string|min:8|max:8',
+            'end_time' => 'required|string|min:8|max:8'
+        ]);
+
+        User::create([
+            'valve_id' => request('valve_id');
+            'date' => request('date');
+            'start_time' => request('start_time');
+            'end_time' => request('end_time');
+        ]);
     }
 
     /**

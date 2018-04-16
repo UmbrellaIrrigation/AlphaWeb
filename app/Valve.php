@@ -28,6 +28,23 @@ class Valve extends Model
         'parent_id', 'name', 'description', 'latitude', 'longitude', 'min_flow_limit', 'max_flow_limit', 'nominal_flow_limit', 'curr_flow', 'max_gpm', 'min_voltage', 'max_voltage', 'curr_voltage', 'normally_open', 'is_parent', 'suppressed', 'postponed', 'shutdown', 'alert', 'overriden'
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'name', 'description', 'latitude', 'longitude', 'min_flow_limit', 'max_flow_limit', 'nominal_flow_limit', 'curr_flow', 'max_gpm', 'min_voltage', 'max_voltage', 'curr_voltage', 'normally_open', 'is_parent', 'suppressed', 'postponed', 'shutdown', 'alert', 'overriden', 'created_at', 'updated_at', 'last_run_time', 'pivot'
+    ];
+
+    protected $appends = [
+    	'title'
+    ];
+
+    public function getTitleAttribute()
+    {
+    	return $this->attributes['title'] = $this->name;
+    }
     public static function getPostponed()
     {
     	return Valve::where('postponed','1')->get();

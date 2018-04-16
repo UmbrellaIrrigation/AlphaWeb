@@ -11,23 +11,16 @@
 |
 */
 
-use App\UserGroup;
-use App\UserGroupTree;
+use App\UserTree;
+use App\User;
 
 Auth::routes();
 
 Route::get('/', 'DashboardController@index')->name('dashboard');
-
+Route::get('/home', 'DashboardController@index')->name('dashboard');
 Route::prefix('users')->group(function() {
     Route::get('/','UserController@main')->name('users');
     Route::get('index','UserController@index')->name('users.index');
-    
-    Route::get('/treeData', function() {
-        $groupTree = new UserGroupTree();
-        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups());
-
-        return $jsonTree;
-    });
 
     Route::get('user/show/{user}', 'UserController@show');
     Route::get('user/editName/{user}', 'UserController@editName');
@@ -51,6 +44,7 @@ Route::prefix('valves')->group(function() {
 
     Route::get('group/show/{valvegroup}', 'ValveGroupController@show');
     Route::get('group/delete/{valvegroup}', 'ValveGroupController@destroy');
+    Route::get('group/deleteWithChildren/{valvegroup}','ValveGroupController@destroyWithChildren');
     Route::post('group/store', 'ValveGroupController@store')->name('valvegroup.store');
 });
 

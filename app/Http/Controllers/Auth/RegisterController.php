@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\VerifyUser;
 use App\Mail\VerifyMail;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 use Mail;
 
@@ -88,6 +90,7 @@ class RegisterController extends Controller
     public function verifyUser($token)
     {
         $verifyUser = VerifyUser::where('token',$token)->first();
+
         if(isset($verifyUser))
         {
             $user = $verifyUser->user;
@@ -107,5 +110,22 @@ class RegisterController extends Controller
             return redirect('/login')->with('warning',"Sorry, your email cannot be identified");
         }
         return redirect('/login')->with('status',$status);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)?: redirect('/');
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $user->generateToken();
+
+        return response()->json(['data' => $user->toArray()], 201);
     }
 }

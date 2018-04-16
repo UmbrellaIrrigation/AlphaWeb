@@ -23,3 +23,9 @@ npm-debug.log
 yarn-error.log
 .env
 .DS_Store
+.env
+/database
+/vendor
+/storage
+/node_modules
+/bootstrap

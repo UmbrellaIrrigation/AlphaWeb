@@ -3,7 +3,7 @@
 namespace App;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
-use App\UserGroupTree;
+use App\User;
 class UserGroup extends Model
 {
 
@@ -19,6 +19,14 @@ class UserGroup extends Model
 
     protected $fillable = [
         'name', 'parent_id'
+    ];
+
+    protected $hidden = [
+        'created_at', 'updated_at', 'parent_id', 'name'
+    ];
+
+    protected $appends = [
+        'folder', 'title'
     ];
 
     public static function getAllGroups()
@@ -46,12 +54,14 @@ class UserGroup extends Model
         return $this->belongsTo(UserGroup::class, 'parent_id');
     }
 
-    public static function getUserGroupTree()
+    public function getFolderAttribute()
     {
-        $groupTree = new UserGroupTree();
-        $jsonTree = $groupTree->createTree(UserGroup::getRootGroups());
+        return $this->attributes['folder'] = true;
+    }
 
-        return $jsonTree;
+    public function getTitleAttribute()
+    {
+        return $this->attributes['title'] = $this->name;
     }
 
     public function addToGroup(UserGroup $parentGroup) //$child->addToGroup($parent)
