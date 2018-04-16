@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="form-group" v-if="editingPassword">
-                    <form method="POST" action="/settings/password" @submit.prevent="onSubmitPassword" @keydown="errors.clear($event.target.name)">
+                    <form method="PUT" action="/settings/password" @submit.prevent="onSubmitPassword" @keydown="errors.clear($event.target.name)">
                         <div v-if="edit_old" class="row col-md-12">
                             <div class="col-md-4">
                                 <label data-name="oldpassword"><strong>Old Password</strong></label>
@@ -146,6 +146,7 @@
                         </div>
                         </form>
                     </div>
+                    <span class="help text-danger" v-if="errors.has('errors')" v-text="errors.get('errors')"></span>
                     <span class="help text-danger" v-if="errors.has('password')" v-text="errors.get('password')"></span>
                     <span class="help text-danger" v-if="errors.has('oldpassword')" v-text="errors.get('oldpassword')"></span>
                     <span class="help text-danger" v-if="errors.has('newpassword')" v-text="errors.get('newpassword')"></span>                    

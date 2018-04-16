@@ -2027,13 +2027,11 @@ var app = new Vue({
             this.edit_confirm = false;
 
             if (this.newpassword == this.confirmnewpassword) {
-                __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/settings/password', {
+                __WEBPACK_IMPORTED_MODULE_1_axios___default.a.put('/settings/password', {
                     oldpassword: this.$data.oldpassword,
                     newpassword: this.$data.newpassword
                 }).then(function (response) {
-                    _this5.errors.record(['password', response.data.errors]);
-                    console.log(_this5.errors.get('password'));
-                    console.log(response.data.errors);
+                    console.log(response.data);
                 }).catch(function (error) {
                     return _this5.errors.record(error.response.data.errors);
                 });
@@ -2041,7 +2039,7 @@ var app = new Vue({
                 this.newpassword = '';
                 this.confirmnewpassword = '';
             } else {
-                this.errors.record(['password', "Passwords do not match"]);
+                this.errors.record({ 'password': ["Passwords do not match"] });
                 this.oldpassword = '';
                 this.newpassword = '';
                 this.confirmnewpassword = '';

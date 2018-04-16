@@ -93,9 +93,9 @@ class AccountSettingsController extends Controller
         if( $request->name != $user->name){
             $user->editName($request->name);
             $user->save();
-            return [ 'message' => 'Name successfully updated' ];
+            return response()->json([ 'message' => 'Name successfully updated' ], 201);
         } else {
-            return [ 'errors' => 'You entered the same name' ];
+            return response()->json([ 'errors' => ['name' => ['You entered the same name'] ] ], 422);
         }
     }
 
@@ -109,9 +109,9 @@ class AccountSettingsController extends Controller
         if( $request->description != $user->description){
             $user->editDescription($request->description);
             $user->save();
-            return [ 'message' => 'Description successfully updated' ];
+            return response()->json([ 'message' => 'Description successfully updated' ], 201);
         } else {
-            return [ 'errors' => 'You entered the same description' ];
+            return response()->json([ 'errors' => ['description' => ['You entered the same description'] ] ], 422);
         }
     }
 
@@ -125,9 +125,9 @@ class AccountSettingsController extends Controller
         if( $request->email != $user->email ){
             $user->editEmail($request->email);
             $user->save();
-            return [ 'message' => 'Email successfully updated' ];
+            return response()->json([ 'message' => 'Email successfully updated' ], 201);
         } else {
-            return [ 'errors' => 'You entered the same email' ];
+            return response()->json([ 'errors' => ['email' => ['You entered the same email'] ] ], 422);
         }
     }
     public function editPassword(Request $request)
@@ -142,9 +142,9 @@ class AccountSettingsController extends Controller
         if( Auth::attempt($credentials) ){
             $user->editPassword($request->newpassword);
             $user->save();
-            return [ 'message' => 'Password successfully updated', 'oldpassword' => bcrypt($request->oldpassword), 'dbpassword' => $user->password ];
+            return response()->json([ 'message' => 'Password successfully updated' ], 201);
         } else {
-            return [ 'errors' => 'Password was incorrect', 'oldpassword' => bcrypt($request->oldpassword), 'dbpassword' => $user->password ];
+            return response()->json([ 'errors' => ['password' => ['Incorrect password'] ] ], 422);
         }
     }
 

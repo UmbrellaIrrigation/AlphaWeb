@@ -118,20 +118,18 @@ const app = new Vue({
             this.edit_confirm = false;
 
             if( this.newpassword == this.confirmnewpassword ) {
-                axios.post('/settings/password', {
+                axios.put('/settings/password', {
                     oldpassword: this.$data.oldpassword,
                     newpassword: this.$data.newpassword,
                 }).then(response => {
-                    this.errors.record(['password', response.data.errors])
-                    console.log(this.errors.get('password'));
-                    console.log(response.data.errors)
+                    console.log(response.data);
                 })
                 .catch( error => this.errors.record(error.response.data.errors));
                 this.oldpassword = '';
                 this.newpassword = '';
                 this.confirmnewpassword = '';
             } else {
-                this.errors.record(['password', "Passwords do not match"]);
+                this.errors.record({'password': ["Passwords do not match"]});
                 this.oldpassword = '';
                 this.newpassword = '';
                 this.confirmnewpassword = '';
