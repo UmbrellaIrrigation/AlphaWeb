@@ -1,5 +1,5 @@
 <template>
-    <div id="tree"></div>
+    <div></div>
 </template>
 
 <script>
@@ -44,23 +44,6 @@ export default {
                     alert(node.data.id);
                 }
             },
-        });
-    
-        $("#treeSort").click(function() {
-            var node = $("#tree").fancytree("getRootNode");
-            node.sortChildren(null, true);
-        });
-    
-        $("#treeExpand").click(function() {
-            $("#tree").fancytree("getTree").visit(function(node){
-                node.setExpanded();
-            });
-        });
-    
-        $("#treeCollapse").click(function() {
-            $("#tree").fancytree("getTree").visit(function(node){
-                node.setExpanded(false);
-            });
         });
     }
 }

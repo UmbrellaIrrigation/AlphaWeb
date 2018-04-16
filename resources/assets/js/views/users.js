@@ -42,3 +42,22 @@ const app = new Vue({
 
     }
 });
+
+$(function() {
+    $("#treeSort").click(function() {
+        var node = $("#tree").fancytree("getRootNode");
+        node.sortChildren(null, true);
+    });
+
+    $("#treeExpand").click(function() {
+        $("#tree").fancytree("getTree").visit(function(node){
+            node.setExpanded();
+        });
+    });
+
+    $("#treeCollapse").click(function() {
+        $("#tree").fancytree("getTree").visit(function(node){
+            node.setExpanded(false);
+        });
+    });
+});
