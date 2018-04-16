@@ -19,6 +19,15 @@ class Errors {
     record(error) {
         this.errors = error;
     }
+
+    clear(field) {
+        delete this.errors[field];
+    }
+
+    has(field) {
+        return this.errors.hasOwnProperty(field);
+    }
+
 }
 
 const app = new Vue({
@@ -112,7 +121,11 @@ const app = new Vue({
                 axios.post('/settings/password', {
                     oldpassword: this.$data.oldpassword,
                     newpassword: this.$data.newpassword,
-                }).then(response => console.log(response.data))
+                }).then(response => {
+                    this.errors.record(['password', response.data.errors])
+                    console.log(this.errors.get('password'));
+                    console.log(response.data.errors)
+                })
                 .catch( error => this.errors.record(error.response.data.errors));
                 this.oldpassword = '';
                 this.newpassword = '';

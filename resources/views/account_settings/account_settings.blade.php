@@ -22,9 +22,9 @@
                                 </div>
                             </div>
                             <div v-if="editingName">
-                                <form method="POST" action="/settings/name" @submit.prevent="onSubmitName" class="row col-md-12">
+                                <form method="POST" action="/settings/name" @submit.prevent="onSubmitName" class="row col-md-12" @keydown="errors.clear($event.target.name)">
                                     <div class="col-md-8">
-                                        <input type="text" v-model="user.name">
+                                        <input type="text" id="name" name="name" v-model="user.name">
                                     </div>
                                     <div class="col-md-4 text-center btn-block">
                                         <button type="submit" @click="editName(true)" class="btn btn-primary text-white">Save name</button>
@@ -35,7 +35,7 @@
                                 </form>
                             </div>
                         </div>
-                        <span class="help text-danger" v-text="errors.get('name')"></span>
+                        <span class="help text-danger" v-if="errors.has('name')" v-text="errors.get('name')"></span>
 
                     <hr>
 
@@ -51,9 +51,9 @@
                                 </div>
                             </div>
                             <div v-if="editingDescription">
-                                <form method="POST" action="/settings/description" @submit.prevent="onSubmitDescription" class="row col-md-12">
+                                <form method="POST" action="/settings/description" @submit.prevent="onSubmitDescription" class="row col-md-12" @keydown="errors.clear($event.target.name)">
                                     <div class="col-md-8">
-                                        <input type="text" v-model="user.description">
+                                        <input type="text" id="description" name="description" v-model="user.description">
                                     </div>
                                     <div class="col-md-4 text-center btn-block">
                                         <button type="submit" @click="editDescription(true)" class="btn btn-primary text-white">Save Description</button>
@@ -64,7 +64,7 @@
                                 </form>
                             </div>
                         </div>
-                        <span class="help text-danger" v-text="errors.get('description')"></span>
+                        <span class="help text-danger" v-if="errors.has('description')" v-text="errors.get('description')"></span>
 
                     <hr>
 
@@ -80,9 +80,9 @@
                                 </div>
                             </div>
                             <div v-if="editingEmail">
-                                <form method="POST" action="/settings/email" @submit.prevent="onSubmitEmail" class="row col-md-12">
+                                <form method="POST" action="/settings/email" @submit.prevent="onSubmitEmail" class="row col-md-12" @keydown="errors.clear($event.target.name)">
                                     <div class="col-md-8">
-                                        <input type="text" v-model="user.email">
+                                        <input type="text" id="email" name="email" v-model="user.email">
                                     </div>
                                     <div class="col-md-4 text-center btn-block">
                                         <button type="submit" @click="editEmail(true)" class="btn btn-primary text-white">Save Email</button>
@@ -93,7 +93,7 @@
                                 </form>
                             </div>
                         </div>
-                        <span class="help text-danger" v-text="errors.get('email')"></span>
+                        <span class="help text-danger" v-if="errors.has('email')" v-text="errors.get('email')"></span>
                     <hr>
 
                     <!-- change password -->
@@ -107,13 +107,13 @@
                         </div>
                     </div>
                     <div class="form-group" v-if="editingPassword">
-                    <form method="POST" action="/settings/password" @submit.prevent="onSubmitPassword">
+                    <form method="POST" action="/settings/password" @submit.prevent="onSubmitPassword" @keydown="errors.clear($event.target.name)">
                         <div v-if="edit_old" class="row col-md-12">
                             <div class="col-md-4">
                                 <label data-name="oldpassword"><strong>Old Password</strong></label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="oldpassword" v-model="oldpassword">
+                                <input type="text" id="oldpassword" name="oldpassword" v-model="oldpassword">
                             </div>
                             <div v-if="!edit_new" class="col-md-5 text-right">
                                 <button type="button" @click="editNewPassword(true)" class="btn btn-primary text-white">Next</button>
@@ -125,7 +125,7 @@
                                 <label data-name="newpassword"><strong>New Password</strong></label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="newpassword" v-model="newpassword">
+                                <input type="text" id="newpassword" name="newpassword" v-model="newpassword">
                             </div>
                             <div v-if="!edit_confirm" class="col-md-5 text-right">
                                 <button type="button" @click="editConfirmPassword(true)" class="btn btn-primary text-white">Next</button>
@@ -137,7 +137,7 @@
                                 <label data-name="confirmnewpassword"><strong>Confirm New Password</strong></label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="confirmnewpassword" v-model="confirmnewpassword">
+                                <input type="text" id="confirmpassword" name="confirmnewpassword" v-model="confirmnewpassword">
                             </div>
                             <div class="col-md-5 text-right">
                                 <button type="submit" @click="editPassword(true)" class="btn btn-primary text-white">Save Password</button>
@@ -146,9 +146,9 @@
                         </div>
                         </form>
                     </div>
-                    <span class="help text-danger" v-text="errors.get('password')"></span>
-                    <span class="help text-danger" v-text="errors.get('oldpassword')"></span>
-                    <span class="help text-danger" v-text="errors.get('newpassword')"></span>                    
+                    <span class="help text-danger" v-if="errors.has('password')" v-text="errors.get('password')"></span>
+                    <span class="help text-danger" v-if="errors.has('oldpassword')" v-text="errors.get('oldpassword')"></span>
+                    <span class="help text-danger" v-if="errors.has('newpassword')" v-text="errors.get('newpassword')"></span>                    
                 </div>
             </div>
 @endsection

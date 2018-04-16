@@ -1904,6 +1904,16 @@ var Errors = function () {
         value: function record(error) {
             this.errors = error;
         }
+    }, {
+        key: 'clear',
+        value: function clear(field) {
+            delete this.errors[field];
+        }
+    }, {
+        key: 'has',
+        value: function has(field) {
+            return this.errors.hasOwnProperty(field);
+        }
     }]);
 
     return Errors;
@@ -2021,7 +2031,9 @@ var app = new Vue({
                     oldpassword: this.$data.oldpassword,
                     newpassword: this.$data.newpassword
                 }).then(function (response) {
-                    return console.log(response.data);
+                    _this5.errors.record(['password', response.data.errors]);
+                    console.log(_this5.errors.get('password'));
+                    console.log(response.data.errors);
                 }).catch(function (error) {
                     return _this5.errors.record(error.response.data.errors);
                 });
