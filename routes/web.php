@@ -44,6 +44,7 @@ Route::prefix('valves')->group(function() {
 
     Route::get('group/show/{valvegroup}', 'ValveGroupController@show');
     Route::get('group/delete/{valvegroup}', 'ValveGroupController@destroy');
+    Route::get('group/deleteWithChildren/{valvegroup}','ValveGroupController@destroyWithChildren');
     Route::post('group/store', 'ValveGroupController@store')->name('valvegroup.store');
 });
 
