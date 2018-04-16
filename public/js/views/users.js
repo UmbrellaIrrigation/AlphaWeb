@@ -322,9 +322,7 @@ if (false) {(function () {
             });
         }
     },
-    created: function created() {
-        //this.updateTree();
-    },
+    created: function created() {},
     mounted: function mounted() {
         $(this.$el).fancytree({
             checkbox: false,
@@ -347,7 +345,6 @@ if (false) {(function () {
             },
             activate: function activate(event, data) {
                 var node = data.node;
-                // Use <a> href and target attributes to load the content:
                 if (node.data.id) {
                     alert(node.data.id);
                 }
