@@ -59,8 +59,9 @@ class LoginController extends Controller
         if($user){
             $user->api_token = null;
             $user->save();
+            return response()->json(['data'=>'user logged out'], 200);
         }
-
-        return response()->json(['data'=>'user logged out'], 200);
+        else
+            return response()->json(['data'=>'user does not exist'], 400);
     }
 }
