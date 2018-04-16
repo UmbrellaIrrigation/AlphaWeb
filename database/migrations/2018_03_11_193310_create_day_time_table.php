@@ -17,7 +17,8 @@ class CreateDayTimeTable extends Migration
             $table->string('id');
             $table->string('valve_id');
             $table->string('date'); //in the format "DD/MM/YYYY"
-            $table->string('time_slice');
+            $table->string('start_time'); //in format "HH:MM PM/AM"
+            $table->string('end_time');
             $table->timestamps();
         });
     }
