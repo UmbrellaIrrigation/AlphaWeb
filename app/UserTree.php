@@ -15,6 +15,24 @@ class UserTree extends Model
         return $jsonTree;   	
     }
 
+    public static function getSpecificTree($userGroup)
+    {
+    	$userGroup = UserGroup::find($userGroup);
+    	if($userGroup)
+    	{
+    		$groupTree = new UserTree();
+    		$parentGroup = $userGroup->first()->getParentGroup;
+    		$rootUsers = $parentGroup->getChildUsers()->get();
+    		$jsonTree = $groupTree->createTree($userGroup, $rootUsers);
+
+    		return $jsonTree;
+
+    	}
+
+    	return NULL;	
+
+    }
+
     private static function createTree($rootGroups, $rootUsers)
     {
         $jsonTree = array();
@@ -33,7 +51,7 @@ class UserTree extends Model
             array_push($jsonTree, $user->toArray());
         }
 
-        return json_encode($jsonTree, JSON_PRETTY_PRINT);
+        return json_encode($jsonTree);
     }
 
     private static function recursiveChildGroups(& $groupData, $group)
