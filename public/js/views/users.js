@@ -443,9 +443,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         }
     },
-    created: function created() {
-        //this.updateTree();
-    },
+    created: function created() {},
     mounted: function mounted() {
         $(this.$el).fancytree({
             checkbox: false,
@@ -468,7 +466,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             activate: function activate(event, data) {
                 var node = data.node;
-                // Use <a> href and target attributes to load the content:
                 if (node.data.id) {
                     alert(node.data.id);
                 }
