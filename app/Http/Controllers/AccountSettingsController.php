@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserGroup;
+use Auth;
 
 class AccountSettingsController extends Controller
 {
@@ -18,9 +19,14 @@ class AccountSettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
-        return view('account_settings/account_settings', compact('user') );
+        return view('account_settings/account_settings');
+    }
+    
+    public function getIndex()
+    {
+        return Auth::user();
     }
 
     /**
@@ -77,35 +83,69 @@ class AccountSettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editName(Request $request, User $user)
+    public function editName(Request $request)
     {
+        $this->validate(request(), [
+            'name' => 'required'
+        ]);
+
+        $user=auth::user();
         if( $request->name != $user->name){
             $user->editName($request->name);
             $user->save();
+            return response()->json([ 'message' => 'Name successfully updated' ], 201);
+        } else {
+            return response()->json([ 'errors' => ['name' => ['You entered the same name'] ] ], 422);
         }
-        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editDescription(Request $request, User $user)
+    public function editDescription(Request $request)
     {
+        $this->validate(request(), [
+            'description' => 'required'
+        ]);
+
+        $user=auth::user();
         if( $request->description != $user->description){
             $user->editDescription($request->description);
             $user->save();
+            return response()->json([ 'message' => 'Description successfully updated' ], 201);
+        } else {
+            return response()->json([ 'errors' => ['description' => ['You entered the same description'] ] ], 422);
         }
-        return redirect()->route('settings.home', ['user'=>$user->id]);
     }
 
-    public function editEmail(Request $request, User $user)
+    public function editEmail(Request $request)
     {
         $this->validate(request(), [
             'email' => ['required','string','email','max:255','unique:users'],
         ]);
 
+        $user=auth::user();
         if( $request->email != $user->email ){
             $user->editEmail($request->email);
             $user->save();
+            return response()->json([ 'message' => 'Email successfully updated' ], 201);
+        } else {
+            return response()->json([ 'errors' => ['email' => ['You entered the same email'] ] ], 422);
         }
-        return redirect()->route('settings.home', ['user'=>$user->id]);
+    }
+    public function editPassword(Request $request)
+    {
+        $this->validate(request(), [
+            'oldpassword' => ['required'],
+            'newpassword' => ['required', 'min:6', 'max:255'],
+        ]);
+
+        $user=Auth::user();
+        $credentials = [ 'email' => $user->email, 'password' => $request->oldpassword ];
+        if( Auth::attempt($credentials) ){
+            $user->editPassword($request->newpassword);
+            $user->save();
+            return response()->json([ 'message' => 'Password successfully updated' ], 201);
+        } else {
+            return response()->json([ 'errors' => ['password' => ['Incorrect password'] ] ], 422);
+        }
     }
 
     /**
