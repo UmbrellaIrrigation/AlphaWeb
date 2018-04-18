@@ -15,7 +15,7 @@ use App\UserTree;
 |
 */
 
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('register', 'Auth\RegisterController@apiRegister');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@apiLogout');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
