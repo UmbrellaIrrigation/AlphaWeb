@@ -66,10 +66,25 @@
 /******/ ({
 
 /***/ 34:
-/***/ (function(module, __webpack_exports__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/arminekhachatryan/Desktop/AlphaWeb/resources/assets/js/models/user.js'");
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var User = function User(data) {
+    _classCallCheck(this, User);
+
+    this.id = data.id;
+    this.name = data.name;
+    this.email = data.email;
+    this.description = data.description;
+    this.permission = data.permission;
+    this.notification_preference = data.notification_preference;
+    this.verified = data.verified;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (User);
 
 /***/ }),
 

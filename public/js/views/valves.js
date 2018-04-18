@@ -388,6 +388,93 @@ if (false) {
   }
 }
 
+/***/ }),
+
+/***/ 57:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(58);
+
+
+/***/ }),
+
+/***/ 58:
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Form and Vue Element
+ */
+
+Vue.component('example', __webpack_require__(30));
+
+var app = new Vue({
+    el: '#app',
+
+    components: {
+        Example: Example
+    },
+
+    data: {
+        form: new Form({
+            name: '',
+            description: ''
+        })
+    },
+
+    methods: {
+        onSubmit: function onSubmit() {
+            this.form.post('/projects').then(function (response) {
+                return alert('Wahoo!');
+            });
+        }
+    }
+});
+
+/**
+ * Fancytree Stuff
+ */
+$(function () {
+    var tree = $("#tree").fancytree({
+        checkbox: false,
+        debugLevel: 2,
+        minExpandLevel: 1,
+        postinit: function postinit(isReloading, isError) {
+            this.reactivate();
+        },
+        focus: function focus(event, data) {
+            // Auto-activate focused node after 2 seconds
+            data.node.scheduleAction("activate", 2000);
+        },
+        activate: function activate(event, data) {
+            var node = data.node;
+            // Use <a> href and target attributes to load the content:
+            if (node.data.href) {
+                // Open target
+                window.open(node.data.href, node.data.target);
+                // or open target in iframe
+                //                $("[name=contentFrame]").attr("src", node.data.href);
+            }
+        }
+    });
+
+    $("#treeSort").click(function () {
+        var node = tree.fancytree("getRootNode");
+        node.sortChildren(null, true);
+    });
+
+    $("#treeExpand").click(function () {
+        tree.fancytree("getTree").visit(function (node) {
+            node.setExpanded();
+        });
+    });
+
+    $("#treeCollapse").click(function () {
+        tree.fancytree("getTree").visit(function (node) {
+            node.setExpanded(false);
+        });
+    });
+});
+
 /***/ })
 
 /******/ });

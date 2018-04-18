@@ -48,12 +48,11 @@ Route::prefix('valves')->group(function() {
     Route::post('group/store', 'ValveGroupController@store')->name('valvegroup.store');
 });
 
-Route::get('/account/{user}/settings', 'AccountSettingsController@index')->name('settings.home');
-Route::post('/account/{user}/settings/editName', 'AccountSettingsController@editName')->name('settings.name');
-Route::post('/account/{user}/settings/editDescription', 'AccountSettingsController@editDescription')->name('settings.description');
-Route::post('/account/{user}/settings/editEmail', 'AccountSettingsController@editEmail')->name('settings.email');
-Route::post('/account/{user}/settings/editPassword', 'AccountSettingsController@editPassword');
-
-// Route::get('/accountsettings', 'AccountSettingsController@show');
+Route::get('/settings', 'AccountSettingsController@index')->name('settings.home');
+Route::get('/getsettings', 'AccountSettingsController@getIndex');
+Route::post('/settings/name', 'AccountSettingsController@editName')->name('settings.name');
+Route::post('/settings/description', 'AccountSettingsController@editDescription')->name('settings.description');
+Route::post('/settings/email', 'AccountSettingsController@editEmail')->name('settings.email');
+Route::put('/settings/password', 'AccountSettingsController@editPassword');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
