@@ -33,21 +33,28 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
+    public function apiLogin(Request $request)
     {
         $this->validateLogin($request);
 
-        if($this->attemptLogin($request) && $request->wantsJson()){
+        if($this->attemptLogin($request)){
             $user = $this->guard()->user();
-            $user->generateToken();
+            if($request->wantsJson()){
+                $user->generateToken();
+                return response()->json(['data' => $user->toArray(),
+                ]);
+            }
+            else
+                return redirect('/login')->with('status',$status);
 
-            return response()->json(['data' => $user->toArray(),
-            ]);
+            
         }
 
         return $this->sendFailedLoginResponse($request);
