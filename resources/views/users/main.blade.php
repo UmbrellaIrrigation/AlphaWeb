@@ -1,10 +1,7 @@
 @extends ('layouts.master')
 
 @section ('modal')
-
     @include ('components.create')
-    @include ('components.user.group.create')
-
 @endsection
 
 @section ('nav')
@@ -16,7 +13,11 @@
     <div class="row">
         @include ('components.options')
     
-        @include ('components.user.tree')
+        <aside class="tree-nav">
+            <h4 class="pl-3">Navigation Menu</h4>
+            <hr>
+            <fancytree id="tree" route="{{ route('api.users.tree') }}"></fancytree>
+        </aside>
     
         <div role="main" class="main-view">
             <iframe src="{{ route('users.index') }}" name="contentFrame" width="100%" height="850"
@@ -26,4 +27,8 @@
         </div>
     </div>
 
+@endsection
+
+@section ('footer')
+    <script src="{{ URL::asset('js/views/users.js') }}"></script>
 @endsection

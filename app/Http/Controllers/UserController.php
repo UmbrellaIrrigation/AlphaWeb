@@ -59,17 +59,17 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => ['required','string','email','max:255','unique:users'],
             'password' => 'required|string|min:6|confirmed',
-            'permission' => 'integer|between:1,3'
+            'permission' => 'required|integer|between:1,3'
         ]);
 
-        User::create([
+        $newUser = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'password' => bcrypt(request('password')),
             'permission' => request('permission')
         ]);
             
-        return redirect('users');
+        return $newUser;
     }
 
     /**
