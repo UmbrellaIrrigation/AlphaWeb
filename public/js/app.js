@@ -82,6 +82,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 window.Form = __WEBPACK_IMPORTED_MODULE_0__utils_Form__["a" /* default */];
+window.Event = new Vue();
 
 var createModal = $('#createModal').modal('hide');
 var createGroupModal = $('#createGroupModal').modal('hide');
@@ -263,7 +264,7 @@ var Form = function () {
     }, {
         key: 'onSuccess',
         value: function onSuccess(data) {
-            alert(data.message); // temporary
+            //alert(data.message); // temporary
 
             this.reset();
         }

@@ -220,6 +220,7 @@ var app = new Vue({
             this.userForm.post('/users/user/store').then(function (response) {
                 alert('New User Added!');
                 $('#createModal').modal('hide');
+                Event.$emit('refresh-user-tree');
             });
         }
     },
@@ -322,7 +323,13 @@ if (false) {(function () {
             });
         }
     },
-    created: function created() {},
+    created: function created() {
+        var _this = this;
+
+        Event.$on('refresh-user-tree', function () {
+            _this.updateTree();
+        });
+    },
     mounted: function mounted() {
         $(this.$el).fancytree({
             checkbox: false,

@@ -15,7 +15,9 @@ export default {
         }
     },
     created: function() {
-        
+        Event.$on('refresh-user-tree', () => {
+            this.updateTree();
+        });
     },
     mounted: function() {
         $(this.$el).fancytree({

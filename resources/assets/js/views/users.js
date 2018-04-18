@@ -29,6 +29,7 @@ const app = new Vue({
                 .then(response => {
                     alert('New User Added!');
                     $('#createModal').modal('hide');
+                    Event.$emit('refresh-user-tree');
                 } 
             );
         }
