@@ -112,7 +112,7 @@ class RegisterController extends Controller
         return redirect('/login')->with('status',$status);
     }
 
-    public function register(Request $request)
+    public function apiRegister(Request $request)
     {
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
