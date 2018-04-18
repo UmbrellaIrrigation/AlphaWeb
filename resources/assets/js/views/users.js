@@ -32,6 +32,10 @@ const app = new Vue({
                     Event.$emit('refresh-user-tree');
                 } 
             );
+        },
+        deleteUser() {
+            alert('User Deleted');
+            Event.$emit('refresh-user-tree');
         }
     },
 

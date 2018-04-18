@@ -69,7 +69,7 @@ class UserController extends Controller
             'permission' => request('permission')
         ]);
             
-        return $newUser;
+        return response()->json($newUser, 201);
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        return response()->json($user, 200);
     }
 
     /**

@@ -5,7 +5,8 @@
 <script>
 export default {
     props: {
-        route: String
+        route: String,
+        refresh: String
     },
     methods: {
         updateTree: function() {
@@ -15,7 +16,7 @@ export default {
         }
     },
     created: function() {
-        Event.$on('refresh-user-tree', () => {
+        Event.$on(this.refresh, () => {
             this.updateTree();
         });
     },
