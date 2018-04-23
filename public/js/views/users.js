@@ -220,7 +220,12 @@ var app = new Vue({
             this.userForm.post('/users/user/store').then(function (response) {
                 alert('New User Added!');
                 $('#createModal').modal('hide');
+                Event.$emit('refresh-user-tree');
             });
+        },
+        deleteUser: function deleteUser() {
+            alert('User Deleted');
+            Event.$emit('refresh-user-tree');
         }
     },
 
@@ -313,7 +318,8 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: {
-        route: String
+        route: String,
+        refresh: String
     },
     methods: {
         updateTree: function updateTree() {
@@ -323,7 +329,11 @@ if (false) {(function () {
         }
     },
     created: function created() {
-        //this.updateTree();
+        var _this = this;
+
+        Event.$on(this.refresh, function () {
+            _this.updateTree();
+        });
     },
     mounted: function mounted() {
         $(this.$el).fancytree({
@@ -347,7 +357,6 @@ if (false) {(function () {
             },
             activate: function activate(event, data) {
                 var node = data.node;
-                // Use <a> href and target attributes to load the content:
                 if (node.data.id) {
                     alert(node.data.id);
                 }

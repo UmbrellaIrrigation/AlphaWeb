@@ -5,7 +5,8 @@
 <script>
 export default {
     props: {
-        route: String
+        route: String,
+        refresh: String
     },
     methods: {
         updateTree: function() {
@@ -15,7 +16,9 @@ export default {
         }
     },
     created: function() {
-        //this.updateTree();
+        Event.$on(this.refresh, () => {
+            this.updateTree();
+        });
     },
     mounted: function() {
         $(this.$el).fancytree({
@@ -39,7 +42,6 @@ export default {
             },
             activate: function (event, data) {
                 var node = data.node;
-                // Use <a> href and target attributes to load the content:
                 if (node.data.id) {
                     alert(node.data.id);
                 }

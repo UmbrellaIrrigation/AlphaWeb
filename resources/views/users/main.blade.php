@@ -13,7 +13,11 @@
     <div class="row">
         @include ('components.options')
     
-        @include ('components.tree')
+        <aside class="tree-nav">
+            <h4 class="pl-3">Navigation Menu</h4>
+            <hr>
+            <fancytree id="tree" route="{{ route('api.users.tree') }}" refresh="refresh-user-tree"></fancytree>
+        </aside>
     
         <div role="main" class="main-view">
             <iframe src="{{ route('users.index') }}" name="contentFrame" width="100%" height="850"

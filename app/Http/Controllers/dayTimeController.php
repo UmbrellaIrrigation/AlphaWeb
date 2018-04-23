@@ -43,10 +43,10 @@ class dayTime extends Controller
         ]);
 
         User::create([
-            'valve_id' => request('valve_id');
-            'date' => request('date');
-            'start_time' => request('start_time');
-            'end_time' => request('end_time');
+            'valve_id' => request('valve_id'),
+            'date' => request('date'),
+            'start_time' => request('start_time'),
+            'end_time' => request('end_time')
         ]);
     }
 
