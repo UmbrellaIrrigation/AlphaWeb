@@ -88,7 +88,7 @@ class ValveTree extends Model
             {
                 $childGroupData = ValveTree::convertGroupToData($childGroup, $withChildren);
 
-                ValveTree::recursiveChildGroups($childGroupData, $childGroup);
+                ValveTree::recursiveChildGroups($childGroupData, $childGroup, $withChildren);
                 array_push($groupData["children"], $childGroupData);
             }
         }
