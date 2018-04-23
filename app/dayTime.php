@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class dayTime extends Model
+class DayTime extends Model
 {
     public static function boot()
     {
