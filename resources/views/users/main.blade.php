@@ -16,14 +16,16 @@
         <aside class="tree-nav">
             <h4 class="pl-3">Navigation Menu</h4>
             <hr>
-            <fancytree id="tree" route="{{ route('api.users.tree') }}" refresh="refresh-user-tree"></fancytree>
+            <fancytree id="tree" route="{{ route('users.tree') }}" refresh="refresh-user-tree"></fancytree>
         </aside>
     
         <div role="main" class="main-view">
-            <iframe src="{{ route('users.index') }}" name="contentFrame" width="100%" height="850"
-                scrolling="yes" marginheight="0" marginwidth="0" frameborder="0">
-              <p>Your browser does not support iframes</p>
-            </iframe>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container text-center">
+                    <h1 class="display-3">Please Choose a User</h1>
+                    <p class="lead">Select a user from the navigation menu.</p>
+                </div>
+            </div>
         </div>
     </div>
 

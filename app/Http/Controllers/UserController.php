@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserGroup;
+use App\UserTree;
 
 class UserController extends Controller
 {
@@ -34,7 +35,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $tree = UserTree::getTree();
+		return response($tree, 200);
     }
 
     /**
