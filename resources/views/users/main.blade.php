@@ -2,6 +2,7 @@
 
 @section ('modal')
     @include ('components.create')
+    @include ('components.delete')
 @endsection
 
 @section ('nav')
@@ -25,6 +26,15 @@
                     <h1 class="display-3">Please Choose a User</h1>
                     <p class="lead">Select a user from the navigation menu.</p>
                 </div>
+            </div>
+            <div>
+                <h3>@{{ user.name }}</h3>
+                <hr>
+                <p>@{{ user.description }}</p>
+                <hr>
+                <p>@{{ user.permission }}</p>
+                <hr>
+                <a href="#deleteModal" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-block btn-lg">Delete User</a>
             </div>
         </div>
     </div>
