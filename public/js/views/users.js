@@ -341,7 +341,8 @@ var app = new Vue({
             password_confirmation: '',
             permission: ''
         }),
-        viewMode: 0
+        viewMode: 0,
+        currentUser: Object
     },
 
     methods: {
@@ -349,18 +350,30 @@ var app = new Vue({
             this.userForm.post('/users/user/store').then(function (response) {
                 alert('New User Added!');
                 $('#createModal').modal('hide');
-                Event.$emit('refresh-user-tree');
+                Event.$emit('user-tree-refresh');
             });
         },
         deleteUser: function deleteUser() {
             alert('User Deleted');
-            Event.$emit('refresh-user-tree');
+            Event.$emit('user-tree-refresh');
         }
     },
 
     mounted: function mounted() {},
 
-    created: function created() {}
+    created: function created() {
+        var _this = this;
+
+        Event.$on('user-tree-clicked-folder', function (data) {});
+        Event.$on('user-tree-clicked-item', function (data) {
+            axios.get('/users/user/show/' + data.id).then(function (response) {
+                _this.currentUser = response.data;
+                _this.viewMode = 1;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        });
+    }
 });
 
 $(function () {
@@ -448,7 +461,14 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: {
         route: String,
-        refresh: String
+        type: String
+    },
+    data: function data() {
+        return {
+            refreshEvent: this.type + '-refresh',
+            clickedFolderEvent: this.type + '-clicked-folder',
+            clickedItemEvent: this.type + '-clicked-item'
+        };
     },
     methods: {
         updateTree: function updateTree() {
@@ -460,8 +480,20 @@ if (false) {(function () {
     created: function created() {
         var _this = this;
 
-        Event.$on(this.refresh, function () {
+        Event.$on(this.refreshEvent, function () {
             _this.updateTree();
+        });
+        Event.$on('ft-activate', function (data) {
+            var node = data.data;
+            if (node.folder === true) {
+                Event.$emit(_this.clickedFolderEvent, {
+                    id: node.data.id
+                });
+            } else {
+                Event.$emit(_this.clickedItemEvent, {
+                    id: node.data.id
+                });
+            }
         });
     },
     mounted: function mounted() {
@@ -475,20 +507,19 @@ if (false) {(function () {
             },
 
             init: function init(event, data, flag) {
-                console.log(this.treeData);
+                //console.log(this.treeData);
             },
             postinit: function postinit(isReloading, isError) {
                 this.reactivate();
             },
             focus: function focus(event, data) {
+
                 // Auto-activate focused node after 2 seconds
                 data.node.scheduleAction("activate", 2000);
             },
             activate: function activate(event, data) {
                 var node = data.node;
-                if (node.data.id) {
-                    alert(node.data.id);
-                }
+                Event.$emit('ft-activate', { data: node });
             }
         });
     }

@@ -21,7 +21,8 @@ const app = new Vue({
             password_confirmation: '',
             permission: ''
         }),
-        viewMode: 0
+        viewMode: 0,
+        currentUser: Object
     },
 
     methods: {
@@ -30,13 +31,13 @@ const app = new Vue({
                 .then(response => {
                     alert('New User Added!');
                     $('#createModal').modal('hide');
-                    Event.$emit('refresh-user-tree');
+                    Event.$emit('user-tree-refresh');
                 } 
             );
         },
         deleteUser() {
             alert('User Deleted');
-            Event.$emit('refresh-user-tree');
+            Event.$emit('user-tree-refresh');
         }
     },
 
@@ -45,7 +46,19 @@ const app = new Vue({
     },
 
     created: function() {
-
+        Event.$on('user-tree-clicked-folder', (data) => {
+        
+        });
+        Event.$on('user-tree-clicked-item', (data) => {
+            axios.get('/users/user/show/' + data.id)
+                .then((response) => {
+                    this.currentUser = response.data;
+                    this.viewMode = 1;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
     }
 });
 
