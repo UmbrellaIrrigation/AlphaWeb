@@ -143,7 +143,7 @@ class UserController extends Controller
         $user->editName($request->name);
         $user->save();
 
-        return redirect('users');
+        return response()->json($user, 200);
     }
 
     /**
@@ -158,7 +158,7 @@ class UserController extends Controller
         $user->editDescription($request->description);
         $user->save();
 
-        return redirect('users');
+        return response()->json($user, 200);
     }
 
     /**
@@ -173,7 +173,7 @@ class UserController extends Controller
         $user->editPermission($request->permission);
         $user->save();
 
-        return redirect('users');
+        return response()->json($user, 200);
     }
 
     /**
@@ -182,11 +182,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
         $user->unassignAllValves();
         $user->delete();
-        return redirect('/users/index');
+        
+        return response(202);
     }
 }

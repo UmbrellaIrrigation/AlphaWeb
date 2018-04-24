@@ -26,14 +26,14 @@ Route::prefix('users')->group(function() {
     Route::get('user/tree', 'UserController@index')->name('users.tree');
 
     Route::get('user/show/{user}', 'UserController@show');
-    Route::get('user/editName/{user}', 'UserController@editName');
-    Route::get('user/editDescription/{user}', 'UserController@editDescription');
-    Route::get('user/editPermission/{user}', 'UserController@editPermission');
+    Route::get('user/updateName/{user}', 'UserController@updateName');
+    Route::get('user/updateDescription/{user}', 'UserController@updateDescription');
+    Route::get('user/updatePermission/{user}', 'UserController@updatePermission');
     Route::get('user/delete/{user}','UserController@destroy');
+
     Route::post('user/store', 'UserController@store')->name('users.store');
 
     
-
     Route::get('group/show/{usergroup}', 'UserGroupController@show');
     Route::get('group/delete/{usergroup}', 'UserGroupController@destroy');
     Route::get('group/deleteWithChildren/{usergroup}','UserGroupController@destroyWithChildren');
