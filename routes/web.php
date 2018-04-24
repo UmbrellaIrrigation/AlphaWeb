@@ -32,7 +32,6 @@ Route::prefix('users')->group(function() {
     Route::get('user/delete/{user}','UserController@destroy');
 
     Route::post('user/store', 'UserController@store')->name('users.store');
-
     
     Route::get('group/show/{usergroup}', 'UserGroupController@show');
     Route::get('group/delete/{usergroup}', 'UserGroupController@destroy');

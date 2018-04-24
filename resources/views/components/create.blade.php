@@ -238,7 +238,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="parent_id">Parent User Group</label>
                         <select class="custom-select" id="parent_id" name="parent_id">
                             <option value="null" selected>None</option>
@@ -249,7 +249,7 @@
                                 @endif
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                 </div>
 

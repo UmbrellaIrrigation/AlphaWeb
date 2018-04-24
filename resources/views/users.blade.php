@@ -21,13 +21,13 @@
     </aside>
 
     <div role="main" class="main-view">
-        <div class="jumbotron jumbotron-fluid">
+        <div v-if="viewMode === 0" class="jumbotron jumbotron-fluid">
             <div class="container text-center">
                 <h1 class="display-3">Please Choose a User</h1>
                 <p class="lead">Select a user from the navigation menu.</p>
             </div>
         </div>
-        <div>
+        <div v-if="viewMode === 1">
             <h3>@{{ user.name }}</h3>
             <hr>
             <div class="form-group">
@@ -42,7 +42,7 @@
             <hr>
             <a href="#deleteModal" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-block btn-lg">Delete User</a>
         </div>
-        <div>
+        <div v-if="viewMode === 2">
             <h3>@{{ usergroup.name }}</h3>
             <hr>
             <div class="form-group">

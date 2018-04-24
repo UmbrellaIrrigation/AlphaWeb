@@ -20,7 +20,8 @@ const app = new Vue({
             password: '',
             password_confirmation: '',
             permission: ''
-        })
+        }),
+        viewMode: 0
     },
 
     methods: {
