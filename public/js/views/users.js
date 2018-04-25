@@ -368,9 +368,15 @@ var app = new Vue({
                 alert('Please choose a user first');
             }
         },
-        deleteUserGroup: function deleteUserGroup() {
+        deleteUserGroup: function deleteUserGroup(keepChildren) {
+            var route = '';
+            if (keepChildren === true) {
+                route = '/users/group/delete/';
+            } else {
+                route = '/users/group/deleteWithChildren/';
+            }
             if (this.currentUserGroup) {
-                axios.delete('/users/group/delete/' + this.currentUserGroup.id).then(function (response) {
+                axios.delete(route + this.currentUserGroup.id).then(function (response) {
                     alert('User Group Deleted');
                     $('#deleteGroupModal').modal('hide');
                     Event.$emit('user-tree-refresh');

@@ -48,8 +48,8 @@
                     <p>Do you wish to delete all Users and Groups within this Group (Remove Children) or keep those Users and Groups in this Group (Keep Children)?</p>
                 </div>
                 <div class="modal-footer">
-                    {{-- <a href="/users/group/deleteWithChildren/{{$usergroup->id}}" class="btn btn-danger">Remove Children</a> --}}
-                    <button type="button" @click="deleteUserGroup" class="btn btn-primary">Keep Children</button>
+                    <button type="button" @click="deleteUserGroup(false)" class="btn btn-danger">Remove Children</button>
+                    <button type="button" @click="deleteUserGroup(true)" class="btn btn-primary">Keep Children</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Deletion</button>
                 </div>
             @elseif (Request::is('valves*'))

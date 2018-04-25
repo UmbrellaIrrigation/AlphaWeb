@@ -53,9 +53,16 @@ const app = new Vue({
                 alert('Please choose a user first');
             }
         },
-        deleteUserGroup() {
+        deleteUserGroup(keepChildren) {
+            let route = '';
+            if (keepChildren === true) {
+                route = '/users/group/delete/';
+            }
+            else {
+                route = '/users/group/deleteWithChildren/'
+            }
             if (this.currentUserGroup) {
-                axios.delete('/users/group/delete/' + this.currentUserGroup.id)
+                axios.delete(route + this.currentUserGroup.id)
                     .then((response) => {
                         alert('User Group Deleted');
                         $('#deleteGroupModal').modal('hide');
