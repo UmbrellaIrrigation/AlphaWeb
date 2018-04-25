@@ -46,10 +46,12 @@
         </div>
 
         <div v-else-if="viewMode === 2" v-cloak class="container-fluid">
-            <h3>@{{ usergroup.name }}</h3>
+            <h3>@{{ currentUserGroup.name }}</h3>
             <hr>
             <div class="form-group">
-                <label for="parent_id">Parent User Group: <b>@{{ getParentName(usergroup.parent_id) }}</b></label>
+                <label for="parent_id">Parent User Group:</label>
+                <p v-if="currentParentGroup !== null">@{{ currentParentGroup.name }}</p>
+                <p v-else-if="currentParentGroup === null">None</p>
             </div>
             <hr>
             <a href="#deleteGroupModal" data-toggle="modal" data-target="#deleteGroupModal" class="btn btn-danger btn-block btn-lg">Delete Group</a>

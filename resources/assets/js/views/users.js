@@ -52,9 +52,23 @@ const app = new Vue({
             axios.get('/users/group/show/' + data.id)
                 .then((response) => {
                     this.currentUserGroup = response.data;
-                    console.log(this.currentUserGroup);
+                    if (this.currentUserGroup.parent_id) {
+                        axios.get('/users/group/show/' + this.currentUserGroup.parent_id)
+                            .then((response) => {
+                                this.currentParentGroup = response.data;
+                            })
+                            .catch((error) => {
+                                this.currentParentGroup = null;
+                                console.log(error);
+                            })
+                    }
+                    else {
+                        this.currentParentGroup = null;
+                    }
+                    this.viewMode = 2;
                 })
                 .catch((error) => {
+                    this.currentUserGroup = null;
                     console.log(error);
                 });
         });
@@ -65,6 +79,7 @@ const app = new Vue({
                     this.viewMode = 1;
                 })
                 .catch((error) => {
+                    this.currentUser = null;
                     console.log(error);
                 });
         });

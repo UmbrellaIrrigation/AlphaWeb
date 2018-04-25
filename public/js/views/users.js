@@ -369,8 +369,19 @@ var app = new Vue({
         Event.$on('user-tree-clicked-folder', function (data) {
             axios.get('/users/group/show/' + data.id).then(function (response) {
                 _this.currentUserGroup = response.data;
-                console.log(_this.currentUserGroup);
+                if (_this.currentUserGroup.parent_id) {
+                    axios.get('/users/group/show/' + _this.currentUserGroup.parent_id).then(function (response) {
+                        _this.currentParentGroup = response.data;
+                    }).catch(function (error) {
+                        _this.currentParentGroup = null;
+                        console.log(error);
+                    });
+                } else {
+                    _this.currentParentGroup = null;
+                }
+                _this.viewMode = 2;
             }).catch(function (error) {
+                _this.currentUserGroup = null;
                 console.log(error);
             });
         });
@@ -379,6 +390,7 @@ var app = new Vue({
                 _this.currentUser = response.data;
                 _this.viewMode = 1;
             }).catch(function (error) {
+                _this.currentUser = null;
                 console.log(error);
             });
         });
