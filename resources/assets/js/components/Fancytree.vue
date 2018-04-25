@@ -6,13 +6,13 @@
 export default {
     props: {
         route: String,
-        type: String
+        name: String
     },
     data: function() {
         return {
-            refreshEvent: this.type + '-refresh',
-            clickedFolderEvent: this.type + '-clicked-folder',
-            clickedItemEvent: this.type + '-clicked-item'
+            refreshEvent: this.name + '-refresh',
+            clickedFolderEvent: this.name + '-clicked-folder',
+            clickedItemEvent: this.name + '-clicked-item'
         };
     },
     methods: {

@@ -362,7 +362,7 @@ var app = new Vue({
                     $('#deleteModal').modal('hide');
                     Event.$emit('user-tree-refresh');
                 }).catch(function (error) {
-                    console.log(errors);
+                    console.log(error);
                 });
             } else {
                 alert('Please choose a user first');
@@ -370,12 +370,12 @@ var app = new Vue({
         },
         deleteUserGroup: function deleteUserGroup() {
             if (this.currentUserGroup) {
-                axios.delete('/users/user/delete/' + this.currentUserGroup.id).then(function (response) {
+                axios.delete('/users/group/delete/' + this.currentUserGroup.id).then(function (response) {
                     alert('User Group Deleted');
                     $('#deleteGroupModal').modal('hide');
                     Event.$emit('user-tree-refresh');
                 }).catch(function (error) {
-                    console.log(errors);
+                    console.log(error);
                 });
             } else {
                 alert('Please choose a user group first');
@@ -504,13 +504,13 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
     props: {
         route: String,
-        type: String
+        name: String
     },
     data: function data() {
         return {
-            refreshEvent: this.type + '-refresh',
-            clickedFolderEvent: this.type + '-clicked-folder',
-            clickedItemEvent: this.type + '-clicked-item'
+            refreshEvent: this.name + '-refresh',
+            clickedFolderEvent: this.name + '-clicked-folder',
+            clickedItemEvent: this.name + '-clicked-item'
         };
     },
     methods: {

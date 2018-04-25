@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
+use App\UserTree;
 use App\UserGroup;
+
 class UserGroupController extends Controller
 {
     /**
@@ -15,7 +17,8 @@ class UserGroupController extends Controller
      */
     public function index()
     {
-        //
+        $tree = UserTree::getGroupTree();
+        return response($tree, 200);
     }
 
     /**
@@ -41,19 +44,20 @@ class UserGroupController extends Controller
             'parent_id' => 'string',
         ]);
 
+        $usergroup = null;
         if (request('parent_id') == 'null') {
-            UserGroup::create([
+            $usergroup = UserGroup::create([
                 'name' => request('name')
             ]);
         }
         else {
-            UserGroup::create([
+            $usergroup = UserGroup::create([
                 'name' => request('name'),
                 'parent_id' => request('parent_id'),
             ]);
         }
 
-        return redirect('users');
+        return response()->json($usergroup, 201);
     }
 
     /**
@@ -97,37 +101,39 @@ class UserGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserGroup $usergroup)
     {
-        $group = UserGroup::find($id);
-        $parent_id = $group->parent_id;
+        $parent_id = $usergroup->parent_id;
         $parentGroup = UserGroup::find($parent_id);
-        $children = $group->getChildGroups()->get();
+        $children = $usergroup->getChildGroups()->get();
+
         while($children->first()!=null)
         {
             $currChild = $children->shift();//gets the first element, removes from collection
             $currChild->parent_id = $parent_id;
             $currChild->save();
         }
-        $children = $group->getChildUsers()->get();
+        $children = $usergroup->getChildUsers()->get();
+
         while($children->first()!=null)
         {
             $currChild = $children->shift();
-            $currChild->user_groups()->detach($group);
+            $currChild->user_groups()->detach($usergroup);
             if($parentGroup!=null)
                 $currChild->user_groups()->attach($parentGroup);
             $currChild->save();
         }
-        $group->delete();
-        return redirect('/users/index');
+        $usergroup->delete();
+
+        return response(200);
     }
 
-    public function destroyWithChildren($id) //infinite recursion! Not sure why
+    public function destroyWithChildren(UserGroup $usergroup) //infinite recursion! Not sure why
     {
         $model = null;
-        if(UserGroup::find($id) != null)
+        if($usergroup != null)
         {
-            $model = UserGroup::find($id);
+            $model = $usergroup;
             $children = $model->getChildUsers()->get();
             while($children->first()!=null)
             {
@@ -145,10 +151,11 @@ class UserGroupController extends Controller
         }
         else
         {
-            $model = User::find($id);
+            $model = $usergroup;
         }
         if($model!=null)
             $model->delete();
-        return redirect('/users/index');
+
+        return response(200);
     }
 }

@@ -46,7 +46,7 @@ const app = new Vue({
                         Event.$emit('user-tree-refresh');
                     })
                     .catch((error) => {
-                        console.log(errors);
+                        console.log(error);
                     });
             }
             else {
@@ -55,14 +55,14 @@ const app = new Vue({
         },
         deleteUserGroup() {
             if (this.currentUserGroup) {
-                axios.delete('/users/user/delete/' + this.currentUserGroup.id)
+                axios.delete('/users/group/delete/' + this.currentUserGroup.id)
                     .then((response) => {
                         alert('User Group Deleted');
                         $('#deleteGroupModal').modal('hide');
                         Event.$emit('user-tree-refresh');
                     })
                     .catch((error) => {
-                        console.log(errors);
+                        console.log(error);
                     });
             }
             else {

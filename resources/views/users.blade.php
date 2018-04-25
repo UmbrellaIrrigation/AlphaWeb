@@ -17,7 +17,7 @@
     <aside class="tree-nav">
         <h4 class="pl-3">Navigation Menu</h4>
         <hr>
-        <fancytree id="tree" route="{{ route('users.tree') }}" type="user-tree"></fancytree>
+        <fancytree id="tree" route="{{ route('user.tree') }}" name="user-tree"></fancytree>
     </aside>
 
     <div role="main" class="main-view">
