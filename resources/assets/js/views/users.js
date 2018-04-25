@@ -38,8 +38,36 @@ const app = new Vue({
             );
         },
         deleteUser() {
-            alert('User Deleted');
-            Event.$emit('user-tree-refresh');
+            if (this.currentUser) {
+                axios.delete('/users/user/delete/' + this.currentUser.id)
+                    .then((response) => {
+                        alert('User Deleted');
+                        $('#deleteModal').modal('hide');
+                        Event.$emit('user-tree-refresh');
+                    })
+                    .catch((error) => {
+                        console.log(errors);
+                    });
+            }
+            else {
+                alert('Please choose a user first');
+            }
+        },
+        deleteUserGroup() {
+            if (this.currentUserGroup) {
+                axios.delete('/users/user/delete/' + this.currentUserGroup.id)
+                    .then((response) => {
+                        alert('User Group Deleted');
+                        $('#deleteGroupModal').modal('hide');
+                        Event.$emit('user-tree-refresh');
+                    })
+                    .catch((error) => {
+                        console.log(errors);
+                    });
+            }
+            else {
+                alert('Please choose a user group first');
+            }
         }
     },
 

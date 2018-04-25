@@ -11,10 +11,10 @@
                 <div class="modal-body">
                     <p>Are you sure you wish to delete this user?</p>
                 </div>
-                {{-- <div class="modal-footer">
-                    <a href="/users/user/delete/{{$user->id}}" class="btn btn-danger">Yes, Delete User</a>
+                <div class="modal-footer">
+                    <button type="button" @click="deleteUser" class="btn btn-danger">Yes, Delete User</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Keep User</button>
-                </div> --}}
+                </div>
             @elseif (Request::is('valves*'))
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Valve Deletion</h5>
@@ -47,11 +47,11 @@
                 <div class="modal-body">
                     <p>Do you wish to delete all Users and Groups within this Group (Remove Children) or keep those Users and Groups in this Group (Keep Children)?</p>
                 </div>
-                {{-- <div class="modal-footer">
-                    <a href="/users/group/deleteWithChildren/{{$usergroup->id}}" class="btn btn-danger">Remove Children</a>
-                    <a href="/users/group/delete/{{$usergroup->id}}" class="btn btn-primary">Keep Children</a>
+                <div class="modal-footer">
+                    {{-- <a href="/users/group/deleteWithChildren/{{$usergroup->id}}" class="btn btn-danger">Remove Children</a> --}}
+                    <button type="button" @click="deleteUserGroup" class="btn btn-primary">Keep Children</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Deletion</button>
-                </div> --}}
+                </div>
             @elseif (Request::is('valves*'))
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Valve Group Deletion</h5>

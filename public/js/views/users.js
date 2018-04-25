@@ -356,8 +356,30 @@ var app = new Vue({
             });
         },
         deleteUser: function deleteUser() {
-            alert('User Deleted');
-            Event.$emit('user-tree-refresh');
+            if (this.currentUser) {
+                axios.delete('/users/user/delete/' + this.currentUser.id).then(function (response) {
+                    alert('User Deleted');
+                    $('#deleteModal').modal('hide');
+                    Event.$emit('user-tree-refresh');
+                }).catch(function (error) {
+                    console.log(errors);
+                });
+            } else {
+                alert('Please choose a user first');
+            }
+        },
+        deleteUserGroup: function deleteUserGroup() {
+            if (this.currentUserGroup) {
+                axios.delete('/users/user/delete/' + this.currentUserGroup.id).then(function (response) {
+                    alert('User Group Deleted');
+                    $('#deleteGroupModal').modal('hide');
+                    Event.$emit('user-tree-refresh');
+                }).catch(function (error) {
+                    console.log(errors);
+                });
+            } else {
+                alert('Please choose a user group first');
+            }
         }
     },
 

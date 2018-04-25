@@ -29,9 +29,9 @@ Route::prefix('users')->group(function() {
     Route::get('user/updateName/{user}', 'UserController@updateName');
     Route::get('user/updateDescription/{user}', 'UserController@updateDescription');
     Route::get('user/updatePermission/{user}', 'UserController@updatePermission');
-    Route::get('user/delete/{user}','UserController@destroy');
-
+    
     Route::post('user/store', 'UserController@store')->name('users.store');
+    Route::delete('user/delete/{user}','UserController@destroy');
     
     Route::get('group/show/{usergroup}', 'UserGroupController@show');
     Route::get('group/delete/{usergroup}', 'UserGroupController@destroy');
