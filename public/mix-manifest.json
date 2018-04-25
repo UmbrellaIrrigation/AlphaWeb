@@ -4,6 +4,6 @@
     "/js/views/account_settings.js": "/js/views/account_settings.js",
     "/js/views/users.js": "/js/views/users.js",
     "/js/views/valves.js": "/js/views/valves.js",
-    "/js/models/user.js": "/js/models/user.js",
-    "/js/app.js": "/js/app.js"
+    "/js/app.js": "/js/app.js",
+    "/js/models/user.js": "/js/models/user.js"
 }
