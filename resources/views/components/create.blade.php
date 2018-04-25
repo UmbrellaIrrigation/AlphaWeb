@@ -237,10 +237,16 @@
 
                     <div class="form-group">
                         <label for="parent_id">Parent User Group</label>
-                        <div>
-                            <input id="parent_id" type="text" :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('password') }" name="parent_id" v-model="userGroupForm.parent_id" required> 
+
+                        <input v-if="userGroupForm.parent_id === 'null'" class="form-control" value="None" disabled>
+                        <input v-else v-cloak class="form-control" value="Test" disabled>
+
+                        <div style="display: none;">
+                            <input id="parent_id" type="text" :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('password') }" name="parent_id" v-model="userGroupForm.parent_id" required disabled> 
                             <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('parent_id')" v-text="userGroupForm.errors.get('parent_id')"></small>                            
                         </div>
+
+                        
                     </div>
 
                 </div>

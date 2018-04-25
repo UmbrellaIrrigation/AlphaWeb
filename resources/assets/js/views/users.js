@@ -23,7 +23,7 @@ const app = new Vue({
         }),
         userGroupForm: new Form({
             name: '',
-            parent_id: ''
+            parent_id: 'null'
         }),
         viewMode: 0,
         currentUser: Object,
