@@ -128,12 +128,12 @@ class UserGroupController extends Controller
         return response(200);
     }
 
-    public function destroyWithChildren(UserGroup $usergroup) //infinite recursion! Not sure why
+    public function destroyWithChildren($id) //infinite recursion! Not sure why
     {
         $model = null;
-        if($usergroup != null)
+        if(UserGroup::find($id) != null)
         {
-            $model = $usergroup;
+            $model = UserGroup::find($id);
             $children = $model->getChildUsers()->get();
             while($children->first()!=null)
             {
@@ -151,7 +151,7 @@ class UserGroupController extends Controller
         }
         else
         {
-            $model = $usergroup;
+            $model = UserGroup::find($id);
         }
         if($model!=null)
             $model->delete();
