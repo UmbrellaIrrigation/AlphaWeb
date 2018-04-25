@@ -22,7 +22,9 @@ const app = new Vue({
             permission: ''
         }),
         viewMode: 0,
-        currentUser: Object
+        currentUser: Object,
+        currentUserGroup: Object,
+        currentParentGroup: Object
     },
 
     methods: {
@@ -47,7 +49,14 @@ const app = new Vue({
 
     created: function() {
         Event.$on('user-tree-clicked-folder', (data) => {
-        
+            axios.get('/users/group/show/' + data.id)
+                .then((response) => {
+                    this.currentUserGroup = response.data;
+                    console.log(this.currentUserGroup);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
         Event.$on('user-tree-clicked-item', (data) => {
             axios.get('/users/user/show/' + data.id)

@@ -64,8 +64,7 @@ class UserGroupController extends Controller
      */
     public function show(UserGroup $usergroup)
     {
-        $rootGroups = UserGroup::getRootGroups();
-        return view('users.group.show', compact('usergroup'), compact('rootGroups'));
+        return response()->json($usergroup, 200);
     }
 
     /**
