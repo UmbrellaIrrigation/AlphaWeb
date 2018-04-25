@@ -21,6 +21,10 @@ const app = new Vue({
             password_confirmation: '',
             permission: ''
         }),
+        userGroupForm: new Form({
+            name: '',
+            parent_id: ''
+        }),
         viewMode: 0,
         currentUser: Object,
         currentUserGroup: Object,
