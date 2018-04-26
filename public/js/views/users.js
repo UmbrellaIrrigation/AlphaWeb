@@ -345,7 +345,7 @@ var app = new Vue({
             name: '',
             parent_id: 'null'
         }),
-        parentName: String,
+        parentName: '',
         viewMode: 0,
         currentUser: Object,
         currentUserGroup: Object,
@@ -357,7 +357,18 @@ var app = new Vue({
             this.userForm.post('/users/user/store').then(function (response) {
                 alert('New User Added!');
                 $('#createModal').modal('hide');
-                Event.$emit('user-tree-refresh');
+                Event.$emit('main-tree-refresh');
+            });
+        },
+        createUserGroup: function createUserGroup() {
+            var _this = this;
+
+            this.userGroupForm.post('/users/group/store').then(function (response) {
+                alert('New User Group Added!');
+                $('#createGroupModal').modal('hide');
+                Event.$emit('main-tree-refresh');
+                Event.$emit('new-group-tree-refresh');
+                _this.userGroupForm.parent_id = 'null';
             });
         },
         deleteUser: function deleteUser() {
@@ -398,39 +409,39 @@ var app = new Vue({
     mounted: function mounted() {},
 
     created: function created() {
-        var _this = this;
+        var _this2 = this;
 
         Event.$on('main-tree-clicked-folder', function (data) {
             axios.get('/users/group/show/' + data.id).then(function (response) {
-                _this.currentUserGroup = response.data;
-                if (_this.currentUserGroup.parent_id) {
-                    axios.get('/users/group/show/' + _this.currentUserGroup.parent_id).then(function (response) {
-                        _this.currentParentGroup = response.data;
+                _this2.currentUserGroup = response.data;
+                if (_this2.currentUserGroup.parent_id) {
+                    axios.get('/users/group/show/' + _this2.currentUserGroup.parent_id).then(function (response) {
+                        _this2.currentParentGroup = response.data;
                     }).catch(function (error) {
-                        _this.currentParentGroup = null;
+                        _this2.currentParentGroup = null;
                         console.log(error);
                     });
                 } else {
-                    _this.currentParentGroup = null;
+                    _this2.currentParentGroup = null;
                 }
-                _this.viewMode = 2;
+                _this2.viewMode = 2;
             }).catch(function (error) {
-                _this.currentUserGroup = null;
+                _this2.currentUserGroup = null;
                 console.log(error);
             });
         });
         Event.$on('main-tree-clicked-item', function (data) {
             axios.get('/users/user/show/' + data.id).then(function (response) {
-                _this.currentUser = response.data;
-                _this.viewMode = 1;
+                _this2.currentUser = response.data;
+                _this2.viewMode = 1;
             }).catch(function (error) {
-                _this.currentUser = null;
+                _this2.currentUser = null;
                 console.log(error);
             });
         });
         Event.$on('new-group-tree-clicked-folder', function (data) {
-            _this.userGroupForm.parent_id = data.id;
-            _this.parentName = data.name;
+            _this2.userGroupForm.parent_id = data.id;
+            _this2.parentName = data.name;
         });
     }
 });

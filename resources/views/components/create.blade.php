@@ -215,7 +215,7 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('usergroup.store') }}" @submit.prevent="createUser" @keydown="userGroupForm.errors.clear($event.target.name)">
+            <form method="POST" action="{{ route('usergroup.store') }}" @submit.prevent="createUserGroup" @keydown="userGroupForm.errors.clear($event.target.name)">
                 {{ csrf_field() }}
 
                 <div class="modal-header">
@@ -239,7 +239,7 @@
                         <label for="parent_id">Parent User Group</label>
 
                         <input v-if="userGroupForm.parent_id === 'null'" class="form-control" value="None" disabled>
-                        <input v-else v-cloak :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('password') }" v-text="parentName" disabled>
+                        <input v-else v-cloak :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('password') }" :value="parentName" disabled>
                         <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('parent_id')" v-text="userGroupForm.errors.get('parent_id')"></small>                            
                         
                         <div style="display: none;">

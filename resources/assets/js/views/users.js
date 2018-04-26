@@ -25,7 +25,7 @@ const app = new Vue({
             name: '',
             parent_id: 'null'
         }),
-        parentName: String,
+        parentName: '',
         viewMode: 0,
         currentUser: Object,
         currentUserGroup: Object,
@@ -38,8 +38,19 @@ const app = new Vue({
                 .then(response => {
                     alert('New User Added!');
                     $('#createModal').modal('hide');
-                    Event.$emit('user-tree-refresh');
+                    Event.$emit('main-tree-refresh');
                 } 
+            );
+        },
+        createUserGroup() {
+            this.userGroupForm.post('/users/group/store')
+                .then(response => {
+                    alert('New User Group Added!');
+                    $('#createGroupModal').modal('hide');
+                    Event.$emit('main-tree-refresh');
+                    Event.$emit('new-group-tree-refresh');
+                    this.userGroupForm.parent_id = 'null';
+                }
             );
         },
         deleteUser() {
@@ -52,7 +63,8 @@ const app = new Vue({
                     })
                     .catch((error) => {
                         console.log(error);
-                    });
+                    }
+                );
             }
             else {
                 alert('Please choose a user first');
@@ -76,7 +88,8 @@ const app = new Vue({
                     })
                     .catch((error) => {
                         console.log(error);
-                    });
+                    }
+                );
             }
             else {
                 alert('Please choose a user group first');
@@ -101,7 +114,8 @@ const app = new Vue({
                             .catch((error) => {
                                 this.currentParentGroup = null;
                                 console.log(error);
-                            })
+                            }
+                        );
                     }
                     else {
                         this.currentParentGroup = null;
@@ -122,7 +136,8 @@ const app = new Vue({
                 .catch((error) => {
                     this.currentUser = null;
                     console.log(error);
-                });
+                }
+            );
         });
         Event.$on('new-group-tree-clicked-folder', (data) => {
             this.userGroupForm.parent_id = data.id;
