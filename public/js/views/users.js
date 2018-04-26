@@ -345,6 +345,7 @@ var app = new Vue({
             name: '',
             parent_id: 'null'
         }),
+        parentName: String,
         viewMode: 0,
         currentUser: Object,
         currentUserGroup: Object,
@@ -364,7 +365,7 @@ var app = new Vue({
                 axios.delete('/users/user/delete/' + this.currentUser.id).then(function (response) {
                     alert('User Deleted');
                     $('#deleteModal').modal('hide');
-                    Event.$emit('user-tree-refresh');
+                    Event.$emit('main-tree-refresh');
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -383,7 +384,8 @@ var app = new Vue({
                 axios.delete(route + this.currentUserGroup.id).then(function (response) {
                     alert('User Group Deleted');
                     $('#deleteGroupModal').modal('hide');
-                    Event.$emit('user-tree-refresh');
+                    Event.$emit('main-tree-refresh');
+                    Event.$emit('new-group-tree-refresh');
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -398,7 +400,7 @@ var app = new Vue({
     created: function created() {
         var _this = this;
 
-        Event.$on('user-tree-clicked-folder', function (data) {
+        Event.$on('main-tree-clicked-folder', function (data) {
             axios.get('/users/group/show/' + data.id).then(function (response) {
                 _this.currentUserGroup = response.data;
                 if (_this.currentUserGroup.parent_id) {
@@ -417,7 +419,7 @@ var app = new Vue({
                 console.log(error);
             });
         });
-        Event.$on('user-tree-clicked-item', function (data) {
+        Event.$on('main-tree-clicked-item', function (data) {
             axios.get('/users/user/show/' + data.id).then(function (response) {
                 _this.currentUser = response.data;
                 _this.viewMode = 1;
@@ -425,6 +427,10 @@ var app = new Vue({
                 _this.currentUser = null;
                 console.log(error);
             });
+        });
+        Event.$on('new-group-tree-clicked-folder', function (data) {
+            _this.userGroupForm.parent_id = data.id;
+            _this.parentName = data.name;
         });
     }
 });
@@ -536,20 +542,11 @@ if (false) {(function () {
         Event.$on(this.refreshEvent, function () {
             _this.updateTree();
         });
-        Event.$on('ft-activate', function (data) {
-            var node = data.data;
-            if (node.folder === true) {
-                Event.$emit(_this.clickedFolderEvent, {
-                    id: node.data.id
-                });
-            } else {
-                Event.$emit(_this.clickedItemEvent, {
-                    id: node.data.id
-                });
-            }
-        });
     },
     mounted: function mounted() {
+        var clickedFolderEvent = this.clickedFolderEvent;
+        var clickedItemEvent = this.clickedItemEvent;
+
         $(this.$el).fancytree({
             checkbox: false,
             debugLevel: 2,
@@ -572,7 +569,17 @@ if (false) {(function () {
             },
             activate: function activate(event, data) {
                 var node = data.node;
-                Event.$emit('ft-activate', { data: node });
+                if (node.folder === true) {
+                    Event.$emit(clickedFolderEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                } else {
+                    Event.$emit(clickedItemEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                }
             }
         });
     }

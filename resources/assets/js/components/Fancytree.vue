@@ -26,21 +26,11 @@ export default {
         Event.$on(this.refreshEvent, () => {
             this.updateTree();
         });
-        Event.$on('ft-activate', (data) => {
-            let node = data.data;
-            if (node.folder === true) {
-                Event.$emit(this.clickedFolderEvent, {
-                    id: node.data.id
-                });
-            }
-            else {
-                Event.$emit(this.clickedItemEvent, {
-                    id: node.data.id
-                });
-            }
-        });
     },
     mounted: function() {
+        let clickedFolderEvent = this.clickedFolderEvent;
+        let clickedItemEvent = this.clickedItemEvent;
+
         $(this.$el).fancytree({
             checkbox: false,
             debugLevel: 2,
@@ -63,7 +53,18 @@ export default {
             },
             activate: function (event, data) {
                 var node = data.node;
-                Event.$emit('ft-activate', { data: node });
+                if (node.folder === true) {
+                    Event.$emit(clickedFolderEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                }
+                else {
+                    Event.$emit(clickedItemEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                }
             },
         });
     }

@@ -25,6 +25,7 @@ const app = new Vue({
             name: '',
             parent_id: 'null'
         }),
+        parentName: String,
         viewMode: 0,
         currentUser: Object,
         currentUserGroup: Object,
@@ -47,7 +48,7 @@ const app = new Vue({
                     .then((response) => {
                         alert('User Deleted');
                         $('#deleteModal').modal('hide');
-                        Event.$emit('user-tree-refresh');
+                        Event.$emit('main-tree-refresh');
                     })
                     .catch((error) => {
                         console.log(error);
@@ -70,7 +71,8 @@ const app = new Vue({
                     .then((response) => {
                         alert('User Group Deleted');
                         $('#deleteGroupModal').modal('hide');
-                        Event.$emit('user-tree-refresh');
+                        Event.$emit('main-tree-refresh');
+                        Event.$emit('new-group-tree-refresh');
                     })
                     .catch((error) => {
                         console.log(error);
@@ -87,7 +89,7 @@ const app = new Vue({
     },
 
     created: function() {
-        Event.$on('user-tree-clicked-folder', (data) => {
+        Event.$on('main-tree-clicked-folder', (data) => {
             axios.get('/users/group/show/' + data.id)
                 .then((response) => {
                     this.currentUserGroup = response.data;
@@ -111,7 +113,7 @@ const app = new Vue({
                     console.log(error);
                 });
         });
-        Event.$on('user-tree-clicked-item', (data) => {
+        Event.$on('main-tree-clicked-item', (data) => {
             axios.get('/users/user/show/' + data.id)
                 .then((response) => {
                     this.currentUser = response.data;
@@ -121,6 +123,10 @@ const app = new Vue({
                     this.currentUser = null;
                     console.log(error);
                 });
+        });
+        Event.$on('new-group-tree-clicked-folder', (data) => {
+            this.userGroupForm.parent_id = data.id;
+            this.parentName = data.name;
         });
     }
 });
