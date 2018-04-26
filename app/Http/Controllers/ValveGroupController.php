@@ -94,6 +94,8 @@ class ValveGroupController extends Controller
     public function destroy($id)
     {
         $group = ValveGroup::find($id);
+        if($group == null)
+            return redirect('/valves/index');
         $parentId = $group->parent_id;
         $parentGroup = ValveGroup::find($parentId);
         $childGroups = $group->getChildGroups()->get();
