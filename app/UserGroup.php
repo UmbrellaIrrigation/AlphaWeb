@@ -22,7 +22,7 @@ class UserGroup extends Model
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at', 'parent_id', 'name'
+        'created_at', 'updated_at'
     ];
 
     protected $appends = [

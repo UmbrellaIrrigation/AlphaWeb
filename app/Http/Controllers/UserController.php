@@ -15,14 +15,10 @@ class UserController extends Controller
     }
 
     public function main() {
-        $rootUsers = User::getRootUsers();
-        $rootGroups = UserGroup::getRootGroups();
-        $allGroups = UserGroup::getAllGroups();
         $admins = User::getAdmins();
         $employees = User::getEmployees();
         $guests = User::getGuests();
-        return view('users.main', compact('rootUsers'), compact('rootGroups'))
-            ->with(compact('allGroups'))
+        return view('users')
             ->with(compact('admins'))
             ->with(compact('employees'))
             ->with(compact('guests'));
@@ -143,7 +139,7 @@ class UserController extends Controller
         $user->editName($request->name);
         $user->save();
 
-        return redirect('users');
+        return response()->json($user, 200);
     }
 
     /**
@@ -158,7 +154,7 @@ class UserController extends Controller
         $user->editDescription($request->description);
         $user->save();
 
-        return redirect('users');
+        return response()->json($user, 200);
     }
 
     /**
@@ -173,7 +169,7 @@ class UserController extends Controller
         $user->editPermission($request->permission);
         $user->save();
 
-        return redirect('users');
+        return response()->json($user, 200);
     }
 
     /**
@@ -182,11 +178,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
         $user->unassignAllValves();
         $user->delete();
-        return redirect('/users/index');
+        
+        return response(202);
     }
 }

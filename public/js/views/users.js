@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 54);
+/******/ 	return __webpack_require__(__webpack_require__.s = 55);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 4:
+/***/ 11:
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -175,230 +175,15 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 54:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(55);
-
-
-/***/ }),
-
-/***/ 55:
+/***/ 31:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Fancytree__ = __webpack_require__(56);
-/**
- * Form and Vue Element
- */
-
-
-
-
-var app = new Vue({
-    el: '#app',
-
-    components: {
-        Example: __WEBPACK_IMPORTED_MODULE_0__components_Example__["default"],
-        Fancytree: __WEBPACK_IMPORTED_MODULE_1__components_Fancytree__["a" /* default */]
-    },
-
-    data: {
-        userForm: new Form({
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-            permission: ''
-        })
-    },
-
-    methods: {
-        createUser: function createUser() {
-            this.userForm.post('/users/user/store').then(function (response) {
-                alert('New User Added!');
-                $('#createModal').modal('hide');
-                Event.$emit('refresh-user-tree');
-            });
-        },
-        deleteUser: function deleteUser() {
-            alert('User Deleted');
-            Event.$emit('refresh-user-tree');
-        }
-    },
-
-    mounted: function mounted() {},
-
-    created: function created() {}
-});
-
-$(function () {
-    $("#treeSort").click(function () {
-        var node = $("#tree").fancytree("getRootNode");
-        node.sortChildren(null, true);
-    });
-
-    $("#treeExpand").click(function () {
-        $("#tree").fancytree("getTree").visit(function (node) {
-            node.setExpanded();
-        });
-    });
-
-    $("#treeCollapse").click(function () {
-        $("#tree").fancytree("getTree").visit(function (node) {
-            node.setExpanded(false);
-        });
-    });
-});
-
-/***/ }),
-
-/***/ 56:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Fancytree_vue__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Fancytree_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Example_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_650f2efa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Example_vue__ = __webpack_require__(33);
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
-/* script */
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Fancytree_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Fancytree_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Fancytree.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-15397a40", Component.options)
-  } else {
-    hotAPI.reload("data-v-15397a40", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 57:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    props: {
-        route: String,
-        refresh: String
-    },
-    methods: {
-        updateTree: function updateTree() {
-            $(this.$el).fancytree('option', 'source', {
-                url: this.route
-            });
-        }
-    },
-    created: function created() {
-        var _this = this;
-
-        Event.$on(this.refresh, function () {
-            _this.updateTree();
-        });
-    },
-    mounted: function mounted() {
-        $(this.$el).fancytree({
-            checkbox: false,
-            debugLevel: 2,
-            minExpandLevel: 1,
-
-            source: {
-                url: this.route
-            },
-
-            init: function init(event, data, flag) {
-                console.log(this.treeData);
-            },
-            postinit: function postinit(isReloading, isError) {
-                this.reactivate();
-            },
-            focus: function focus(event, data) {
-                // Auto-activate focused node after 2 seconds
-                data.node.scheduleAction("activate", 2000);
-            },
-            activate: function activate(event, data) {
-                var node = data.node;
-                if (node.data.id) {
-                    alert(node.data.id);
-                }
-            }
-        });
-    }
-});
-
-/***/ }),
-
-/***/ 58:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-15397a40", esExports)
-  }
-}
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Example_vue__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_650f2efa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Example_vue__ = __webpack_require__(8);
-var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 
 /* template */
@@ -443,7 +228,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 7:
+/***/ 32:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -472,7 +257,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 8:
+/***/ 33:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -513,6 +298,324 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-650f2efa", esExports)
+  }
+}
+
+/***/ }),
+
+/***/ 55:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(56);
+
+
+/***/ }),
+
+/***/ 56:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Fancytree__ = __webpack_require__(57);
+/**
+ * Form and Vue Element
+ */
+
+
+
+
+var app = new Vue({
+    el: '#app',
+
+    components: {
+        Example: __WEBPACK_IMPORTED_MODULE_0__components_Example__["default"],
+        Fancytree: __WEBPACK_IMPORTED_MODULE_1__components_Fancytree__["a" /* default */]
+    },
+
+    data: {
+        userForm: new Form({
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            permission: ''
+        }),
+        userGroupForm: new Form({
+            name: '',
+            parent_id: 'null'
+        }),
+        parentName: '',
+        viewMode: 0,
+        currentUser: Object,
+        currentUserGroup: Object,
+        currentParentGroup: Object
+    },
+
+    methods: {
+        createUser: function createUser() {
+            this.userForm.post('/users/user/store').then(function (response) {
+                alert('New User Added!');
+                $('#createModal').modal('hide');
+                Event.$emit('main-tree-refresh');
+            });
+        },
+        createUserGroup: function createUserGroup() {
+            var _this = this;
+
+            this.userGroupForm.post('/users/group/store').then(function (response) {
+                alert('New User Group Added!');
+                $('#createGroupModal').modal('hide');
+                Event.$emit('main-tree-refresh');
+                Event.$emit('new-group-tree-refresh');
+                _this.userGroupForm.parent_id = 'null';
+            });
+        },
+        deleteUser: function deleteUser() {
+            if (this.currentUser) {
+                axios.delete('/users/user/delete/' + this.currentUser.id).then(function (response) {
+                    alert('User Deleted');
+                    $('#deleteModal').modal('hide');
+                    Event.$emit('main-tree-refresh');
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                alert('Please choose a user first');
+            }
+        },
+        deleteUserGroup: function deleteUserGroup(keepChildren) {
+            var route = '';
+            if (keepChildren === true) {
+                route = '/users/group/delete/';
+            } else {
+                route = '/users/group/deleteWithChildren/';
+            }
+            if (this.currentUserGroup) {
+                axios.delete(route + this.currentUserGroup.id).then(function (response) {
+                    alert('User Group Deleted');
+                    $('#deleteGroupModal').modal('hide');
+                    Event.$emit('main-tree-refresh');
+                    Event.$emit('new-group-tree-refresh');
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                alert('Please choose a user group first');
+            }
+        }
+    },
+
+    mounted: function mounted() {},
+
+    created: function created() {
+        var _this2 = this;
+
+        Event.$on('main-tree-clicked-folder', function (data) {
+            axios.get('/users/group/show/' + data.id).then(function (response) {
+                _this2.currentUserGroup = response.data;
+                if (_this2.currentUserGroup.parent_id) {
+                    axios.get('/users/group/show/' + _this2.currentUserGroup.parent_id).then(function (response) {
+                        _this2.currentParentGroup = response.data;
+                    }).catch(function (error) {
+                        _this2.currentParentGroup = null;
+                        console.log(error);
+                    });
+                } else {
+                    _this2.currentParentGroup = null;
+                }
+                _this2.viewMode = 2;
+            }).catch(function (error) {
+                _this2.currentUserGroup = null;
+                console.log(error);
+            });
+        });
+        Event.$on('main-tree-clicked-item', function (data) {
+            axios.get('/users/user/show/' + data.id).then(function (response) {
+                _this2.currentUser = response.data;
+                _this2.viewMode = 1;
+            }).catch(function (error) {
+                _this2.currentUser = null;
+                console.log(error);
+            });
+        });
+        Event.$on('new-group-tree-clicked-folder', function (data) {
+            _this2.userGroupForm.parent_id = data.id;
+            _this2.parentName = data.name;
+        });
+    }
+});
+
+$(function () {
+    $("#treeSort").click(function () {
+        var node = $("#tree").fancytree("getRootNode");
+        node.sortChildren(null, true);
+    });
+
+    $("#treeExpand").click(function () {
+        $("#tree").fancytree("getTree").visit(function (node) {
+            node.setExpanded();
+        });
+    });
+
+    $("#treeCollapse").click(function () {
+        $("#tree").fancytree("getTree").visit(function (node) {
+            node.setExpanded(false);
+        });
+    });
+});
+
+/***/ }),
+
+/***/ 57:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Fancytree_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Fancytree_vue__ = __webpack_require__(59);
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Fancytree_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Fancytree_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Fancytree.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-15397a40", Component.options)
+  } else {
+    hotAPI.reload("data-v-15397a40", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ 58:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: {
+        route: String,
+        name: String
+    },
+    data: function data() {
+        return {
+            refreshEvent: this.name + '-refresh',
+            clickedFolderEvent: this.name + '-clicked-folder',
+            clickedItemEvent: this.name + '-clicked-item'
+        };
+    },
+    methods: {
+        updateTree: function updateTree() {
+            $(this.$el).fancytree('option', 'source', {
+                url: this.route
+            });
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        Event.$on(this.refreshEvent, function () {
+            _this.updateTree();
+        });
+    },
+    mounted: function mounted() {
+        var clickedFolderEvent = this.clickedFolderEvent;
+        var clickedItemEvent = this.clickedItemEvent;
+
+        $(this.$el).fancytree({
+            checkbox: false,
+            debugLevel: 2,
+            minExpandLevel: 1,
+
+            source: {
+                url: this.route
+            },
+
+            init: function init(event, data, flag) {
+                //console.log(this.treeData);
+            },
+            postinit: function postinit(isReloading, isError) {
+                this.reactivate();
+            },
+            focus: function focus(event, data) {
+
+                // Auto-activate focused node after 2 seconds
+                data.node.scheduleAction("activate", 2000);
+            },
+            activate: function activate(event, data) {
+                var node = data.node;
+                if (node.folder === true) {
+                    Event.$emit(clickedFolderEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                } else {
+                    Event.$emit(clickedItemEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                }
+            }
+        });
+    }
+});
+
+/***/ }),
+
+/***/ 59:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-15397a40", esExports)
   }
 }
 
