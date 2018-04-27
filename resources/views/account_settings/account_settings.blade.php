@@ -113,7 +113,7 @@
                                 <label data-name="oldpassword"><strong>Old Password</strong></label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="oldpassword" name="oldpassword" v-model="oldpassword">
+                                <input type="text" id="oldpassword" name="oldpassword" v-model="oldpassword" required>
                             </div>
                             <div v-if="!edit_new" class="col-md-5 text-right">
                                 <button type="button" @click="editNewPassword(true)" class="btn btn-primary text-white">Next</button>
@@ -125,7 +125,7 @@
                                 <label data-name="newpassword"><strong>New Password</strong></label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="newpassword" name="newpassword" v-model="newpassword">
+                                <input type="text" id="newpassword" name="newpassword" v-model="newpassword" required>
                             </div>
                             <div v-if="!edit_confirm" class="col-md-5 text-right">
                                 <button type="button" @click="editConfirmPassword(true)" class="btn btn-primary text-white">Next</button>
@@ -137,7 +137,7 @@
                                 <label data-name="confirmnewpassword"><strong>Confirm New Password</strong></label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="confirmpassword" name="confirmnewpassword" v-model="confirmnewpassword">
+                                <input type="text" id="confirmpassword" name="confirmnewpassword" v-model="confirmnewpassword" required>
                             </div>
                             <div class="col-md-5 text-right">
                                 <button type="submit" @click="editPassword(true)" class="btn btn-primary text-white">Save Password</button>

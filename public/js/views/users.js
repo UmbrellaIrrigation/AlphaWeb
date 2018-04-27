@@ -60,12 +60,41 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 55);
+/******/ 	return __webpack_require__(__webpack_require__.s = 56);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 11:
+/***/ 10:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+
+/***/ 12:
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -175,16 +204,18 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 31:
+/***/ 32:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Example_vue__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_650f2efa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Example_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Example_vue__ = __webpack_require__(10);
+/* empty harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_650f2efa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Example_vue__ = __webpack_require__(33);
 var disposed = false
-var normalizeComponent = __webpack_require__(11)
+var normalizeComponent = __webpack_require__(12)
 /* script */
+
 
 /* template */
 
@@ -197,15 +228,14 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Example_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_650f2efa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Example_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Example_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_650f2efa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Example_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/Example.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -217,7 +247,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-650f2efa", Component.options)
   } else {
     hotAPI.reload("data-v-650f2efa", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -225,35 +255,6 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-
-/***/ }),
-
-/***/ 32:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
 
 /***/ }),
 
@@ -303,21 +304,100 @@ if (false) {
 
 /***/ }),
 
-/***/ 55:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 36:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__(56);
+"use strict";
+//
+//
+//
+//
 
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: {
+        route: String,
+        name: String
+    },
+    data: function data() {
+        return {
+            refreshEvent: this.name + '-refresh',
+            clickedFolderEvent: this.name + '-clicked-folder',
+            clickedItemEvent: this.name + '-clicked-item'
+        };
+    },
+    methods: {
+        updateTree: function updateTree() {
+            $(this.$el).fancytree('option', 'source', {
+                url: this.route
+            });
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        Event.$on(this.refreshEvent, function () {
+            _this.updateTree();
+        });
+    },
+    mounted: function mounted() {
+        var clickedFolderEvent = this.clickedFolderEvent;
+        var clickedItemEvent = this.clickedItemEvent;
+
+        $(this.$el).fancytree({
+            checkbox: false,
+            debugLevel: 2,
+            minExpandLevel: 1,
+
+            source: {
+                url: this.route
+            },
+
+            init: function init(event, data, flag) {
+                //console.log(this.treeData);
+            },
+            postinit: function postinit(isReloading, isError) {
+                this.reactivate();
+            },
+            focus: function focus(event, data) {
+
+                // Auto-activate focused node after 2 seconds
+                data.node.scheduleAction("activate", 2000);
+            },
+            activate: function activate(event, data) {
+                var node = data.node;
+                if (node.folder === true) {
+                    Event.$emit(clickedFolderEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                } else {
+                    Event.$emit(clickedItemEvent, {
+                        id: node.data.id,
+                        name: node.data.name
+                    });
+                }
+            }
+        });
+    }
+});
 
 /***/ }),
 
 /***/ 56:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(57);
+
+
+/***/ }),
+
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Fancytree__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Example__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Fancytree__ = __webpack_require__(58);
 /**
  * Form and Vue Element
  */
@@ -467,15 +547,17 @@ $(function () {
 
 /***/ }),
 
-/***/ 57:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Fancytree_vue__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Fancytree_vue__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Fancytree_vue__ = __webpack_require__(36);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Fancytree_vue__ = __webpack_require__(59);
 var disposed = false
-var normalizeComponent = __webpack_require__(11)
+var normalizeComponent = __webpack_require__(12)
 /* script */
+
 
 /* template */
 
@@ -488,15 +570,14 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_Fancytree_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_Fancytree_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Fancytree_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Fancytree_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/Fancytree.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -508,7 +589,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-15397a40", Component.options)
   } else {
     hotAPI.reload("data-v-15397a40", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -516,85 +597,6 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
-
-/***/ }),
-
-/***/ 58:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    props: {
-        route: String,
-        name: String
-    },
-    data: function data() {
-        return {
-            refreshEvent: this.name + '-refresh',
-            clickedFolderEvent: this.name + '-clicked-folder',
-            clickedItemEvent: this.name + '-clicked-item'
-        };
-    },
-    methods: {
-        updateTree: function updateTree() {
-            $(this.$el).fancytree('option', 'source', {
-                url: this.route
-            });
-        }
-    },
-    created: function created() {
-        var _this = this;
-
-        Event.$on(this.refreshEvent, function () {
-            _this.updateTree();
-        });
-    },
-    mounted: function mounted() {
-        var clickedFolderEvent = this.clickedFolderEvent;
-        var clickedItemEvent = this.clickedItemEvent;
-
-        $(this.$el).fancytree({
-            checkbox: false,
-            debugLevel: 2,
-            minExpandLevel: 1,
-
-            source: {
-                url: this.route
-            },
-
-            init: function init(event, data, flag) {
-                //console.log(this.treeData);
-            },
-            postinit: function postinit(isReloading, isError) {
-                this.reactivate();
-            },
-            focus: function focus(event, data) {
-
-                // Auto-activate focused node after 2 seconds
-                data.node.scheduleAction("activate", 2000);
-            },
-            activate: function activate(event, data) {
-                var node = data.node;
-                if (node.folder === true) {
-                    Event.$emit(clickedFolderEvent, {
-                        id: node.data.id,
-                        name: node.data.name
-                    });
-                } else {
-                    Event.$emit(clickedItemEvent, {
-                        id: node.data.id,
-                        name: node.data.name
-                    });
-                }
-            }
-        });
-    }
-});
 
 /***/ }),
 
