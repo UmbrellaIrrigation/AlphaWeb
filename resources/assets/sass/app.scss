@@ -1,6 +1,11 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~jquery.fancytree/dist/skin-win8-n/ui.fancytree.css";
 
+/* Vue Styles */
+[v-cloak] {
+    display: none;
+}
+
 /* Media Queries */
 $breakPointXL: 1800px;
 $breakPointLG: 1500px;

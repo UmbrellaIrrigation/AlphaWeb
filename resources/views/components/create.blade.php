@@ -35,14 +35,14 @@
                         <label for="password" class="control-label">Password</label>
                         <div>
                             <input id="password" type="password" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password" v-model="userForm.password" required> 
-                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('password')" v-text="userForm.errors.get('password')"></small>
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="password-confirm" class="control-label">Confirm Password</label>
                         <div>
                             <input id="password-confirm" type="password" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password_confirmation" v-model="userForm.password_confirmation" required>
+                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('password')" v-text="userForm.errors.get('password')"></small>
                         </div>
                     </div>
 
@@ -215,7 +215,7 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('usergroup.store') }}">
+            <form method="POST" action="{{ route('usergroup.store') }}" @submit.prevent="createUserGroup" @keydown="userGroupForm.errors.clear($event.target.name)">
                 {{ csrf_field() }}
 
                 <div class="modal-header">
@@ -227,28 +227,26 @@
 
                 <div class="modal-body">
 
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="name" class="control-label">Name</label>
-
                         <div>
-                            <input id="groupname" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus> 
-                            @if ($errors->has('name'))
-                                <small class="form-text alert alert-danger" role="alert">{{ $errors->first('name') }}</small>
-                            @endif
+                            <input id="groupname" type="text" :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('name') }" name="name" v-model="userGroupForm.name" required autofocus> 
+                            <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('name')" v-text="userGroupForm.errors.get('name')"></small>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="parent_id">Parent User Group</label>
-                        <select class="custom-select" id="parent_id" name="parent_id">
-                            <option value="null" selected>None</option>
-                            @foreach ($rootGroups as $group)
-                                <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                @if (count($group->getChildGroups)) 
-                                    @include('components.loop.usergroup', ['childGroups' => $group->getChildGroups, 'space' => '&#x02514;&nbsp;']) 
-                                @endif
-                            @endforeach
-                        </select>
+
+                        <input v-if="userGroupForm.parent_id === 'null'" class="form-control" value="None" disabled>
+                        <input v-else v-cloak :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('password') }" :value="parentName" disabled>
+                        <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('parent_id')" v-text="userGroupForm.errors.get('parent_id')"></small>                            
+                        
+                        <div style="display: none;">
+                            <input id="parent_id" type="text" name="parent_id" v-model="userGroupForm.parent_id" required disabled> 
+                        </div>
+
+                        <fancytree route="{{ route('usergroup.tree') }}" name="new-group-tree"></fancytree>
                     </div>
 
                 </div>

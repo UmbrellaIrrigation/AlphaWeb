@@ -21,7 +21,7 @@
                                     <button type="button" @click="editName(true)" class="btn btn-primary text-white">Edit name</button>
                                 </div>
                             </div>
-                            <div v-if="editingName">
+                            <div v-cloak v-if="editingName">
                                 <form method="POST" action="/settings/name" @submit.prevent="onSubmitName" class="row col-md-12" @keydown="errors.clear($event.target.name)">
                                     <div class="col-md-8">
                                         <input type="text" id="name" name="name" v-model="user.name">
@@ -50,7 +50,7 @@
                                     <button type="button" @click="editDescription(true)" class="btn btn-primary text-white">Edit Description</button>
                                 </div>
                             </div>
-                            <div v-if="editingDescription">
+                            <div v-cloak v-if="editingDescription">
                                 <form method="POST" action="/settings/description" @submit.prevent="onSubmitDescription" class="row col-md-12" @keydown="errors.clear($event.target.name)">
                                     <div class="col-md-8">
                                         <input type="text" id="description" name="description" v-model="user.description">
@@ -79,7 +79,7 @@
                                     <button type="button" @click="editEmail(true)" class="btn btn-primary text-white">Edit Email</button>
                                 </div>
                             </div>
-                            <div v-if="editingEmail">
+                            <div v-cloak v-if="editingEmail">
                                 <form method="POST" action="/settings/email" @submit.prevent="onSubmitEmail" class="row col-md-12" @keydown="errors.clear($event.target.name)">
                                     <div class="col-md-8">
                                         <input type="text" id="email" name="email" v-model="user.email">
@@ -108,7 +108,7 @@
                     </div>
                     <div class="form-group" v-if="editingPassword">
                     <form method="PUT" action="/settings/password" @submit.prevent="onSubmitPassword" @keydown="errors.clear($event.target.name)">
-                        <div v-if="edit_old" class="row col-md-12">
+                        <div v-cloak v-if="edit_old" class="row col-md-12">
                             <div class="col-md-4">
                                 <label data-name="oldpassword"><strong>Old Password</strong></label>
                             </div>
@@ -120,7 +120,7 @@
                                 <button type="button" @click="editPassword(false)" class="btn btn-primary text-white">Cancel</button>
                             </div>
                         </div>
-                        <div v-if="edit_new" class="row col-md-12">
+                        <div v-cloak v-if="edit_new" class="row col-md-12">
                             <div class="col-md-4">
                                 <label data-name="newpassword"><strong>New Password</strong></label>
                             </div>
@@ -132,7 +132,7 @@
                                 <button type="button" @click="editPassword(false)" class="btn btn-primary text-white">Cancel</button>
                             </div>
                         </div>
-                        <div v-if="edit_confirm" class="row col-md-12">
+                        <div v-cloak v-if="edit_confirm" class="row col-md-12">
                             <div class="col-md-4">
                                 <label data-name="confirmnewpassword"><strong>Confirm New Password</strong></label>
                             </div>

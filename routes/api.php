@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use App\Valve;
-use App\UserTree;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('users')->group(function() {
-	Route::get('/treeData', function() {
-		$tree = UserTree::getTree();
-		return response($tree, 200);
-	})->name('api.users.tree');
+	Route::get('/treeData', 'UserController@index')->name('api.users.tree');
 });
 
 
