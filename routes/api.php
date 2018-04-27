@@ -38,4 +38,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('valves/group', 'API\ValveGroupController@store');
 	Route::put('valves/group/{valvegroup}', 'API\ValveGroupController@store');
 	Route::post('valves/group/{valvegroup}', 'API\ValveGroupController@destroy');
+
+	Route::get('test1', 'API\TestController@index1');
+	Route::get('test2', 'API\TestController@index2');
 });
