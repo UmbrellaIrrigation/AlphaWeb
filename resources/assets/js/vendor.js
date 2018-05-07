@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -24,6 +23,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * Vue Dependencies
  */
 window.Vue = require('vue');
+window.events = new Vue();
+
+window.flash = function (message, type) {
+    window.events.$emit('flash', message, type);
+};
 
 /**
  * Tokens

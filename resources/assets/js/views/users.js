@@ -4,13 +4,15 @@
 
 import Example from '../components/Example';
 import Fancytree from '../components/Fancytree';
+import Flash from '../components/Flash';
 
 const app = new Vue({
     el: '#app',
 
     components: {
         Example,
-        Fancytree
+        Fancytree,
+        Flash
     },
 
     data: {
@@ -36,7 +38,7 @@ const app = new Vue({
         createUser() {
             this.userForm.post('/users/user/store')
                 .then(response => {
-                    alert('New User Added!');
+                    //this.flash('New User Added!', 'success');
                     $('#createModal').modal('hide');
                     Event.$emit('main-tree-refresh');
                 } 
@@ -45,7 +47,7 @@ const app = new Vue({
         createUserGroup() {
             this.userGroupForm.post('/users/group/store')
                 .then(response => {
-                    alert('New User Group Added!');
+                    //this.flash('New User Group Added!', 'success');
                     $('#createGroupModal').modal('hide');
                     Event.$emit('main-tree-refresh');
                     Event.$emit('new-group-tree-refresh');
@@ -57,9 +59,10 @@ const app = new Vue({
             if (this.currentUser) {
                 axios.delete('/users/user/delete/' + this.currentUser.id)
                     .then((response) => {
-                        alert('User Deleted');
+                        //this.flash('User Successfully Deleted.', 'success');
                         $('#deleteModal').modal('hide');
                         Event.$emit('main-tree-refresh');
+                        this.viewMode = 0;
                     })
                     .catch((error) => {
                         console.log(error);
@@ -98,7 +101,23 @@ const app = new Vue({
     },
 
     mounted: function() {
-        
+        $("#treeSort").click(function() {
+            var node = $("#tree").fancytree("getRootNode");
+            node.sortChildren(null, true);
+            flash('Hello World', 'success');
+        });
+    
+        $("#treeExpand").click(function() {
+            $("#tree").fancytree("getTree").visit(function(node){
+                node.setExpanded();
+            });
+        });
+    
+        $("#treeCollapse").click(function() {
+            $("#tree").fancytree("getTree").visit(function(node){
+                node.setExpanded(false);
+            });
+        });
     },
 
     created: function() {
@@ -144,23 +163,4 @@ const app = new Vue({
             this.parentName = data.name;
         });
     }
-});
-
-$(function() {
-    $("#treeSort").click(function() {
-        var node = $("#tree").fancytree("getRootNode");
-        node.sortChildren(null, true);
-    });
-
-    $("#treeExpand").click(function() {
-        $("#tree").fancytree("getTree").visit(function(node){
-            node.setExpanded();
-        });
-    });
-
-    $("#treeCollapse").click(function() {
-        $("#tree").fancytree("getTree").visit(function(node){
-            node.setExpanded(false);
-        });
-    });
 });

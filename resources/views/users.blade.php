@@ -12,6 +12,9 @@
 @section ('content')
 
 <div class="row">
+
+    <flash></flash>
+    
     @include ('components.options')
 
     <aside class="tree-nav">
