@@ -794,7 +794,42 @@ var app = new Vue({
         currentParentGroup: Object
     },
 
-    methods: {},
+    methods: {
+        getUser: function getUser(data) {
+            var _this = this;
+
+            axios.get('/users/user/show/' + data.id).then(function (response) {
+                _this.currentUser = response.data;
+                _this.viewMode = 1;
+            }).catch(function (error) {
+                _this.currentUser = null;
+                flash('Error: Failed to load user.', 'error');
+                console.log(error);
+            });
+        },
+        getUserGroup: function getUserGroup(data) {
+            var _this2 = this;
+
+            axios.get('/users/group/show/' + data.id).then(function (response) {
+                _this2.currentUserGroup = response.data;
+                if (_this2.currentUserGroup.parent_id) {
+                    axios.get('/users/group/show/' + _this2.currentUserGroup.parent_id).then(function (response) {
+                        _this2.currentParentGroup = response.data;
+                    }).catch(function (error) {
+                        _this2.currentParentGroup = null;
+                        console.log(error);
+                    });
+                } else {
+                    _this2.currentParentGroup = null;
+                }
+                _this2.viewMode = 2;
+            }).catch(function (error) {
+                _this2.currentUserGroup = null;
+                flash('Error: Failed to load user group.', 'error');
+                console.log(error);
+            });
+        }
+    },
 
     mounted: function mounted() {
         $("#treeSort").click(function () {
@@ -816,40 +851,16 @@ var app = new Vue({
     },
 
     created: function created() {
-        var _this = this;
+        var _this3 = this;
 
         Event.$on('reset-view', function () {
-            return _this.viewMode = 0;
-        });
-        Event.$on('main-tree-clicked-folder', function (data) {
-            axios.get('/users/group/show/' + data.id).then(function (response) {
-                _this.currentUserGroup = response.data;
-                if (_this.currentUserGroup.parent_id) {
-                    axios.get('/users/group/show/' + _this.currentUserGroup.parent_id).then(function (response) {
-                        _this.currentParentGroup = response.data;
-                    }).catch(function (error) {
-                        _this.currentParentGroup = null;
-                        console.log(error);
-                    });
-                } else {
-                    _this.currentParentGroup = null;
-                }
-                _this.viewMode = 2;
-            }).catch(function (error) {
-                _this.currentUserGroup = null;
-                flash('Error: Failed to load user group.', 'error');
-                console.log(error);
-            });
+            return _this3.viewMode = 0;
         });
         Event.$on('main-tree-clicked-item', function (data) {
-            axios.get('/users/user/show/' + data.id).then(function (response) {
-                _this.currentUser = response.data;
-                _this.viewMode = 1;
-            }).catch(function (error) {
-                _this.currentUser = null;
-                flash('Error: Failed to load user.', 'error');
-                console.log(error);
-            });
+            return _this3.getUser(data);
+        });
+        Event.$on('main-tree-clicked-folder', function (data) {
+            return _this3.getUserGroup(data);
         });
     }
 });

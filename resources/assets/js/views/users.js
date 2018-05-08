@@ -30,31 +30,20 @@ const app = new Vue({
     },
 
     methods: {
-
-    },
-
-    mounted: function() {
-        $("#treeSort").click(function() {
-            var node = $("#tree").fancytree("getRootNode");
-            node.sortChildren(null, true);
-        });
-    
-        $("#treeExpand").click(function() {
-            $("#tree").fancytree("getTree").visit(function(node){
-                node.setExpanded();
-            });
-        });
-    
-        $("#treeCollapse").click(function() {
-            $("#tree").fancytree("getTree").visit(function(node){
-                node.setExpanded(false);
-            });
-        });
-    },
-
-    created: function() {
-        Event.$on('reset-view', () => this.viewMode = 0);
-        Event.$on('main-tree-clicked-folder', (data) => {
+        getUser(data) {
+            axios.get('/users/user/show/' + data.id)
+                .then((response) => {
+                    this.currentUser = response.data;
+                    this.viewMode = 1;
+                })
+                .catch((error) => {
+                    this.currentUser = null;
+                    flash('Error: Failed to load user.', 'error');
+                    console.log(error);
+                }
+            );
+        },
+        getUserGroup(data) {
             axios.get('/users/group/show/' + data.id)
                 .then((response) => {
                     this.currentUserGroup = response.data;
@@ -78,20 +67,33 @@ const app = new Vue({
                     this.currentUserGroup = null;
                     flash('Error: Failed to load user group.', 'error');
                     console.log(error);
-                });
-        });
-        Event.$on('main-tree-clicked-item', (data) => {
-            axios.get('/users/user/show/' + data.id)
-                .then((response) => {
-                    this.currentUser = response.data;
-                    this.viewMode = 1;
-                })
-                .catch((error) => {
-                    this.currentUser = null;
-                    flash('Error: Failed to load user.', 'error');
-                    console.log(error);
                 }
             );
+        }
+    },
+
+    mounted: function() {
+        $("#treeSort").click(function() {
+            var node = $("#tree").fancytree("getRootNode");
+            node.sortChildren(null, true);
         });
+    
+        $("#treeExpand").click(function() {
+            $("#tree").fancytree("getTree").visit(function(node){
+                node.setExpanded();
+            });
+        });
+    
+        $("#treeCollapse").click(function() {
+            $("#tree").fancytree("getTree").visit(function(node){
+                node.setExpanded(false);
+            });
+        });
+    },
+
+    created: function() {
+        Event.$on('reset-view', () => this.viewMode = 0);
+        Event.$on('main-tree-clicked-item', (data) => this.getUser(data));
+        Event.$on('main-tree-clicked-folder', (data) => this.getUserGroup(data));
     }
 });
