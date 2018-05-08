@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function user_groups() //fetch collection of user's groups by using $user->user_groups
     {
-        return $this->belongsToMany(UserGroup::class,'user_to_group');
+        return $this->belongsToMany(UserGroup::class, 'user_to_group');
     }
     public function employee_to_guest()
     {

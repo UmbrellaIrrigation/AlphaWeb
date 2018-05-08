@@ -57,7 +57,8 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => ['required','string','email','max:255','unique:users'],
             'password' => 'required|string|min:6|confirmed',
-            'permission' => 'required|integer|between:1,3'
+            'permission' => 'required|integer|between:1,3',
+            'group_id' => 'string' 
         ]);
 
         $newUser = User::create([
@@ -66,6 +67,12 @@ class UserController extends Controller
             'password' => bcrypt(request('password')),
             'permission' => request('permission')
         ]);
+
+        $groupID = request('group_id');
+        if ($groupID != 'null') {
+            $group = UserGroup::find($groupID);
+            $newUser->addToGroup($group);
+        }
             
         return response()->json($newUser, 201);
     }
@@ -78,6 +85,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user->groups = $user->getAssocGroups();
         return response()->json($user, 200);
     }
 

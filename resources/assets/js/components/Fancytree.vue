@@ -47,11 +47,10 @@ export default {
                 this.reactivate();
             },
             focus: function (event, data) {
-                
                 // Auto-activate focused node after 2 seconds
                 data.node.scheduleAction("activate", 2000);
             },
-            activate: function (event, data) {
+            click: function (event, data) {
                 var node = data.node;
                 if (node.folder === true) {
                     Event.$emit(clickedFolderEvent, {
@@ -65,6 +64,10 @@ export default {
                         name: node.data.name
                     });
                 }
+                node.scheduleAction('activate');
+            },
+            activate: function (event, data) {
+                
             },
         });
     }

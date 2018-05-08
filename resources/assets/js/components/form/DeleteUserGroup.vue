@@ -35,8 +35,7 @@ export default {
                     .then((response) => {
                         flash('User Group Successfully Deleted', 'success');
                         $('#deleteGroupModal').modal('hide');
-                        Event.$emit('main-tree-refresh');
-                        Event.$emit('new-group-tree-refresh');
+                        Event.$emit('refresh-all');
                         Event.$emit('reset-view');
                     })
                     .catch((error) => {

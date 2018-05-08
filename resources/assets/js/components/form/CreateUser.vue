@@ -53,6 +53,23 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="group_id">Group &nbsp;
+                    <button type="button" @click="reset" class="btn btn-danger btn-sm">No Group</button>
+                </label>
+
+                <input v-show="groupName === ''" class="form-control" value="None" disabled>
+                <input v-show="groupName !== ''" v-cloak class="form-control" :value="groupName" disabled>
+                
+                <small class="form-text alert alert-danger" role="alert"  v-if="form.errors.has('group_id')" v-text="form.errors.get('group_id')"></small>                            
+                
+                <div style="display: none;">
+                    <input id="group_id" type="text" name="group_id" v-model="form.group_id" required disabled> 
+                </div>
+
+                <fancytree :route="treeRoute" :name="tree"></fancytree>
+            </div>
+
         </div>
 
         <div class="modal-footer">
@@ -65,8 +82,17 @@
 </template>
 
 <script>
+import Fancytree from '../Fancytree';
+
 export default {
     name: 'create-user',
+    props: {
+        tree: String,
+        treeRoute: String
+    },
+    components: {
+        Fancytree
+    },
     data: function() {
         return {
             form: new Form({
@@ -74,20 +100,33 @@ export default {
                 email: '',
                 password: '',
                 password_confirmation: '',
-                permission: ''
-            })
+                permission: '',
+                group_id: 'null'
+            }),
+            groupName: ''
         }
     },
     methods: {
+        reset() {
+            this.form.group_id = 'null';
+            this.groupName = '';
+        },
         createUser() {
             this.form.post('/users/user/store')
                 .then(response => {
                     flash('New User Added!', 'success');
                     $('#createModal').modal('hide');
                     Event.$emit('main-tree-refresh');
+                    this.reset();
                 } 
             );
         }
+    },
+    created: function() {
+        Event.$on(this.tree + '-clicked-folder', (data) => {
+            this.form.group_id = data.id;
+            this.groupName = data.name;
+        });
     }
 }
 </script>
