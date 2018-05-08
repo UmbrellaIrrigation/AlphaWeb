@@ -38,7 +38,7 @@ const app = new Vue({
         createUser() {
             this.userForm.post('/users/user/store')
                 .then(response => {
-                    //this.flash('New User Added!', 'success');
+                    flash('New User Added!', 'success');
                     $('#createModal').modal('hide');
                     Event.$emit('main-tree-refresh');
                 } 
@@ -47,7 +47,7 @@ const app = new Vue({
         createUserGroup() {
             this.userGroupForm.post('/users/group/store')
                 .then(response => {
-                    //this.flash('New User Group Added!', 'success');
+                    flash('New User Group Added!', 'success');
                     $('#createGroupModal').modal('hide');
                     Event.$emit('main-tree-refresh');
                     Event.$emit('new-group-tree-refresh');
@@ -59,18 +59,19 @@ const app = new Vue({
             if (this.currentUser) {
                 axios.delete('/users/user/delete/' + this.currentUser.id)
                     .then((response) => {
-                        //this.flash('User Successfully Deleted.', 'success');
+                        flash('User Successfully Deleted.', 'success');
                         $('#deleteModal').modal('hide');
                         Event.$emit('main-tree-refresh');
                         this.viewMode = 0;
                     })
                     .catch((error) => {
+                        flash('Error: Failed to delete user.', 'error');
                         console.log(error);
                     }
                 );
             }
             else {
-                alert('Please choose a user first');
+                flash('Error: Please select a user first.', 'error');
             }
         },
         deleteUserGroup(keepChildren) {
@@ -84,18 +85,20 @@ const app = new Vue({
             if (this.currentUserGroup) {
                 axios.delete(route + this.currentUserGroup.id)
                     .then((response) => {
-                        alert('User Group Deleted');
+                        flash('User Group Successfully Deleted', 'success');
                         $('#deleteGroupModal').modal('hide');
                         Event.$emit('main-tree-refresh');
                         Event.$emit('new-group-tree-refresh');
+                        this.viewMode = 0;
                     })
                     .catch((error) => {
+                        flash('Error: Failed to delete user group.', 'error');
                         console.log(error);
                     }
                 );
             }
             else {
-                alert('Please choose a user group first');
+                flash('Error: Please select a user group first.', 'error');
             }
         }
     },
@@ -104,7 +107,6 @@ const app = new Vue({
         $("#treeSort").click(function() {
             var node = $("#tree").fancytree("getRootNode");
             node.sortChildren(null, true);
-            flash('Hello World', 'success');
         });
     
         $("#treeExpand").click(function() {
@@ -143,6 +145,7 @@ const app = new Vue({
                 })
                 .catch((error) => {
                     this.currentUserGroup = null;
+                    flash('Error: Failed to load user group.', 'error');
                     console.log(error);
                 });
         });
@@ -154,6 +157,7 @@ const app = new Vue({
                 })
                 .catch((error) => {
                     this.currentUser = null;
+                    flash('Error: Failed to load user.', 'error');
                     console.log(error);
                 }
             );
