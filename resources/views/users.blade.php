@@ -41,7 +41,7 @@
             </div>
             <hr>
             <div class="form-group">
-                <label for="description">Description:</label>
+                <label for="permission">Permission:</label>
                 <p>@{{ currentUser.permission }}</p>
             </div>
             <hr>
