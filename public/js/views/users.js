@@ -541,6 +541,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 
 
@@ -567,6 +569,10 @@ if (false) {(function () {
         };
     },
     methods: {
+        reset: function reset() {
+            this.form.group_id = 'null';
+            this.groupName = '';
+        },
         createUser: function createUser() {
             var _this = this;
 
@@ -574,8 +580,7 @@ if (false) {(function () {
                 flash('New User Added!', 'success');
                 $('#createModal').modal('hide');
                 Event.$emit('main-tree-refresh');
-                _this.form.group_id = 'null';
-                _this.groupName = '';
+                _this.reset();
             });
         }
     },
@@ -1693,18 +1698,45 @@ var render = function() {
           "div",
           { staticClass: "form-group" },
           [
-            _c("label", { attrs: { for: "group_id" } }, [_vm._v("Group")]),
+            _c("label", { attrs: { for: "group_id" } }, [
+              _vm._v("Group  \n                "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger btn-sm",
+                  attrs: { type: "button" },
+                  on: { click: _vm.reset }
+                },
+                [_vm._v("No Group")]
+              )
+            ]),
             _vm._v(" "),
-            _vm.groupName === ""
-              ? _c("input", {
-                  staticClass: "form-control",
-                  attrs: { value: "None", disabled: "" }
-                })
-              : _c("input", {
-                  staticClass: "form-control",
-                  attrs: { disabled: "" },
-                  domProps: { value: _vm.groupName }
-                }),
+            _c("input", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.groupName === "",
+                  expression: "groupName === ''"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { value: "None", disabled: "" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.groupName !== "",
+                  expression: "groupName !== ''"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { disabled: "" },
+              domProps: { value: _vm.groupName }
+            }),
             _vm._v(" "),
             _vm.form.errors.has("group_id")
               ? _c("small", {
@@ -1939,7 +1971,7 @@ var render = function() {
           { staticClass: "form-group" },
           [
             _c("label", { attrs: { for: "parent_id" } }, [
-              _vm._v("Parent User Group\n                "),
+              _vm._v("Parent User Group  \n                "),
               _c(
                 "button",
                 {
@@ -1947,7 +1979,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: { click: _vm.reset }
                 },
-                [_vm._v("None")]
+                [_vm._v("No Parent")]
               )
             ]),
             _vm._v(" "),

@@ -19,8 +19,8 @@
             </div>
 
             <div class="form-group">
-                <label for="parent_id">Parent User Group
-                    <button type="button" @click="reset" class="btn btn-danger btn-sm">None</button>
+                <label for="parent_id">Parent User Group &nbsp;
+                    <button type="button" @click="reset" class="btn btn-danger btn-sm">No Parent</button>
                 </label>
 
                 <input v-show="parentName === ''" class="form-control" value="None" disabled>
