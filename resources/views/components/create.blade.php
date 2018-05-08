@@ -4,7 +4,7 @@
 
             @if (Request::is('users*'))
 
-                <create-user tree="main-tree" />
+                <create-user />
 
             @elseif (Request::is('valves*'))
 
@@ -154,48 +154,7 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('usergroup.store') }}" @submit.prevent="createUserGroup" @keydown="userGroupForm.errors.clear($event.target.name)">
-                {{ csrf_field() }}
-
-                <div class="modal-header">
-                    <h5 class="modal-title">Create a New User Group</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="name" class="control-label">Name</label>
-                        <div>
-                            <input id="groupname" type="text" :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('name') }" name="name" v-model="userGroupForm.name" required autofocus> 
-                            <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('name')" v-text="userGroupForm.errors.get('name')"></small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="parent_id">Parent User Group</label>
-
-                        <input v-if="userGroupForm.parent_id === 'null'" class="form-control" value="None" disabled>
-                        <input v-else v-cloak :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('password') }" :value="parentName" disabled>
-                        <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('parent_id')" v-text="userGroupForm.errors.get('parent_id')"></small>                            
-                        
-                        <div style="display: none;">
-                            <input id="parent_id" type="text" name="parent_id" v-model="userGroupForm.parent_id" required disabled> 
-                        </div>
-
-                        <fancytree route="{{ route('usergroup.tree') }}" name="new-group-tree"></fancytree>
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create User Group</button>
-                </div>
-
-            </form>
+                <create-user-group tree="new-group-tree" tree-route="{{ route('usergroup.tree') }}" />
 
             @elseif (Request::is('valves*'))
 

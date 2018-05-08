@@ -60,12 +60,22 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 55);
+/******/ 	return __webpack_require__(__webpack_require__.s = 58);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 32:
+/******/ ([
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -174,8 +184,80 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ 33:
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Fancytree_vue__ = __webpack_require__(34);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Fancytree_vue__ = __webpack_require__(60);
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Fancytree_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Fancytree_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Fancytree.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-15397a40", Component.options)
+  } else {
+    hotAPI.reload("data-v-15397a40", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -253,8 +335,7 @@ module.exports = function normalizeComponent (
 });
 
 /***/ }),
-
-/***/ 34:
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -373,8 +454,212 @@ module.exports = function normalizeComponent (
 });
 
 /***/ }),
+/* 36 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ 50:
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    name: 'create-user',
+    data: function data() {
+        return {
+            form: new Form({
+                name: '',
+                email: '',
+                password: '',
+                password_confirmation: '',
+                permission: ''
+            })
+        };
+    },
+    methods: {
+        createUser: function createUser() {
+            this.form.post('/users/user/store').then(function (response) {
+                flash('New User Added!', 'success');
+                $('#createModal').modal('hide');
+                Event.$emit('main-tree-refresh');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Fancytree__ = __webpack_require__(33);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    name: 'create-user-group',
+    props: {
+        tree: String,
+        treeRoute: String
+    },
+    components: {
+        Fancytree: __WEBPACK_IMPORTED_MODULE_0__Fancytree__["a" /* default */]
+    },
+    data: function data() {
+        return {
+            form: new Form({
+                name: '',
+                parent_id: 'null'
+            }),
+            parentName: ''
+        };
+    },
+    methods: {
+        createUserGroup: function createUserGroup() {
+            var _this = this;
+
+            this.form.post('/users/group/store').then(function (response) {
+                flash('New User Group Added!', 'success');
+                $('#createGroupModal').modal('hide');
+                Event.$emit('main-tree-refresh');
+                Event.$emit(_this.tree + '-refresh');
+                _this.form.parent_id = 'null';
+            });
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        Event.$on(this.tree + '-clicked-folder', function (data) {
+            _this2.form.parent_id = data.id;
+            _this2.parentName = data.name;
+        });
+    }
+});
+
+/***/ }),
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */
 /***/ (function(module, exports) {
 
 /*
@@ -456,26 +741,30 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-
-/***/ 55:
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(56);
+module.exports = __webpack_require__(59);
 
 
 /***/ }),
-
-/***/ 56:
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Fancytree__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Flash__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_form_CreateUser__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Fancytree__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Flash__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_form_CreateUser__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_form_CreateUserGroup__ = __webpack_require__(69);
 /**
  * Form and Vue Element
  */
+
 
 
 
@@ -488,15 +777,11 @@ var app = new Vue({
     components: {
         Fancytree: __WEBPACK_IMPORTED_MODULE_0__components_Fancytree__["a" /* default */],
         Flash: __WEBPACK_IMPORTED_MODULE_1__components_Flash__["a" /* default */],
-        CreateUser: __WEBPACK_IMPORTED_MODULE_2__components_form_CreateUser__["a" /* default */]
+        CreateUser: __WEBPACK_IMPORTED_MODULE_2__components_form_CreateUser__["a" /* default */],
+        CreateUserGroup: __WEBPACK_IMPORTED_MODULE_3__components_form_CreateUserGroup__["a" /* default */]
     },
 
     data: {
-        userGroupForm: new Form({
-            name: '',
-            parent_id: 'null'
-        }),
-        parentName: '',
         viewMode: 0,
         currentUser: Object,
         currentUserGroup: Object,
@@ -504,26 +789,15 @@ var app = new Vue({
     },
 
     methods: {
-        createUserGroup: function createUserGroup() {
-            var _this = this;
-
-            this.userGroupForm.post('/users/group/store').then(function (response) {
-                flash('New User Group Added!', 'success');
-                $('#createGroupModal').modal('hide');
-                Event.$emit('main-tree-refresh');
-                Event.$emit('new-group-tree-refresh');
-                _this.userGroupForm.parent_id = 'null';
-            });
-        },
         deleteUser: function deleteUser() {
-            var _this2 = this;
+            var _this = this;
 
             if (this.currentUser) {
                 axios.delete('/users/user/delete/' + this.currentUser.id).then(function (response) {
                     flash('User Successfully Deleted.', 'success');
                     $('#deleteModal').modal('hide');
                     Event.$emit('main-tree-refresh');
-                    _this2.viewMode = 0;
+                    _this.viewMode = 0;
                 }).catch(function (error) {
                     flash('Error: Failed to delete user.', 'error');
                     console.log(error);
@@ -533,7 +807,7 @@ var app = new Vue({
             }
         },
         deleteUserGroup: function deleteUserGroup(keepChildren) {
-            var _this3 = this;
+            var _this2 = this;
 
             var route = '';
             if (keepChildren === true) {
@@ -547,7 +821,7 @@ var app = new Vue({
                     $('#deleteGroupModal').modal('hide');
                     Event.$emit('main-tree-refresh');
                     Event.$emit('new-group-tree-refresh');
-                    _this3.viewMode = 0;
+                    _this2.viewMode = 0;
                 }).catch(function (error) {
                     flash('Error: Failed to delete user group.', 'error');
                     console.log(error);
@@ -578,101 +852,43 @@ var app = new Vue({
     },
 
     created: function created() {
-        var _this4 = this;
+        var _this3 = this;
 
         Event.$on('main-tree-clicked-folder', function (data) {
             axios.get('/users/group/show/' + data.id).then(function (response) {
-                _this4.currentUserGroup = response.data;
-                if (_this4.currentUserGroup.parent_id) {
-                    axios.get('/users/group/show/' + _this4.currentUserGroup.parent_id).then(function (response) {
-                        _this4.currentParentGroup = response.data;
+                _this3.currentUserGroup = response.data;
+                if (_this3.currentUserGroup.parent_id) {
+                    axios.get('/users/group/show/' + _this3.currentUserGroup.parent_id).then(function (response) {
+                        _this3.currentParentGroup = response.data;
                     }).catch(function (error) {
-                        _this4.currentParentGroup = null;
+                        _this3.currentParentGroup = null;
                         console.log(error);
                     });
                 } else {
-                    _this4.currentParentGroup = null;
+                    _this3.currentParentGroup = null;
                 }
-                _this4.viewMode = 2;
+                _this3.viewMode = 2;
             }).catch(function (error) {
-                _this4.currentUserGroup = null;
+                _this3.currentUserGroup = null;
                 flash('Error: Failed to load user group.', 'error');
                 console.log(error);
             });
         });
         Event.$on('main-tree-clicked-item', function (data) {
             axios.get('/users/user/show/' + data.id).then(function (response) {
-                _this4.currentUser = response.data;
-                _this4.viewMode = 1;
+                _this3.currentUser = response.data;
+                _this3.viewMode = 1;
             }).catch(function (error) {
-                _this4.currentUser = null;
+                _this3.currentUser = null;
                 flash('Error: Failed to load user.', 'error');
                 console.log(error);
             });
-        });
-        Event.$on('new-group-tree-clicked-folder', function (data) {
-            _this4.userGroupForm.parent_id = data.id;
-            _this4.parentName = data.name;
         });
     }
 });
 
 /***/ }),
-
-/***/ 57:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Fancytree_vue__ = __webpack_require__(33);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Fancytree_vue__ = __webpack_require__(58);
-var disposed = false
-var normalizeComponent = __webpack_require__(32)
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Fancytree_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_15397a40_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Fancytree_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Fancytree.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-15397a40", Component.options)
-  } else {
-    hotAPI.reload("data-v-15397a40", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-
-/***/ 58:
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -694,20 +910,19 @@ if (false) {
 }
 
 /***/ }),
-
-/***/ 59:
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Flash_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_Flash_vue__ = __webpack_require__(35);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_03030049_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Flash_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_03030049_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Flash_vue__ = __webpack_require__(66);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(60)
+  __webpack_require__(62)
 }
-var normalizeComponent = __webpack_require__(32)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 
 
@@ -751,18 +966,17 @@ if (false) {(function () {
 
 
 /***/ }),
-
-/***/ 60:
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(61);
+var content = __webpack_require__(63);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(62)("2ca0e7aa", content, false, {});
+var update = __webpack_require__(64)("2ca0e7aa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -778,11 +992,10 @@ if(false) {
 }
 
 /***/ }),
-
-/***/ 61:
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(50)(false);
+exports = module.exports = __webpack_require__(53)(false);
 // imports
 
 
@@ -793,8 +1006,7 @@ exports.push([module.i, "\n.alert-wrap[data-v-03030049] {\n    position: fixed;\
 
 
 /***/ }),
-
-/***/ 62:
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -813,7 +1025,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(63)
+var listToStyles = __webpack_require__(65)
 
 /*
 type StyleObject = {
@@ -1022,8 +1234,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-
-/***/ 63:
+/* 65 */
 /***/ (function(module, exports) {
 
 /**
@@ -1056,8 +1267,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-
-/***/ 64:
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1108,118 +1318,15 @@ if (false) {
 }
 
 /***/ }),
-
-/***/ 80:
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    name: 'create-user',
-    props: {
-        tree: String
-    },
-    data: function data() {
-        return {
-            form: new Form({
-                name: '',
-                email: '',
-                password: '',
-                password_confirmation: '',
-                permission: ''
-            })
-        };
-    },
-    methods: {
-        createUser: function createUser() {
-            var _this = this;
-
-            this.form.post('/users/user/store').then(function (response) {
-                flash('New User Added!', 'success');
-                $('#createModal').modal('hide');
-                Event.$emit(_this.tree + '-refresh');
-            });
-        }
-    }
-});
-
-/***/ }),
-
-/***/ 81:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_CreateUser_vue__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_CreateUser_vue__ = __webpack_require__(36);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_06243b6b_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CreateUser_vue__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_06243b6b_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CreateUser_vue__ = __webpack_require__(68);
 var disposed = false
-var normalizeComponent = __webpack_require__(32)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 
 
@@ -1263,8 +1370,7 @@ if (false) {(function () {
 
 
 /***/ }),
-
-/***/ 82:
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1607,6 +1713,260 @@ if (false) {
   }
 }
 
-/***/ })
+/***/ }),
+/* 69 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/******/ });
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_CreateUserGroup_vue__ = __webpack_require__(37);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_54327484_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CreateUserGroup_vue__ = __webpack_require__(70);
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_CreateUserGroup_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_54327484_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CreateUserGroup_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/form/CreateUserGroup.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-54327484", Component.options)
+  } else {
+    hotAPI.reload("data-v-54327484", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: { method: "POST", action: "" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.createUserGroup($event)
+        },
+        keydown: function($event) {
+          _vm.form.errors.clear($event.target.name)
+        }
+      }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "modal-body" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "control-label", attrs: { for: "name" } },
+            [_vm._v("Name")]
+          ),
+          _vm._v(" "),
+          _c("div", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.name,
+                  expression: "form.name"
+                }
+              ],
+              class: {
+                "form-control": true,
+                "is-invalid": _vm.form.errors.has("name")
+              },
+              attrs: {
+                id: "groupname",
+                type: "text",
+                name: "name",
+                required: "",
+                autofocus: ""
+              },
+              domProps: { value: _vm.form.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.form.errors.has("name")
+              ? _c("small", {
+                  staticClass: "form-text alert alert-danger",
+                  attrs: { role: "alert" },
+                  domProps: { textContent: _vm._s(_vm.form.errors.get("name")) }
+                })
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "parent_id" } }, [
+              _vm._v("Parent User Group")
+            ]),
+            _vm._v(" "),
+            _vm.form.parent_id === "null"
+              ? _c("input", {
+                  staticClass: "form-control",
+                  attrs: { value: "None", disabled: "" }
+                })
+              : _c("input", {
+                  class: {
+                    "form-control": true,
+                    "is-invalid": _vm.form.errors.has("password")
+                  },
+                  attrs: { disabled: "" },
+                  domProps: { value: _vm.parentName }
+                }),
+            _vm._v(" "),
+            _vm.form.errors.has("parent_id")
+              ? _c("small", {
+                  staticClass: "form-text alert alert-danger",
+                  attrs: { role: "alert" },
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.get("parent_id"))
+                  }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticStyle: { display: "none" } }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.parent_id,
+                    expression: "form.parent_id"
+                  }
+                ],
+                attrs: {
+                  id: "parent_id",
+                  type: "text",
+                  name: "parent_id",
+                  required: "",
+                  disabled: ""
+                },
+                domProps: { value: _vm.form.parent_id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "parent_id", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("fancytree", { attrs: { route: _vm.treeRoute, name: _vm.tree } })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Create a New User Group")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cancel")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Create User Group")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-54327484", esExports)
+  }
+}
+
+/***/ })
+/******/ ]);

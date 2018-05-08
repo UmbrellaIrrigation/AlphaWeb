@@ -6,6 +6,7 @@ import Fancytree from '../components/Fancytree';
 import Flash from '../components/Flash';
 
 import CreateUser from '../components/form/CreateUser';
+import CreateUserGroup from '../components/form/CreateUserGroup';
 
 const app = new Vue({
     el: '#app',
@@ -13,15 +14,11 @@ const app = new Vue({
     components: {
         Fancytree,
         Flash,
-        CreateUser
+        CreateUser,
+        CreateUserGroup
     },
 
     data: {
-        userGroupForm: new Form({
-            name: '',
-            parent_id: 'null'
-        }),
-        parentName: '',
         viewMode: 0,
         currentUser: Object,
         currentUserGroup: Object,
@@ -29,17 +26,6 @@ const app = new Vue({
     },
 
     methods: {
-        createUserGroup() {
-            this.userGroupForm.post('/users/group/store')
-                .then(response => {
-                    flash('New User Group Added!', 'success');
-                    $('#createGroupModal').modal('hide');
-                    Event.$emit('main-tree-refresh');
-                    Event.$emit('new-group-tree-refresh');
-                    this.userGroupForm.parent_id = 'null';
-                }
-            );
-        },
         deleteUser() {
             if (this.currentUser) {
                 axios.delete('/users/user/delete/' + this.currentUser.id)
@@ -146,10 +132,6 @@ const app = new Vue({
                     console.log(error);
                 }
             );
-        });
-        Event.$on('new-group-tree-clicked-folder', (data) => {
-            this.userGroupForm.parent_id = data.id;
-            this.parentName = data.name;
         });
     }
 });

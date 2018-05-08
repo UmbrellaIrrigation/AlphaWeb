@@ -67,9 +67,6 @@
 <script>
 export default {
     name: 'create-user',
-    props: {
-        tree: String
-    },
     data: function() {
         return {
             form: new Form({
@@ -87,7 +84,7 @@ export default {
                 .then(response => {
                     flash('New User Added!', 'success');
                     $('#createModal').modal('hide');
-                    Event.$emit(this.tree + '-refresh');
+                    Event.$emit('main-tree-refresh');
                 } 
             );
         }
