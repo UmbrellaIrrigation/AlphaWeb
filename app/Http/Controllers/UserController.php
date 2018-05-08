@@ -85,7 +85,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->groups = $user->user_groups();
+        $user->groups = $user->getAssocGroups();
         return response()->json($user, 200);
     }
 

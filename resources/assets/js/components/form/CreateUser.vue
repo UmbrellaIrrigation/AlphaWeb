@@ -53,6 +53,21 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="group_id">Group</label>
+
+                <input v-if="groupName === ''" class="form-control" value="None" disabled>
+                <input v-else v-cloak class="form-control" :value="groupName" disabled>
+                
+                <small class="form-text alert alert-danger" role="alert"  v-if="form.errors.has('group_id')" v-text="form.errors.get('group_id')"></small>                            
+                
+                <div style="display: none;">
+                    <input id="group_id" type="text" name="group_id" v-model="form.group_id" required disabled> 
+                </div>
+
+                <fancytree :route="treeRoute" :name="tree"></fancytree>
+            </div>
+
         </div>
 
         <div class="modal-footer">
@@ -65,8 +80,17 @@
 </template>
 
 <script>
+import Fancytree from '../Fancytree';
+
 export default {
     name: 'create-user',
+    props: {
+        tree: String,
+        treeRoute: String
+    },
+    components: {
+        Fancytree
+    },
     data: function() {
         return {
             form: new Form({
@@ -74,8 +98,10 @@ export default {
                 email: '',
                 password: '',
                 password_confirmation: '',
-                permission: ''
-            })
+                permission: '',
+                group_id: 'null'
+            }),
+            groupName: ''
         }
     },
     methods: {
@@ -85,9 +111,17 @@ export default {
                     flash('New User Added!', 'success');
                     $('#createModal').modal('hide');
                     Event.$emit('main-tree-refresh');
+                    this.form.group_id = 'null';
+                    this.groupName = '';
                 } 
             );
         }
+    },
+    created: function() {
+        Event.$on(this.tree + '-clicked-folder', (data) => {
+            this.form.group_id = data.id;
+            this.groupName = data.name;
+        });
     }
 }
 </script>

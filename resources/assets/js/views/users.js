@@ -69,6 +69,11 @@ const app = new Vue({
                     console.log(error);
                 }
             );
+        },
+        refreshAll() {
+            Event.$emit('main-tree-refresh');
+            Event.$emit('create-user-tree-refresh');
+            Event.$emit('create-group-tree-refresh');
         }
     },
 
@@ -93,6 +98,7 @@ const app = new Vue({
 
     created: function() {
         Event.$on('reset-view', () => this.viewMode = 0);
+        Event.$on('refresh-all', () => this.refreshAll());
         Event.$on('main-tree-clicked-item', (data) => this.getUser(data));
         Event.$on('main-tree-clicked-folder', (data) => this.getUserGroup(data));
     }

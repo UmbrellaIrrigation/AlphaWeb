@@ -458,6 +458,22 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Fancytree__ = __webpack_require__(33);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -525,8 +541,17 @@ if (false) {(function () {
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     name: 'create-user',
+    props: {
+        tree: String,
+        treeRoute: String
+    },
+    components: {
+        Fancytree: __WEBPACK_IMPORTED_MODULE_0__Fancytree__["a" /* default */]
+    },
     data: function data() {
         return {
             form: new Form({
@@ -534,18 +559,32 @@ if (false) {(function () {
                 email: '',
                 password: '',
                 password_confirmation: '',
-                permission: ''
-            })
+                permission: '',
+                group_id: 'null'
+            }),
+            groupName: ''
         };
     },
     methods: {
         createUser: function createUser() {
+            var _this = this;
+
             this.form.post('/users/user/store').then(function (response) {
                 flash('New User Added!', 'success');
                 $('#createModal').modal('hide');
                 Event.$emit('main-tree-refresh');
+                _this.form.group_id = 'null';
+                _this.groupName = '';
             });
         }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        Event.$on(this.tree + '-clicked-folder', function (data) {
+            _this2.form.group_id = data.id;
+            _this2.groupName = data.name;
+        });
     }
 });
 
@@ -555,6 +594,9 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Fancytree__ = __webpack_require__(33);
+//
+//
+//
 //
 //
 //
@@ -621,15 +663,18 @@ if (false) {(function () {
         };
     },
     methods: {
+        reset: function reset() {
+            this.form.parent_id = 'null';
+            this.parentName = '';
+        },
         createUserGroup: function createUserGroup() {
             var _this = this;
 
             this.form.post('/users/group/store').then(function (response) {
                 flash('New User Group Added!', 'success');
                 $('#createGroupModal').modal('hide');
-                Event.$emit('main-tree-refresh');
-                Event.$emit(_this.tree + '-refresh');
-                _this.form.parent_id = 'null';
+                Event.$emit('refresh-all');
+                _this.reset();
             });
         }
     },
@@ -828,6 +873,11 @@ var app = new Vue({
                 flash('Error: Failed to load user group.', 'error');
                 console.log(error);
             });
+        },
+        refreshAll: function refreshAll() {
+            Event.$emit('main-tree-refresh');
+            Event.$emit('create-user-tree-refresh');
+            Event.$emit('create-group-tree-refresh');
         }
     },
 
@@ -855,6 +905,9 @@ var app = new Vue({
 
         Event.$on('reset-view', function () {
             return _this3.viewMode = 0;
+        });
+        Event.$on('refresh-all', function () {
+            return _this3.refreshAll();
         });
         Event.$on('main-tree-clicked-item', function (data) {
             return _this3.getUser(data);
@@ -1633,7 +1686,68 @@ var render = function() {
                 })
               : _vm._e()
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "group_id" } }, [_vm._v("Group")]),
+            _vm._v(" "),
+            _vm.groupName === ""
+              ? _c("input", {
+                  staticClass: "form-control",
+                  attrs: { value: "None", disabled: "" }
+                })
+              : _c("input", {
+                  staticClass: "form-control",
+                  attrs: { disabled: "" },
+                  domProps: { value: _vm.groupName }
+                }),
+            _vm._v(" "),
+            _vm.form.errors.has("group_id")
+              ? _c("small", {
+                  staticClass: "form-text alert alert-danger",
+                  attrs: { role: "alert" },
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.get("group_id"))
+                  }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticStyle: { display: "none" } }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.group_id,
+                    expression: "form.group_id"
+                  }
+                ],
+                attrs: {
+                  id: "group_id",
+                  type: "text",
+                  name: "group_id",
+                  required: "",
+                  disabled: ""
+                },
+                domProps: { value: _vm.form.group_id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "group_id", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("fancytree", { attrs: { route: _vm.treeRoute, name: _vm.tree } })
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "modal-footer" }, [
@@ -1824,22 +1938,44 @@ var render = function() {
           { staticClass: "form-group" },
           [
             _c("label", { attrs: { for: "parent_id" } }, [
-              _vm._v("Parent User Group")
+              _vm._v("Parent User Group\n                "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger btn-sm",
+                  attrs: { type: "button" },
+                  on: { click: _vm.reset }
+                },
+                [_vm._v("None")]
+              )
             ]),
             _vm._v(" "),
-            _vm.form.parent_id === "null"
-              ? _c("input", {
-                  staticClass: "form-control",
-                  attrs: { value: "None", disabled: "" }
-                })
-              : _c("input", {
-                  class: {
-                    "form-control": true,
-                    "is-invalid": _vm.form.errors.has("password")
-                  },
-                  attrs: { disabled: "" },
-                  domProps: { value: _vm.parentName }
-                }),
+            _c("input", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.parentName === "",
+                  expression: "parentName === ''"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { value: "None", disabled: "" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.parentName !== "",
+                  expression: "parentName !== ''"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { disabled: "" },
+              domProps: { value: _vm.parentName }
+            }),
             _vm._v(" "),
             _vm.form.errors.has("parent_id")
               ? _c("small", {
@@ -2178,8 +2314,7 @@ if (false) {
                 axios.delete(route + this.usergroup.id).then(function (response) {
                     flash('User Group Successfully Deleted', 'success');
                     $('#deleteGroupModal').modal('hide');
-                    Event.$emit('main-tree-refresh');
-                    Event.$emit('new-group-tree-refresh');
+                    Event.$emit('refresh-all');
                     Event.$emit('reset-view');
                 }).catch(function (error) {
                     flash('Error: Failed to delete user group.', 'error');

@@ -19,10 +19,13 @@
             </div>
 
             <div class="form-group">
-                <label for="parent_id">Parent User Group</label>
+                <label for="parent_id">Parent User Group
+                    <button type="button" @click="reset" class="btn btn-danger btn-sm">None</button>
+                </label>
 
-                <input v-if="form.parent_id === 'null'" class="form-control" value="None" disabled>
-                <input v-else v-cloak :class="{ 'form-control': true, 'is-invalid': form.errors.has('password') }" :value="parentName" disabled>
+                <input v-show="parentName === ''" class="form-control" value="None" disabled>
+                <input v-show="parentName !== ''" v-cloak class="form-control" :value="parentName" disabled>
+
                 <small class="form-text alert alert-danger" role="alert"  v-if="form.errors.has('parent_id')" v-text="form.errors.get('parent_id')"></small>                            
                 
                 <div style="display: none;">
@@ -64,14 +67,17 @@ export default {
         }
     },
     methods: {
+        reset() {
+            this.form.parent_id = 'null';
+            this.parentName = '';
+        },
         createUserGroup() {
             this.form.post('/users/group/store')
                 .then(response => {
                     flash('New User Group Added!', 'success');
                     $('#createGroupModal').modal('hide');
-                    Event.$emit('main-tree-refresh');
-                    Event.$emit(this.tree + '-refresh');
-                    this.form.parent_id = 'null';
+                    Event.$emit('refresh-all');
+                    this.reset();
                 }
             );
         },

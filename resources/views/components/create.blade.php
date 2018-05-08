@@ -4,7 +4,7 @@
 
             @if (Request::is('users*'))
 
-                <create-user />
+                <create-user tree="create-user-tree" tree-route="{{ route('usergroup.tree') }}" />
 
             @elseif (Request::is('valves*'))
 
