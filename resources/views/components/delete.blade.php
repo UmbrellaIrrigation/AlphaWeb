@@ -2,7 +2,9 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             @if (Request::is('users*'))
+
                 <delete-user :user="currentUser" />
+
             @elseif (Request::is('valves*'))
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Valve Deletion</h5>
@@ -26,20 +28,9 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             @if (Request::is('users*'))
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirm User Group Deletion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Do you wish to delete all Users and Groups within this Group (Remove Children) or keep those Users and Groups in this Group (Keep Children)?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" @click="deleteUserGroup(false)" class="btn btn-danger">Remove Children</button>
-                    <button type="button" @click="deleteUserGroup(true)" class="btn btn-primary">Keep Children</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Deletion</button>
-                </div>
+
+                <delete-user-group :usergroup="currentUserGroup" />
+                
             @elseif (Request::is('valves*'))
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Valve Group Deletion</h5>

@@ -8,6 +8,7 @@ import Flash from '../components/Flash';
 import CreateUser from '../components/form/CreateUser';
 import CreateUserGroup from '../components/form/CreateUserGroup';
 import DeleteUser from '../components/form/DeleteUser';
+import DeleteUserGroup from '../components/form/DeleteUserGroup';
 
 const app = new Vue({
     el: '#app',
@@ -17,7 +18,8 @@ const app = new Vue({
         Flash,
         CreateUser,
         CreateUserGroup,
-        DeleteUser
+        DeleteUser,
+        DeleteUserGroup
     },
 
     data: {
@@ -28,33 +30,7 @@ const app = new Vue({
     },
 
     methods: {
-        deleteUserGroup(keepChildren) {
-            let route = '';
-            if (keepChildren === true) {
-                route = '/users/group/delete/';
-            }
-            else {
-                route = '/users/group/deleteWithChildren/'
-            }
-            if (this.currentUserGroup) {
-                axios.delete(route + this.currentUserGroup.id)
-                    .then((response) => {
-                        flash('User Group Successfully Deleted', 'success');
-                        $('#deleteGroupModal').modal('hide');
-                        Event.$emit('main-tree-refresh');
-                        Event.$emit('new-group-tree-refresh');
-                        this.viewMode = 0;
-                    })
-                    .catch((error) => {
-                        flash('Error: Failed to delete user group.', 'error');
-                        console.log(error);
-                    }
-                );
-            }
-            else {
-                flash('Error: Please select a user group first.', 'error');
-            }
-        }
+
     },
 
     mounted: function() {

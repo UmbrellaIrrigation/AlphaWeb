@@ -19,9 +19,7 @@
 <script>
 export default {
     name: 'delete-user',
-    props: {
-        user
-    },
+    props: ['user'],
     methods: {
         deleteUser() {
             if (this.user) {
