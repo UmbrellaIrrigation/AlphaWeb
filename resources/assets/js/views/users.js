@@ -7,6 +7,7 @@ import Flash from '../components/Flash';
 
 import CreateUser from '../components/form/CreateUser';
 import CreateUserGroup from '../components/form/CreateUserGroup';
+import DeleteUser from '../components/form/DeleteUser';
 
 const app = new Vue({
     el: '#app',
@@ -15,7 +16,8 @@ const app = new Vue({
         Fancytree,
         Flash,
         CreateUser,
-        CreateUserGroup
+        CreateUserGroup,
+        DeleteUser
     },
 
     data: {
@@ -26,25 +28,6 @@ const app = new Vue({
     },
 
     methods: {
-        deleteUser() {
-            if (this.currentUser) {
-                axios.delete('/users/user/delete/' + this.currentUser.id)
-                    .then((response) => {
-                        flash('User Successfully Deleted.', 'success');
-                        $('#deleteModal').modal('hide');
-                        Event.$emit('main-tree-refresh');
-                        this.viewMode = 0;
-                    })
-                    .catch((error) => {
-                        flash('Error: Failed to delete user.', 'error');
-                        console.log(error);
-                    }
-                );
-            }
-            else {
-                flash('Error: Please select a user first.', 'error');
-            }
-        },
         deleteUserGroup(keepChildren) {
             let route = '';
             if (keepChildren === true) {
@@ -94,6 +77,7 @@ const app = new Vue({
     },
 
     created: function() {
+        Event.$on('reset-view', () => this.viewMode = 0);
         Event.$on('main-tree-clicked-folder', (data) => {
             axios.get('/users/group/show/' + data.id)
                 .then((response) => {

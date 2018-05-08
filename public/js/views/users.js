@@ -761,9 +761,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Flash__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_form_CreateUser__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_form_CreateUserGroup__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_form_DeleteUser__ = __webpack_require__(87);
 /**
  * Form and Vue Element
  */
+
 
 
 
@@ -778,7 +780,8 @@ var app = new Vue({
         Fancytree: __WEBPACK_IMPORTED_MODULE_0__components_Fancytree__["a" /* default */],
         Flash: __WEBPACK_IMPORTED_MODULE_1__components_Flash__["a" /* default */],
         CreateUser: __WEBPACK_IMPORTED_MODULE_2__components_form_CreateUser__["a" /* default */],
-        CreateUserGroup: __WEBPACK_IMPORTED_MODULE_3__components_form_CreateUserGroup__["a" /* default */]
+        CreateUserGroup: __WEBPACK_IMPORTED_MODULE_3__components_form_CreateUserGroup__["a" /* default */],
+        DeleteUser: __WEBPACK_IMPORTED_MODULE_4__components_form_DeleteUser__["a" /* default */]
     },
 
     data: {
@@ -789,25 +792,8 @@ var app = new Vue({
     },
 
     methods: {
-        deleteUser: function deleteUser() {
-            var _this = this;
-
-            if (this.currentUser) {
-                axios.delete('/users/user/delete/' + this.currentUser.id).then(function (response) {
-                    flash('User Successfully Deleted.', 'success');
-                    $('#deleteModal').modal('hide');
-                    Event.$emit('main-tree-refresh');
-                    _this.viewMode = 0;
-                }).catch(function (error) {
-                    flash('Error: Failed to delete user.', 'error');
-                    console.log(error);
-                });
-            } else {
-                flash('Error: Please select a user first.', 'error');
-            }
-        },
         deleteUserGroup: function deleteUserGroup(keepChildren) {
-            var _this2 = this;
+            var _this = this;
 
             var route = '';
             if (keepChildren === true) {
@@ -821,7 +807,7 @@ var app = new Vue({
                     $('#deleteGroupModal').modal('hide');
                     Event.$emit('main-tree-refresh');
                     Event.$emit('new-group-tree-refresh');
-                    _this2.viewMode = 0;
+                    _this.viewMode = 0;
                 }).catch(function (error) {
                     flash('Error: Failed to delete user group.', 'error');
                     console.log(error);
@@ -852,34 +838,37 @@ var app = new Vue({
     },
 
     created: function created() {
-        var _this3 = this;
+        var _this2 = this;
 
+        Event.$on('reset-view', function () {
+            return _this2.viewMode = 0;
+        });
         Event.$on('main-tree-clicked-folder', function (data) {
             axios.get('/users/group/show/' + data.id).then(function (response) {
-                _this3.currentUserGroup = response.data;
-                if (_this3.currentUserGroup.parent_id) {
-                    axios.get('/users/group/show/' + _this3.currentUserGroup.parent_id).then(function (response) {
-                        _this3.currentParentGroup = response.data;
+                _this2.currentUserGroup = response.data;
+                if (_this2.currentUserGroup.parent_id) {
+                    axios.get('/users/group/show/' + _this2.currentUserGroup.parent_id).then(function (response) {
+                        _this2.currentParentGroup = response.data;
                     }).catch(function (error) {
-                        _this3.currentParentGroup = null;
+                        _this2.currentParentGroup = null;
                         console.log(error);
                     });
                 } else {
-                    _this3.currentParentGroup = null;
+                    _this2.currentParentGroup = null;
                 }
-                _this3.viewMode = 2;
+                _this2.viewMode = 2;
             }).catch(function (error) {
-                _this3.currentUserGroup = null;
+                _this2.currentUserGroup = null;
                 flash('Error: Failed to load user group.', 'error');
                 console.log(error);
             });
         });
         Event.$on('main-tree-clicked-item', function (data) {
             axios.get('/users/user/show/' + data.id).then(function (response) {
-                _this3.currentUser = response.data;
-                _this3.viewMode = 1;
+                _this2.currentUser = response.data;
+                _this2.viewMode = 1;
             }).catch(function (error) {
-                _this3.currentUser = null;
+                _this2.currentUser = null;
                 flash('Error: Failed to load user.', 'error');
                 console.log(error);
             });
@@ -1965,6 +1954,200 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-54327484", esExports)
+  }
+}
+
+/***/ }),
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    name: 'delete-user',
+    props: {
+        user: user
+    },
+    methods: {
+        deleteUser: function deleteUser() {
+            if (this.user) {
+                axios.delete('/users/user/delete/' + this.user.id).then(function (response) {
+                    flash('User Successfully Deleted.', 'success');
+                    $('#deleteModal').modal('hide');
+                    Event.$emit('main-tree-refresh');
+                    Event.$emit('reset-view');
+                }).catch(function (error) {
+                    flash('Error: Failed to delete user.', 'error');
+                    console.log(error);
+                });
+            } else {
+                flash('Error: Please select a user first.', 'error');
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 87 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_DeleteUser_vue__ = __webpack_require__(86);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_54c9011a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_DeleteUser_vue__ = __webpack_require__(88);
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_node_modules_vue_loader_lib_selector_type_script_index_0_DeleteUser_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_54c9011a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_DeleteUser_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/form/DeleteUser.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-54c9011a", Component.options)
+  } else {
+    hotAPI.reload("data-v-54c9011a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button" },
+          on: { click: _vm.deleteUser }
+        },
+        [_vm._v("Yes, Delete User")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("No, Keep User")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Confirm User Deletion")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("p", [_vm._v("Are you sure you wish to delete this user?")])
+    ])
+  }
+]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-54c9011a", esExports)
   }
 }
 
