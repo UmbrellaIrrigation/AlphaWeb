@@ -312,11 +312,10 @@ if (false) {(function () {
                 this.reactivate();
             },
             focus: function focus(event, data) {
-
                 // Auto-activate focused node after 2 seconds
                 data.node.scheduleAction("activate", 2000);
             },
-            activate: function activate(event, data) {
+            click: function click(event, data) {
                 var node = data.node;
                 if (node.folder === true) {
                     Event.$emit(clickedFolderEvent, {
@@ -329,7 +328,9 @@ if (false) {(function () {
                         name: node.data.name
                     });
                 }
-            }
+                node.scheduleAction('activate');
+            },
+            activate: function activate(event, data) {}
         });
     }
 });
