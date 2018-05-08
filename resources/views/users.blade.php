@@ -12,6 +12,9 @@
 @section ('content')
 
 <div class="row">
+
+    <flash></flash>
+    
     @include ('components.options')
 
     <aside class="tree-nav">
@@ -38,7 +41,7 @@
             </div>
             <hr>
             <div class="form-group">
-                <label for="description">Description:</label>
+                <label for="permission">Permission:</label>
                 <p>@{{ currentUser.permission }}</p>
             </div>
             <hr>

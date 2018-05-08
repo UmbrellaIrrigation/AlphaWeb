@@ -4,68 +4,7 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('users.store') }}" @submit.prevent="createUser" @keydown="userForm.errors.clear($event.target.name)">
-
-                <div class="modal-header">
-                    <h5 class="modal-title">Create a New User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="name" class="control-label">Name</label>
-                        <div>
-                            <input id="name" type="text" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('name') }" name="name" v-model="userForm.name" required autofocus> 
-                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('name')" v-text="userForm.errors.get('name')"></small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="control-label">E-Mail Address</label>
-                        <div>
-                            <input id="email" type="email" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('email') }" name="email" v-model="userForm.email" required>
-                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('email')" v-text="userForm.errors.get('email')"></small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="control-label">Password</label>
-                        <div>
-                            <input id="password" type="password" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password" v-model="userForm.password" required> 
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password-confirm" class="control-label">Confirm Password</label>
-                        <div>
-                            <input id="password-confirm" type="password" :class="{ 'form-control': true, 'is-invalid': userForm.errors.has('password') }" name="password_confirmation" v-model="userForm.password_confirmation" required>
-                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('password')" v-text="userForm.errors.get('password')"></small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="permission" class="control-label">Permission</label>
-                        <div>
-                            <select id="permission" :class="{ 'custom-select': true, 'is-invalid': userForm.errors.has('permission') }" name="permission" v-model="userForm.permission" required>
-                                <option value="1" selected>Guest</option>
-                                <option value="2">Employee</option>
-                                <option value="3">Admin</option>
-                            </select>
-                            <small class="form-text alert alert-danger" role="alert" v-if="userForm.errors.has('permission')" v-text="userForm.errors.get('permission')"></small>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" :disabled="userForm.errors.any()">Create User</button>
-                </div>
-
-            </form>
+                <create-user />
 
             @elseif (Request::is('valves*'))
 
@@ -215,48 +154,7 @@
 
             @if (Request::is('users*'))
 
-            <form method="POST" action="{{ route('usergroup.store') }}" @submit.prevent="createUserGroup" @keydown="userGroupForm.errors.clear($event.target.name)">
-                {{ csrf_field() }}
-
-                <div class="modal-header">
-                    <h5 class="modal-title">Create a New User Group</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="name" class="control-label">Name</label>
-                        <div>
-                            <input id="groupname" type="text" :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('name') }" name="name" v-model="userGroupForm.name" required autofocus> 
-                            <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('name')" v-text="userGroupForm.errors.get('name')"></small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="parent_id">Parent User Group</label>
-
-                        <input v-if="userGroupForm.parent_id === 'null'" class="form-control" value="None" disabled>
-                        <input v-else v-cloak :class="{ 'form-control': true, 'is-invalid': userGroupForm.errors.has('password') }" :value="parentName" disabled>
-                        <small class="form-text alert alert-danger" role="alert"  v-if="userGroupForm.errors.has('parent_id')" v-text="userGroupForm.errors.get('parent_id')"></small>                            
-                        
-                        <div style="display: none;">
-                            <input id="parent_id" type="text" name="parent_id" v-model="userGroupForm.parent_id" required disabled> 
-                        </div>
-
-                        <fancytree route="{{ route('usergroup.tree') }}" name="new-group-tree"></fancytree>
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create User Group</button>
-                </div>
-
-            </form>
+                <create-user-group tree="create-group-tree" tree-route="{{ route('usergroup.tree') }}" />
 
             @elseif (Request::is('valves*'))
 

@@ -60,73 +60,37 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 51);
+/******/ 	return __webpack_require__(__webpack_require__.s = 54);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 51:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(52);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
 
-/***/ 52:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_Form__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_Form__ = __webpack_require__(56);
 
 
 window.Form = __WEBPACK_IMPORTED_MODULE_0__utils_Form__["a" /* default */];
 window.Event = new Vue();
 
-var createModal = $('#createModal').modal('hide');
-var createGroupModal = $('#createGroupModal').modal('hide');
-
-$(function () {
-
-    function onExit($input, save) {
-        $input.keypress(function (e) {
-            if (e.which == 13) {
-                $(this).blur();
-            }
-        });
-        $input.on('blur', save).focus();
-    }
-
-    $('body').on('click', '[data-editable]', function () {
-        var $elem = $(this);
-        var dtag = $elem.prop('tagName');
-        var dtype = $elem.attr('data-type');
-        var dname = $elem.attr('data-name');
-
-        var $input = $('<input/>', { class: 'form-control', type: dtype, name: dname, required: 'true' }).val($elem.text());
-        $elem.replaceWith($input);
-
-        var save = function save() {
-            if ($input.val().length > 0) {
-                var $text = $('<' + dtag + ' data-editable />').attr('data-type', dtype).attr('data-name', dname).text($input.val());
-                $input.replaceWith($text);
-            }
-        };
-
-        if ($input.val().length) {
-            onExit($input, save);
-        }
-    });
-});
-
 /***/ }),
 
-/***/ 53:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Errors__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Errors__ = __webpack_require__(57);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -289,7 +253,7 @@ var Form = function () {
 
 /***/ }),
 
-/***/ 54:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
