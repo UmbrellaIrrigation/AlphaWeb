@@ -2,27 +2,21 @@
  * Form and Vue Element
  */
 
-import Example from '../components/Example';
 import Fancytree from '../components/Fancytree';
 import Flash from '../components/Flash';
+
+import CreateUser from '../components/form/CreateUser';
 
 const app = new Vue({
     el: '#app',
 
     components: {
-        Example,
         Fancytree,
-        Flash
+        Flash,
+        CreateUser
     },
 
     data: {
-        userForm: new Form({
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-            permission: ''
-        }),
         userGroupForm: new Form({
             name: '',
             parent_id: 'null'
@@ -35,15 +29,6 @@ const app = new Vue({
     },
 
     methods: {
-        createUser() {
-            this.userForm.post('/users/user/store')
-                .then(response => {
-                    flash('New User Added!', 'success');
-                    $('#createModal').modal('hide');
-                    Event.$emit('main-tree-refresh');
-                } 
-            );
-        },
         createUserGroup() {
             this.userGroupForm.post('/users/group/store')
                 .then(response => {
